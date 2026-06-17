@@ -54,8 +54,8 @@ export default function AboutPage() {
         <ScaleIn>
           <div className="relative rounded-[32px] overflow-hidden min-h-[400px] lg:min-h-full border border-black/10 dark:border-white/10">
             <Image 
-              src="/about-working.png" 
-              alt="Professional working at PrimeForge" 
+              src="/my-image.jpeg" 
+              alt="Kartik - Founder of PrimeForge" 
               fill
               className="object-cover"
             />
