@@ -69,34 +69,34 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,_rgba(37,99,235,0.4)_0%,_rgba(30,64,175,0.2)_30%,_transparent_70%)] -z-10 pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(30,64,175,0.1)_0%,_transparent_50%)] -z-10 pointer-events-none"></div>
         
-        <div className="container max-w-4xl mx-auto flex flex-col items-center">
-          <FadeIn delay={0}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10 mb-8">
+        <div className="container max-w-4xl mx-auto flex flex-col items-center justify-center text-center w-full">
+          <FadeIn delay={0} className="flex justify-center w-full">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10 mb-8 mx-auto">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
               <span className="text-sm font-medium text-white/80">ACCEPTING NEW PROJECTS</span>
             </div>
           </FadeIn>
 
-          <h1 className="heading-serif text-5xl md:text-7xl leading-tight mb-6 text-center flex flex-col gap-2">
-            <FadeUp delay={0.1}>
+          <h1 className="heading-serif text-5xl md:text-7xl leading-tight mb-6 text-center flex flex-col items-center justify-center gap-2 w-full mx-auto">
+            <FadeUp delay={0.1} className="w-full text-center flex justify-center">
               <span>We build websites that</span>
             </FadeUp>
-            <FadeUp delay={0.2}>
+            <FadeUp delay={0.2} className="w-full text-center flex justify-center">
               <span className="text-accent italic">bring you clients,</span>
             </FadeUp>
-            <FadeUp delay={0.3}>
+            <FadeUp delay={0.3} className="w-full text-center flex justify-center">
               <span>not just traffic.</span>
             </FadeUp>
           </h1>
 
-          <FadeUp delay={0.4}>
+          <FadeUp delay={0.4} className="w-full flex justify-center">
             <p className="text-lg md:text-xl text-text-body max-w-2xl mx-auto mb-10 text-center">
               Helping ambitious businesses dominate their niche with premium, high-converting digital experiences.
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.5}>
-            <div className="flex flex-col sm:flex-row items-center gap-4">
+          <FadeUp delay={0.5} className="w-full flex justify-center">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto">
               <Button href="/start-a-project" variant="primary" icon>Start a Project</Button>
               <Button href="/book-a-call" variant="secondary">Book a Call</Button>
             </div>
