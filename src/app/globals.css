@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0a0a0a;
-  --color-accent: #2563eb;
-  --color-surface: #111111;
-  --color-text-heading: #ffffff;
-  --color-text-body: #a1a1aa;
+  --color-primary: var(--bg-primary);
+  --color-accent: var(--color-accent-base);
+  --color-surface: var(--bg-surface);
+  --color-text-heading: var(--text-heading);
+  --color-text-body: var(--text-body);
   
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -14,8 +14,28 @@
   --radius-pill: 999px;
 }
 
+@layer base {
+  :root {
+    --bg-primary: #ffffff;
+    --bg-surface: #f4f4f5;
+    --color-accent-base: #2563eb;
+    --text-heading: #09090b;
+    --text-body: #52525b;
+    --color-glass: rgba(255, 255, 255, 0.7);
+  }
+
+  .dark {
+    --bg-primary: #0a0a0a;
+    --bg-surface: #111111;
+    --color-accent-base: #2563eb;
+    --text-heading: #ffffff;
+    --text-body: #a1a1aa;
+    --color-glass: rgba(10, 10, 10, 0.7);
+  }
+}
+
 @utility glass {
-  background-color: rgba(10, 10, 10, 0.7);
+  background-color: var(--color-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }

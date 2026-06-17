@@ -64,16 +64,21 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative pt-32 pb-32 flex flex-col items-center justify-center text-center px-4 min-h-[90vh]">
-        {/* Exact Premium Deep Blue Radial Gradient from Image */}
-        <div className="absolute inset-0 bg-[#020617] -z-20 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,_rgba(37,99,235,0.4)_0%,_rgba(30,64,175,0.2)_30%,_transparent_70%)] -z-10 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(30,64,175,0.1)_0%,_transparent_50%)] -z-10 pointer-events-none"></div>
+        {/* Dynamic Background */}
+        <div className="absolute inset-0 bg-primary -z-20 pointer-events-none transition-colors duration-500"></div>
+        
+        {/* Dark Mode Glows */}
+        <div className="absolute inset-0 hidden dark:block bg-[radial-gradient(circle_at_80%_40%,_rgba(37,99,235,0.4)_0%,_rgba(30,64,175,0.2)_30%,_transparent_70%)] -z-10 pointer-events-none"></div>
+        <div className="absolute inset-0 hidden dark:block bg-[radial-gradient(circle_at_20%_80%,_rgba(30,64,175,0.1)_0%,_transparent_50%)] -z-10 pointer-events-none"></div>
+        
+        {/* Light Mode Glows (Subtle) */}
+        <div className="absolute inset-0 block dark:hidden bg-[radial-gradient(circle_at_80%_40%,_rgba(37,99,235,0.15)_0%,_rgba(37,99,235,0.05)_40%,_transparent_70%)] -z-10 pointer-events-none"></div>
         
         <div className="container max-w-4xl mx-auto flex flex-col items-center justify-center text-center w-full">
           <FadeIn delay={0} className="flex justify-center w-full">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10 mb-8 mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-black/10 dark:border-white/10 mb-8 mx-auto">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-sm font-medium text-white/80">ACCEPTING NEW PROJECTS</span>
+              <span className="text-sm font-medium text-text-heading/80">ACCEPTING NEW PROJECTS</span>
             </div>
           </FadeIn>
 
@@ -105,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* Marquee Section */}
-      <section className="py-20 border-y border-white/5 bg-surface/30 overflow-hidden">
+      <section className="py-20 border-y border-black/5 dark:border-white/5 bg-surface/30 overflow-hidden">
         <FadeUp>
           <div className="container mb-12 text-center">
             <h2 className="heading-serif text-3xl md:text-4xl">What Our Customers Say</h2>
@@ -116,14 +121,14 @@ export default function Home() {
           <div className="relative w-full flex overflow-x-hidden group">
           <div className="flex w-max animate-marquee space-x-6 px-6 group-hover:[animation-play-state:paused]">
             {duplicatedTestimonials.map((testimonial, i) => (
-              <div key={i} className="w-[350px] bg-surface border border-white/10 rounded-2xl p-6 flex flex-col justify-between shrink-0">
+              <div key={i} className="w-[350px] bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between shrink-0">
                 <div>
                   <div className="flex gap-1 mb-4 text-yellow-500">
                     {[...Array(testimonial.rating)].map((_, j) => (
                       <Star key={j} className="w-5 h-5 fill-current" />
                     ))}
                   </div>
-                  <p className="text-white text-lg italic mb-6">"{testimonial.quote}"</p>
+                  <p className="text-text-heading text-lg italic mb-6">"{testimonial.quote}"</p>
                 </div>
                 <p className="text-text-body font-medium">{testimonial.name}</p>
               </div>
@@ -153,24 +158,24 @@ export default function Home() {
           ].map((feature, i) => (
             <StaggerItem 
               key={i} 
-              className="bg-surface border border-white/10 rounded-2xl p-8 transition-colors"
+              className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 transition-colors"
               whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <h3 className="text-white text-xl font-semibold mb-2">{feature.title}</h3>
+              <h3 className="text-text-heading text-xl font-semibold mb-2">{feature.title}</h3>
               <p className="text-text-body">{feature.desc}</p>
             </StaggerItem>
           ))}
-          <StaggerItem className="md:col-span-2 bg-gradient-to-br from-surface to-accent/10 border border-white/10 rounded-2xl p-8 text-center flex flex-col items-center">
+          <StaggerItem className="md:col-span-2 bg-gradient-to-br from-surface to-accent/10 border border-black/10 dark:border-white/10 rounded-2xl p-8 text-center flex flex-col items-center">
             <div className="text-4xl mb-4">🎧</div>
-            <h3 className="text-white text-xl font-semibold mb-2">Free Consultation</h3>
+            <h3 className="text-text-heading text-xl font-semibold mb-2">Free Consultation</h3>
             <p className="text-text-body">Expert advice on your digital strategy, no strings attached.</p>
           </StaggerItem>
         </StaggerContainer>
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-surface/30 border-y border-white/5">
+      <section className="py-24 bg-surface/30 border-y border-black/5 dark:border-white/5">
         <div className="container">
           <FadeUp>
             <div className="text-center mb-16">
@@ -222,15 +227,15 @@ export default function Home() {
             ].map((service, i) => (
               <StaggerItem 
                 key={i} 
-                className="bg-surface border border-white/10 rounded-2xl p-8 transition-all duration-300"
+                className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 transition-all duration-300"
                 whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
               >
                 <div className="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-6">
                   {service.icon}
                 </div>
-                <h3 className="text-white text-2xl font-serif mb-4">{service.title}</h3>
+                <h3 className="text-text-heading text-2xl font-serif mb-4">{service.title}</h3>
                 <div className="space-y-3 text-sm">
-                  <p><strong className="text-white">What it is:</strong> <span className="text-text-body">{service.what}</span></p>
+                  <p><strong className="text-text-heading">What it is:</strong> <span className="text-text-body">{service.what}</span></p>
                   <p><strong className="text-accent">The Result:</strong> <span className="text-text-body">{service.result}</span></p>
                 </div>
               </StaggerItem>
@@ -250,7 +255,7 @@ export default function Home() {
           </div>
         </FadeUp>
 
-        <div className="relative border-l-2 border-white/10 ml-6 md:ml-12 pl-12 space-y-8">
+        <div className="relative border-l-2 border-black/10 dark:border-white/10 ml-6 md:ml-12 pl-12 space-y-8">
           {[
             { step: "1", icon: "📞", title: "Contact / Book Call", desc: "We discuss your goals, target audience, and specific requirements." },
             { step: "2", icon: "🖥️", title: "Get Free Demo Website", desc: "Within 48 hours, see a live demo of what your site could look like." },
@@ -278,26 +283,67 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="py-24 overflow-hidden relative">
+        <div className="container mb-16 text-center relative z-10">
+          <FadeUp>
+            <h2 className="heading-serif text-4xl md:text-5xl mb-4">Client <span className="text-accent">Success</span></h2>
+            <p className="text-text-body text-lg">Don't just take our word for it.</p>
+          </FadeUp>
+        </div>
+
+        {/* Endless scrolling marquee */}
+        <div className="relative w-full flex overflow-x-hidden">
+          {/* Left/Right fading gradients */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-primary to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-primary to-transparent z-10"></div>
+          
+          <motion.div 
+            className="flex gap-6 px-6 shrink-0"
+            animate={{ x: [0, -1920] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+          >
+            {[...testimonials, ...testimonials].map((testimonial, i) => (
+              <div key={i} className="w-[350px] md:w-[450px] shrink-0 bg-surface border border-black/5 dark:border-white/5 rounded-2xl p-8 shadow-lg">
+                <div className="flex gap-1 text-yellow-500 mb-6">
+                  {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
+                </div>
+                <p className="text-text-heading text-lg italic mb-6">"{testimonial.quote}"</p>
+                <div>
+                  <p className="text-text-heading font-medium">{testimonial.author}</p>
+                  <p className="text-text-body text-sm">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-24 container max-w-3xl mx-auto">
         <FadeUp>
           <div className="text-center mb-16">
-            <h2 className="heading-serif text-4xl md:text-5xl mb-4">
-              Frequently Asked <span className="text-accent">Questions</span>
-            </h2>
+            <h2 className="heading-serif text-4xl md:text-5xl mb-4">FAQ</h2>
             <p className="text-text-body text-lg">Everything you need to know about working with PrimeForge.</p>
           </div>
         </FadeUp>
 
         <StaggerContainer className="space-y-4">
-          {faqs.map((faq, i) => (
+          {[
+            { q: "Do you use templates or are the websites custom coded?", a: "We never use generic templates. Every single website is custom-designed and hard-coded from scratch using Next.js and React. This guarantees unparalleled speed, security, and a unique premium aesthetic that templates simply cannot match." },
+            { q: "How long does it take to deliver a premium website?", a: "Most agency projects take 2-4 weeks from the strategy call to the final live launch. We work fast without compromising on the high-end quality." },
+            { q: "Do you do SEO?", a: "Yes. Technical SEO is baked into our code by default. We also offer advanced AEO (Answer Engine Optimization) so AI bots like ChatGPT recommend your business, and GEO (Generative Engine Optimization) for AI search summaries." },
+            { q: "What if I am not satisfied with the design?", a: "We build a live demo before we ask for payment. If you don't like it, we iterate until you do. You have zero risk." },
+            { q: "How do I pay?", a: "We use a milestone-based system. You only pay once you've seen and approved the initial design concepts." },
+            { q: "Do you build chatbots and automations?", a: "Absolutely. We can integrate custom AI agents trained specifically on your business data to handle customer inquiries 24/7." }
+          ].map((faq, i) => (
             <StaggerItem key={i}>
-              <div className="bg-surface border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden">
                 <button 
                   onClick={() => toggleFaq(i)}
-                  className="w-full text-left px-8 py-6 flex items-center justify-between hover:bg-white/5 transition-colors focus:outline-none"
+                  className="w-full text-left px-8 py-6 flex items-center justify-between hover:bg-black/5 dark:bg-white/5 transition-colors focus:outline-none"
                 >
-                  <span className="text-white font-medium text-lg pr-8">{faq.q}</span>
+                  <span className="text-text-heading font-medium text-lg pr-8">{faq.q}</span>
                   <ChevronDown className={`w-6 h-6 text-accent transition-transform duration-300 shrink-0 ${openFaq === i ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence>
@@ -329,13 +375,13 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/20 rounded-full blur-[80px]"></div>
             
             <div className="relative z-10">
-              <h2 className="heading-serif text-4xl md:text-5xl mb-6">Ready to scale your business?</h2>
-              <p className="text-lg text-text-body max-w-2xl mx-auto mb-10">
+              <h2 className="heading-serif text-4xl md:text-5xl mb-6 text-white">Ready to scale your business?</h2>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
                 Let's engineer a digital experience that converts visitors into high-paying clients.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button href="/start-a-project" variant="primary" icon>Start Your Project</Button>
-                <Button href="/book-a-call" variant="secondary">Book a Strategy Call</Button>
+                <Button href="/book-a-call" variant="secondary" className="!text-white !border-white/20 hover:!bg-white/10 hover:!text-white">Book a Strategy Call</Button>
               </div>
             </div>
           </div>

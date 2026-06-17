@@ -25,7 +25,7 @@ export default function BookCallPage() {
   return (
     <div className="container py-12 md:py-24">
       <div className="text-center mb-16">
-        <h1 className="heading-serif text-5xl md:text-6xl mb-6 text-white">Let's build your pipeline.</h1>
+        <h1 className="heading-serif text-5xl md:text-6xl mb-6 text-text-heading">Let's build your pipeline.</h1>
         <p className="text-lg md:text-xl text-text-body max-w-2xl mx-auto">
           Select a time that works for you, or skip the line and talk to us directly right now.
         </p>
@@ -35,22 +35,22 @@ export default function BookCallPage() {
         {/* Left Column - Contact Info */}
         <div className="lg:col-span-4 space-y-12">
           <div>
-            <p className="text-xs font-bold tracking-wider text-white/50 uppercase mb-4">Director / Founder</p>
-            <h2 className="heading-serif text-3xl mb-4 text-white">Kartik Sharma</h2>
+            <p className="text-xs font-bold tracking-wider text-text-heading/50 uppercase mb-4">Director / Founder</p>
+            <h2 className="heading-serif text-3xl mb-4 text-text-heading">Kartik Sharma</h2>
             <div className="bg-surface/50 border-l-4 border-accent p-6 rounded-r-xl italic text-text-body">
               "I personally oversee every core strategy session to ensure your website is engineered to convert."
             </div>
           </div>
 
-          <hr className="border-white/10" />
+          <hr className="border-black/10 dark:border-white/10" />
 
           <div>
-            <p className="text-xs font-bold tracking-wider text-white/50 uppercase mb-6">Instant Access</p>
+            <p className="text-xs font-bold tracking-wider text-text-heading/50 uppercase mb-6">Instant Access</p>
             
             <div className="space-y-6">
               <div>
                 <p className="text-sm text-text-body mb-2">Direct Phone</p>
-                <a href="tel:+918533925291" className="inline-flex items-center gap-3 text-xl text-white hover:text-accent transition-colors font-medium">
+                <a href="tel:+918533925291" className="inline-flex items-center gap-3 text-xl text-text-heading hover:text-accent transition-colors font-medium">
                   <Phone className="w-5 h-5" />
                   +91 8533925291
                 </a>
@@ -68,10 +68,10 @@ export default function BookCallPage() {
         </div>
 
         {/* Right Column - Booking Flow */}
-        <div className="lg:col-span-8 bg-surface border border-white/10 rounded-[32px] p-8 md:p-12 shadow-2xl">
+        <div className="lg:col-span-8 bg-surface border border-black/10 dark:border-white/10 rounded-[32px] p-8 md:p-12 shadow-2xl">
           {step === 1 && (
             <div className="animate-fade-in">
-              <h3 className="text-2xl text-white font-medium mb-2">What do you need help with?</h3>
+              <h3 className="text-2xl text-text-heading font-medium mb-2">What do you need help with?</h3>
               <p className="text-text-body mb-8">Select a service to discuss during our call.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
@@ -81,14 +81,14 @@ export default function BookCallPage() {
                     onClick={() => setSelectedService(service)}
                     className={`text-left p-4 rounded-xl border transition-all ${
                       selectedService === service 
-                        ? 'border-accent bg-accent/10 text-white shadow-[0_0_15px_rgba(59,130,246,0.15)]' 
-                        : 'border-white/10 text-text-body hover:border-white/30 hover:bg-white/5'
+                        ? 'border-accent bg-accent/10 text-text-heading shadow-[0_0_15px_rgba(59,130,246,0.15)]' 
+                        : 'border-black/10 dark:border-white/10 text-text-body hover:border-black/20 dark:border-white/30 hover:bg-black/5 dark:bg-white/5'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-medium">{service}</span>
                       <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                        selectedService === service ? 'border-accent bg-accent text-white' : 'border-white/30'
+                        selectedService === service ? 'border-accent bg-accent text-text-heading' : 'border-black/20 dark:border-white/30'
                       }`}>
                         {selectedService === service && <div className="w-2 h-2 bg-white rounded-full"></div>}
                       </div>
@@ -102,8 +102,8 @@ export default function BookCallPage() {
                 disabled={!selectedService}
                 className={`w-full py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2 ${
                   selectedService 
-                    ? 'bg-accent text-white hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]' 
-                    : 'bg-white/5 text-white/30 cursor-not-allowed'
+                    ? 'bg-accent text-text-heading hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]' 
+                    : 'bg-black/5 dark:bg-white/5 text-text-heading/30 cursor-not-allowed'
                 }`}
               >
                 Book a Meeting <span className="text-xl leading-none">→</span>
@@ -113,13 +113,13 @@ export default function BookCallPage() {
 
           {step === 2 && (
             <div className="animate-fade-in">
-              <button onClick={() => setStep(1)} className="text-sm text-accent hover:text-white transition-colors mb-6 flex items-center gap-1">
+              <button onClick={() => setStep(1)} className="text-sm text-accent hover:text-text-heading transition-colors mb-6 flex items-center gap-1">
                 ← Back
               </button>
               
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <h3 className="text-2xl text-white font-medium mb-2">Select an available slot</h3>
+                  <h3 className="text-2xl text-text-heading font-medium mb-2">Select an available slot</h3>
                   <p className="text-text-body flex items-center gap-2">
                     <Clock className="w-4 h-4" /> Timezone: India Standard Time (IST)
                   </p>
@@ -127,7 +127,7 @@ export default function BookCallPage() {
               </div>
 
               <div className="mb-8">
-                <p className="text-sm font-medium text-white mb-4">Next availability</p>
+                <p className="text-sm font-medium text-text-heading mb-4">Next availability</p>
                 <div className="flex overflow-x-auto pb-4 gap-3 snap-x scrollbar-hide">
                   {dates.map((date, i) => (
                     <button
@@ -135,12 +135,12 @@ export default function BookCallPage() {
                       onClick={() => setSelectedDate(date)}
                       className={`shrink-0 snap-start px-6 py-4 rounded-xl border transition-all text-center min-w-[100px] ${
                         selectedDate === date
-                          ? 'border-accent bg-accent/10 text-white'
-                          : 'border-white/10 text-text-body hover:border-white/30 hover:bg-white/5'
+                          ? 'border-accent bg-accent/10 text-text-heading'
+                          : 'border-black/10 dark:border-white/10 text-text-body hover:border-black/20 dark:border-white/30 hover:bg-black/5 dark:bg-white/5'
                       }`}
                     >
                       <div className="text-xs uppercase mb-1">{date.split(' ')[0]}</div>
-                      <div className="text-xl font-bold text-white">{date.split(' ')[1]}</div>
+                      <div className="text-xl font-bold text-text-heading">{date.split(' ')[1]}</div>
                     </button>
                   ))}
                 </div>
@@ -148,7 +148,7 @@ export default function BookCallPage() {
 
               {selectedDate && (
                 <div className="mb-10 animate-fade-in">
-                  <p className="text-sm font-medium text-white mb-4">Available Times</p>
+                  <p className="text-sm font-medium text-text-heading mb-4">Available Times</p>
                   <div className="grid grid-cols-3 gap-3">
                     {times.map((time, i) => (
                       <button
@@ -156,8 +156,8 @@ export default function BookCallPage() {
                         onClick={() => setSelectedTime(time)}
                         className={`py-3 rounded-lg border text-sm font-medium transition-all ${
                           selectedTime === time
-                            ? 'border-accent bg-accent text-white shadow-[0_0_10px_rgba(59,130,246,0.3)]'
-                            : 'border-white/10 text-text-body hover:border-white/30 hover:text-white'
+                            ? 'border-accent bg-accent text-text-heading shadow-[0_0_10px_rgba(59,130,246,0.3)]'
+                            : 'border-black/10 dark:border-white/10 text-text-body hover:border-black/20 dark:border-white/30 hover:text-text-heading'
                         }`}
                       >
                         {time}
@@ -172,8 +172,8 @@ export default function BookCallPage() {
                 disabled={!selectedDate || !selectedTime}
                 className={`w-full py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2 ${
                   selectedDate && selectedTime 
-                    ? 'bg-accent text-white hover:bg-blue-600' 
-                    : 'bg-white/5 text-white/30 cursor-not-allowed'
+                    ? 'bg-accent text-text-heading hover:bg-blue-600' 
+                    : 'bg-black/5 dark:bg-white/5 text-text-heading/30 cursor-not-allowed'
                 }`}
               >
                 Confirm Time <span className="text-xl leading-none">→</span>
@@ -183,15 +183,15 @@ export default function BookCallPage() {
 
           {step === 3 && (
             <div className="animate-fade-in">
-              <button onClick={() => setStep(2)} className="text-sm text-accent hover:text-white transition-colors mb-6 flex items-center gap-1">
+              <button onClick={() => setStep(2)} className="text-sm text-accent hover:text-text-heading transition-colors mb-6 flex items-center gap-1">
                 ← Back
               </button>
               
-              <h3 className="text-2xl text-white font-medium mb-2">Almost done!</h3>
+              <h3 className="text-2xl text-text-heading font-medium mb-2">Almost done!</h3>
               <div className="bg-accent/10 border border-accent/20 rounded-xl p-4 mb-8 flex items-start gap-4">
                 <Calendar className="w-6 h-6 text-accent shrink-0 mt-1" />
                 <div>
-                  <p className="text-white font-medium">You've selected</p>
+                  <p className="text-text-heading font-medium">You've selected</p>
                   <p className="text-accent">{selectedDate} at {selectedTime}</p>
                   <p className="text-sm text-text-body mt-1">Topic: {selectedService}</p>
                 </div>
@@ -209,20 +209,20 @@ export default function BookCallPage() {
                 setStep(4); 
               }} className="space-y-4 mb-8">
                 <div>
-                  <label className="block text-sm text-white mb-2">Your Name *</label>
-                  <input required name="name" type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
+                  <label className="block text-sm text-text-heading mb-2">Your Name *</label>
+                  <input required name="name" type="text" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
                 </div>
                 <div>
-                  <label className="block text-sm text-white mb-2">Phone / WhatsApp Number *</label>
-                  <input required name="phone" type="tel" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="+91 XXXXX XXXXX" />
+                  <label className="block text-sm text-text-heading mb-2">Phone / WhatsApp Number *</label>
+                  <input required name="phone" type="tel" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors" placeholder="+91 XXXXX XXXXX" />
                 </div>
                 <div>
-                  <label className="block text-sm text-white mb-2">Business Website or Name</label>
-                  <input name="business" type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="https://..." />
+                  <label className="block text-sm text-text-heading mb-2">Business Website or Name</label>
+                  <input name="business" type="text" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors" placeholder="https://..." />
                 </div>
                 <button 
                   type="submit"
-                  className="w-full py-4 mt-4 rounded-full font-medium transition-all bg-accent text-white hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+                  className="w-full py-4 mt-4 rounded-full font-medium transition-all bg-accent text-text-heading hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
                 >
                   Book Meeting
                 </button>
@@ -235,7 +235,7 @@ export default function BookCallPage() {
               <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-6">
                 <CheckCircle2 className="w-10 h-10 text-green-500" />
               </div>
-              <h3 className="text-3xl text-white font-medium mb-4">Meeting Confirmed!</h3>
+              <h3 className="text-3xl text-text-heading font-medium mb-4">Meeting Confirmed!</h3>
               <p className="text-text-body mb-8 max-w-md mx-auto">
                 Your meeting is set for <strong>{selectedDate} at {selectedTime}</strong>. We've sent a calendar invitation to your email. Kartik will call you at the scheduled time.
               </p>

@@ -32,7 +32,7 @@ export function FloatingCTAs() {
       {showTopBtn && (
         <button 
           onClick={scrollToTop}
-          className="w-12 h-12 bg-surface border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-all shadow-lg animate-fade-in"
+          className="w-12 h-12 bg-surface border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center text-text-heading hover:bg-white/10 transition-all shadow-lg animate-fade-in"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-5 h-5" />
@@ -44,7 +44,7 @@ export function FloatingCTAs() {
         href="https://wa.me/918533925291" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 hover:scale-110 transition-all shadow-lg hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]"
+        className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-text-heading hover:bg-green-600 hover:scale-110 transition-all shadow-lg hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]"
         aria-label="Chat on WhatsApp"
       >
         <MessageCircle className="w-7 h-7" />
@@ -53,7 +53,7 @@ export function FloatingCTAs() {
       {/* Phone Button */}
       <a 
         href="tel:+918533925291" 
-        className="w-14 h-14 bg-surface border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 hover:scale-110 transition-all shadow-lg"
+        className="w-14 h-14 bg-surface border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center text-text-heading hover:bg-white/10 hover:scale-110 transition-all shadow-lg"
         aria-label="Call Us"
       >
         <Phone className="w-6 h-6" />

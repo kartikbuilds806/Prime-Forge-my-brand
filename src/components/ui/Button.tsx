@@ -29,7 +29,7 @@ export function Button({
   
   const variants = {
     primary: "bg-accent text-white hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]",
-    secondary: "bg-transparent text-white border border-white hover:bg-white hover:text-primary"
+    secondary: "bg-transparent text-text-heading border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10"
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${className}`;

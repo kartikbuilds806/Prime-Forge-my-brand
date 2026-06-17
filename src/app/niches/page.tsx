@@ -89,18 +89,18 @@ export default function NichesPage() {
           {niches.map((niche, i) => (
             <StaggerItem 
               key={i} 
-              className="bg-surface border border-white/10 rounded-2xl p-8 flex flex-col h-full transition-colors"
+              className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 flex flex-col h-full transition-colors"
               whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
             >
-              <h3 className="text-white text-2xl font-serif mb-3">{niche.title}</h3>
+              <h3 className="text-text-heading text-2xl font-serif mb-3">{niche.title}</h3>
               <p className="text-text-body mb-6 flex-grow">{niche.desc}</p>
               
-              <div className="pt-6 border-t border-white/10">
-                <p className="text-xs font-bold tracking-wider text-white/50 uppercase mb-3">Demos:</p>
+              <div className="pt-6 border-t border-black/10 dark:border-white/10">
+                <p className="text-xs font-bold tracking-wider text-text-heading/50 uppercase mb-3">Demos:</p>
                 <ul className="space-y-3">
                   {niche.demos.map((demo, j) => (
                     <li key={j}>
-                      <a href={demo.link} className="inline-flex items-center gap-2 text-accent hover:text-white transition-colors group">
+                      <a href={demo.link} className="inline-flex items-center gap-2 text-accent hover:text-text-heading transition-colors group">
                         <span className="font-medium">{demo.name}</span>
                         <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                       </a>
@@ -114,10 +114,10 @@ export default function NichesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 border-t border-white/5 bg-surface/30">
+      <section className="py-24 border-t border-black/5 dark:border-white/5 bg-surface/30">
         <ScaleIn>
           <div className="container text-center">
-            <h2 className="heading-serif text-3xl md:text-4xl mb-6 text-white">Don't see your niche?</h2>
+            <h2 className="heading-serif text-3xl md:text-4xl mb-6 text-text-heading">Don't see your niche?</h2>
             <p className="text-text-body text-lg mb-8 max-w-xl mx-auto">
               We build high-converting websites for any local business. Book a call to discuss your specific industry requirements.
             </p>

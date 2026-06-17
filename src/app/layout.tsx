@@ -23,13 +23,15 @@ import { FloatingCTAs } from "@/components/ui/FloatingCTAs";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { PageTransition } from "@/components/animations/PageTransition";
 
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -57,8 +59,9 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-[#0A0A0A] text-[#A1A1AA] pt-[88px] flex flex-col min-h-screen`}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-primary text-text-body pt-[88px] flex flex-col min-h-screen`}
       >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
         <ScrollProgress />
         <Navbar />
         <main className="flex-grow">
@@ -68,6 +71,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <FloatingCTAs />
+        </ThemeProvider>
       </body>
     </html>
   );

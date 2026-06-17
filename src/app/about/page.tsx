@@ -23,7 +23,7 @@ export default function AboutPage() {
         <div className="max-w-2xl">
           <FadeUp>
             <h4 className="text-accent text-sm font-bold tracking-widest uppercase mb-4">Our Mission</h4>
-            <h1 className="heading-serif text-5xl md:text-6xl text-white mb-6">The PrimeForge Story.</h1>
+            <h1 className="heading-serif text-5xl md:text-6xl text-text-heading mb-6">The PrimeForge Story.</h1>
           </FadeUp>
           <FadeUp delay={0.2}>
             <p className="text-text-body text-xl leading-relaxed">
@@ -42,8 +42,8 @@ export default function AboutPage() {
         <div className="flex flex-col">
           {coreValues.map((value, idx) => (
             <FadeUp key={idx} delay={idx * 0.1}>
-              <div className="py-8 border-b border-white/10 first:pt-0">
-                <h3 className="heading-serif text-3xl text-white mb-3">{value.title}.</h3>
+              <div className="py-8 border-b border-black/10 dark:border-white/10 first:pt-0">
+                <h3 className="heading-serif text-3xl text-text-heading mb-3">{value.title}.</h3>
                 <p className="text-text-body text-lg">{value.desc}</p>
               </div>
             </FadeUp>
@@ -52,7 +52,7 @@ export default function AboutPage() {
 
         {/* Right Column - Image */}
         <ScaleIn>
-          <div className="relative rounded-[32px] overflow-hidden min-h-[400px] lg:min-h-full border border-white/10">
+          <div className="relative rounded-[32px] overflow-hidden min-h-[400px] lg:min-h-full border border-black/10 dark:border-white/10">
             <Image 
               src="/about-working.png" 
               alt="Professional working at PrimeForge" 

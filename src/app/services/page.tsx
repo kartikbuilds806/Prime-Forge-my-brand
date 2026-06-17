@@ -77,15 +77,15 @@ export default function ServicesPage() {
           {services.map((service, i) => (
             <StaggerItem 
               key={i} 
-              className="bg-surface border border-white/10 rounded-2xl p-8 transition-all duration-300"
+              className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 transition-all duration-300"
               whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
             >
               <div className="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-6">
                 {service.icon}
               </div>
-              <h3 className="text-white text-2xl font-serif mb-4">{service.title}</h3>
+              <h3 className="text-text-heading text-2xl font-serif mb-4">{service.title}</h3>
               <div className="space-y-4 text-base">
-                <p><strong className="text-white block mb-1">What it is:</strong> <span className="text-text-body leading-relaxed">{service.what}</span></p>
+                <p><strong className="text-text-heading block mb-1">What it is:</strong> <span className="text-text-body leading-relaxed">{service.what}</span></p>
                 <p><strong className="text-accent block mb-1">The Result:</strong> <span className="text-text-body leading-relaxed">{service.result}</span></p>
               </div>
             </StaggerItem>
@@ -105,17 +105,17 @@ export default function ServicesPage() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="bg-surface border border-white/10 rounded-2xl overflow-hidden">
-            <div className="grid grid-cols-3 border-b border-white/10 bg-white/5">
-              <div className="p-6 font-semibold text-white/60">Feature</div>
+          <div className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-3 border-b border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5">
+              <div className="p-6 font-semibold text-text-heading/60">Feature</div>
               <div className="p-6 font-bold text-accent bg-accent/10 border-x border-accent/20">PrimeForge</div>
-              <div className="p-6 font-semibold text-white/60 text-center">Standard Agencies</div>
+              <div className="p-6 font-semibold text-text-heading/60 text-center">Standard Agencies</div>
             </div>
             
             {comparison.map((item, i) => (
-              <div key={i} className={`grid grid-cols-3 ${i !== comparison.length - 1 ? 'border-b border-white/5' : ''}`}>
-                <div className="p-6 text-white font-medium flex items-center">{item.feature}</div>
-                <div className="p-6 text-white flex items-center gap-3 bg-accent/5 border-x border-accent/10">
+              <div key={i} className={`grid grid-cols-3 ${i !== comparison.length - 1 ? 'border-b border-black/5 dark:border-white/5' : ''}`}>
+                <div className="p-6 text-text-heading font-medium flex items-center">{item.feature}</div>
+                <div className="p-6 text-text-heading flex items-center gap-3 bg-accent/5 border-x border-accent/10">
                   <Check className="w-5 h-5 text-accent shrink-0" />
                   <span className="font-medium">{item.us}</span>
                 </div>
