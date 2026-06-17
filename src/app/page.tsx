@@ -63,13 +63,13 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-32 flex flex-col items-start justify-center text-left px-4 min-h-[90vh]">
+      <section className="relative pt-32 pb-32 flex flex-col items-center justify-center text-center px-4 min-h-[90vh]">
         {/* Exact Premium Deep Blue Radial Gradient from Image */}
         <div className="absolute inset-0 bg-[#020617] -z-20 pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,_rgba(37,99,235,0.4)_0%,_rgba(30,64,175,0.2)_30%,_transparent_70%)] -z-10 pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(30,64,175,0.1)_0%,_transparent_50%)] -z-10 pointer-events-none"></div>
         
-        <div className="container max-w-6xl mx-auto flex flex-col items-start">
+        <div className="container max-w-4xl mx-auto flex flex-col items-center">
           <FadeIn delay={0}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10 mb-8">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -77,7 +77,7 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          <h1 className="heading-serif text-5xl md:text-7xl leading-tight mb-6 text-left flex flex-col gap-2">
+          <h1 className="heading-serif text-5xl md:text-7xl leading-tight mb-6 text-center flex flex-col gap-2">
             <FadeUp delay={0.1}>
               <span>We build websites that</span>
             </FadeUp>
@@ -90,7 +90,7 @@ export default function Home() {
           </h1>
 
           <FadeUp delay={0.4}>
-            <p className="text-lg md:text-xl text-text-body max-w-2xl mb-10 text-left">
+            <p className="text-lg md:text-xl text-text-body max-w-2xl mx-auto mb-10 text-center">
               Helping ambitious businesses dominate their niche with premium, high-converting digital experiences.
             </p>
           </FadeUp>
