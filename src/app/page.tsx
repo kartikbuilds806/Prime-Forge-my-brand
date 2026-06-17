@@ -310,8 +310,7 @@ export default function Home() {
                 </div>
                 <p className="text-text-heading text-lg italic mb-6">"{testimonial.quote}"</p>
                 <div>
-                  <p className="text-text-heading font-medium">{testimonial.author}</p>
-                  <p className="text-text-body text-sm">{testimonial.role}</p>
+                  <p className="text-text-heading font-medium">{testimonial.name}</p>
                 </div>
               </div>
             ))}
