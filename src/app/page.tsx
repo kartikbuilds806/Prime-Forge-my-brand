@@ -64,8 +64,10 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative pt-24 pb-32 overflow-hidden flex flex-col items-center justify-center text-center px-4 min-h-[90vh]">
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        {/* Premium Deep Blue Glow Background */}
+        <div className="absolute inset-0 bg-[#0a0a0a] -z-20 pointer-events-none"></div>
+        <div className="absolute top-[-10%] right-[-10%] w-[70vw] h-[70vw] max-w-[1200px] max-h-[1200px] rounded-full bg-blue-600/25 blur-[160px] -z-10 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] max-w-[900px] max-h-[900px] rounded-full bg-blue-800/20 blur-[140px] -z-10 pointer-events-none translate-y-1/3 -translate-x-1/4"></div>
         
         <div className="container max-w-4xl mx-auto flex flex-col items-center">
           <FadeIn delay={0}>
