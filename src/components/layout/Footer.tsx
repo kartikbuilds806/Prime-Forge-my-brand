@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#0a0a0a] border-t border-white/5 pt-16 pb-8 overflow-hidden">
-      {/* Premium Footer Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] rounded-full bg-blue-600/15 blur-[140px] -z-10 pointer-events-none translate-y-1/2"></div>
+    <footer className="relative bg-[#020617] border-t border-white/5 pt-16 pb-8 overflow-hidden z-0">
+      {/* Exact Premium Deep Blue Radial Gradient from Image */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_100%,_rgba(37,99,235,0.3)_0%,_rgba(30,64,175,0.15)_40%,_transparent_80%)] -z-10 pointer-events-none"></div>
       <div className="container flex flex-col items-center justify-center text-center">
         <Link href="/" className="flex items-center gap-2 group mb-8">
           <div className="w-8 h-8 bg-white text-primary rounded flex items-center justify-center font-bold text-xl group-hover:bg-accent group-hover:text-white transition-colors">
