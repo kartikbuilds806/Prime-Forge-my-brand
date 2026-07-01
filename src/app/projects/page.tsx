@@ -30,7 +30,7 @@ export default function ProjectsPage() {
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Protein Coach */}
           <StaggerItem
-            className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 relative"
+            className="glass-card p-8 flex flex-col justify-between relative"
             whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
           >
             <div>
@@ -74,7 +74,7 @@ export default function ProjectsPage() {
 
           {/* Portfolio & Agency Sites */}
           <StaggerItem
-            className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 relative"
+            className="glass-card p-8 flex flex-col justify-between relative"
             whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
           >
             <div>

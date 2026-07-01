@@ -122,7 +122,7 @@ export default function Home() {
           <div className="relative w-full flex overflow-x-hidden group">
           <div className="flex w-max animate-marquee space-x-6 px-6 group-hover:[animation-play-state:paused]">
             {duplicatedTestimonials.map((testimonial, i) => (
-              <div key={i} className="w-[350px] bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between shrink-0">
+              <div key={i} className="w-[350px] glass-card p-6 flex flex-col justify-between shrink-0">
                 <div>
                   <div className="flex gap-1 mb-4 text-yellow-500">
                     {[...Array(testimonial.rating)].map((_, j) => (
@@ -159,7 +159,7 @@ export default function Home() {
           ].map((feature, i) => (
             <StaggerItem 
               key={i} 
-              className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 transition-colors"
+              className="glass-card p-8"
               whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
@@ -167,7 +167,7 @@ export default function Home() {
               <p className="text-text-body">{feature.desc}</p>
             </StaggerItem>
           ))}
-          <StaggerItem className="md:col-span-2 bg-gradient-to-br from-surface to-accent/10 border border-black/10 dark:border-white/10 rounded-2xl p-8 text-center flex flex-col items-center">
+          <StaggerItem className="md:col-span-2 glass-card p-8 text-center flex flex-col items-center">
             <div className="text-4xl mb-4">🎧</div>
             <h3 className="text-text-heading text-xl font-semibold mb-2">Free Consultation</h3>
             <p className="text-text-body">Expert advice on your digital strategy, no strings attached.</p>
@@ -228,7 +228,7 @@ export default function Home() {
             ].map((service, i) => (
               <StaggerItem 
                 key={i} 
-                className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 transition-all duration-300"
+                className="glass-card p-8"
                 whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
               >
                 <div className="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-6">
@@ -272,7 +272,7 @@ export default function Home() {
               <div className="absolute -left-[69px] w-10 h-10 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-[0_0_20px_rgba(59,130,246,0.6)] z-10">
                 {item.step}
               </div>
-              <div className="bg-[#121212] border border-white/5 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-start md:items-center hover:border-white/10 transition-colors shadow-lg">
+              <div className="glass-card p-6 flex flex-col md:flex-row gap-6 items-start md:items-center">
                 <div className="text-4xl shrink-0">{item.icon}</div>
                 <div>
                   <h3 className="text-white text-xl font-medium mb-1">{item.title}</h3>
@@ -310,7 +310,7 @@ export default function Home() {
             transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
           >
             {[...testimonials, ...testimonials].map((testimonial, i) => (
-              <div key={i} className="w-[350px] md:w-[450px] shrink-0 bg-surface border border-black/5 dark:border-white/5 rounded-2xl p-8 shadow-lg">
+              <div key={i} className="w-[350px] md:w-[450px] shrink-0 glass-card p-8">
                 <div className="flex gap-1 text-yellow-500 mb-6">
                   {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
                 </div>

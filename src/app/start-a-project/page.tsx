@@ -119,7 +119,7 @@ export default function StartProjectPage() {
       )}
 
       <ScaleIn delay={0.2}>
-        <div className="bg-surface border border-black/10 dark:border-white/10 rounded-[32px] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+        <div className="glass-card p-8 md:p-12 relative overflow-hidden">
           {/* Glow effect */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px] pointer-events-none"></div>
 

@@ -160,8 +160,8 @@ export function PricingSection() {
               key={plan.id}
               className={`relative rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 ${
                 plan.featured
-                  ? 'bg-primary border-2 border-accent shadow-[0_0_20px_rgba(37,99,235,0.1)] md:scale-102 z-10'
-                  : 'bg-surface border border-black/10 dark:border-white/10 shadow-md'
+                  ? 'bg-white/[0.04] backdrop-blur-xl border-2 border-accent shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)] md:scale-102 z-10'
+                  : 'glass-card'
               } ${plan.id === 'advanced' ? 'md:col-span-2 lg:col-span-1 md:max-w-sm md:mx-auto lg:w-full lg:max-w-none' : ''}`}
               whileHover={
                 plan.featured
@@ -269,7 +269,7 @@ export function PricingSection() {
             {additionalServices.map((service, i) => (
               <StaggerItem
                 key={service.id}
-                className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 shadow-md"
+                className="glass-card p-6 flex flex-col justify-between"
                 whileHover={{
                   y: -6,
                   scale: 1.02,

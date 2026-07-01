@@ -77,7 +77,7 @@ export default function ServicesPage() {
           {services.map((service, i) => (
             <StaggerItem 
               key={i} 
-              className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl p-8 transition-all duration-300"
+              className="glass-card p-8"
               whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
             >
               <div className="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-6">
