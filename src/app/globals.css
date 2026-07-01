@@ -52,6 +52,27 @@
     0 0 0 0.5px rgba(255, 255, 255, 0.03) inset !important;
   transition: all 0.3s ease !important;
 
+  /* Force light/white text inside glass-card, overriding theme variables for light theme readability */
+  &,
+  & *,
+  & .text-text-body,
+  & label {
+    color: #a1a1aa !important;
+  }
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6,
+  & strong,
+  & select,
+  & option,
+  & .text-text-heading {
+    color: #ffffff !important;
+  }
+
   &:hover {
     background: rgba(28, 28, 28, 0.70) !important;
     border: 1px solid rgba(255, 255, 255, 0.10) !important;
