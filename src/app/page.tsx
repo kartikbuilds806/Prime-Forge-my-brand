@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { CheckCircle2, ChevronDown, MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Star } from 'lucide-react';
 import { FadeUp, FadeIn, FadeLeft, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
+import { PricingSection } from '@/components/sections/PricingSection';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -281,6 +282,11 @@ export default function Home() {
             </FadeLeft>
           ))}
         </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="border-t border-black/5 dark:border-white/5">
+        <PricingSection />
       </section>
 
       {/* Testimonials */}

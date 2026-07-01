@@ -15,7 +15,7 @@ export function Footer() {
         </Link>
         
         <nav className="flex flex-wrap items-center justify-center gap-6 mb-12">
-          {['Services', 'Niches', 'About', 'Contact', 'Start a Project'].map((link) => (
+          {['Services', 'Projects', 'Niches', 'Pricing', 'About', 'Contact', 'Start a Project'].map((link) => (
             <Link 
               key={link} 
               href={`/${link.toLowerCase().replace(/\s+/g, '-')}`}

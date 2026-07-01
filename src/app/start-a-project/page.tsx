@@ -34,17 +34,40 @@ export default function StartProjectPage() {
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.email || !formData.phone) {
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.phone.trim()) {
       setError("Please fill in all required fields.");
       return;
     }
+    
+    // Client-side email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
     setError(null);
     setStep(2);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.digitalSignature || !formData.agreedToTerms) {
+    
+    // Validate required fields again before the database call
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.serviceNeeded) {
+      setError("Please fill in all required fields.");
+      setStep(1);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      setError("Please enter a valid email address.");
+      setStep(1);
+      return;
+    }
+
+    if (!formData.digitalSignature.trim() || !formData.agreedToTerms) {
       setError("You must agree to the terms and provide a digital signature.");
       return;
     }

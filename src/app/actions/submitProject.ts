@@ -28,7 +28,7 @@ const formSchema = z.object({
   businessName: z.string().optional(),
   projectType: z.string().min(1),
   budget: z.string().min(1),
-  message: z.string().min(10).max(2000).trim(),
+  message: z.string().max(2000).trim().optional().or(z.literal('')),
   digitalSignature: z.string().min(1),
   agreedToTerms: z.literal("on").transform(() => true),
 })
@@ -61,7 +61,8 @@ export async function submitProjectAction(formData: FormData) {
     const validatedFields = formSchema.safeParse(rawData);
     
     if (!validatedFields.success) {
-      return { success: false, error: "Invalid form data" };
+      const errorMsg = validatedFields.error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`).join(', ');
+      return { success: false, error: `Invalid form data: ${errorMsg}` };
     }
 
     const data = validatedFields.data; // The sanitized, parsed data
@@ -74,7 +75,7 @@ export async function submitProjectAction(formData: FormData) {
         email: data.email,
         phone: data.phone,
         business_name: data.businessName,
-        requirements: data.message,
+        requirements: data.message || null,
         service_needed: data.projectType,
         digital_signature: data.digitalSignature,
         agreed_to_terms: data.agreedToTerms,
@@ -90,48 +91,52 @@ export async function submitProjectAction(formData: FormData) {
     const timestamp = new Date().toLocaleString();
 
     // 5. Send Emails via Resend (using sanitized data)
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: data.email,
-      subject: '✅ PrimeForge — Your Project Request is Confirmed',
-      html: `
-        <p>Hello ${data.fullName},</p>
-        <p>Thank you for choosing PrimeForge! This email confirms that we have received your project request and serves as your official record.</p>
-        <h3>📋 Project Details:</h3>
-        <ul>
-          <li><strong>Name:</strong> ${data.fullName}</li>
-          <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
-          <li><strong>Service Requested:</strong> ${data.projectType}</li>
-          <li><strong>Budget:</strong> ${data.budget}</li>
-          <li><strong>Requirements:</strong> ${data.message || "None"}</li>
-          <li><strong>Digital Signature:</strong> ${data.digitalSignature}</li>
-          <li><strong>Submitted On:</strong> ${timestamp}</li>
-        </ul>
-        <p>You agreed to the PrimeForge 5-step process terms. The mockup phase is free, and payment is only processed after your design approval.</p>
-        <p>We will contact you within 24 hours at ${data.phone}.</p>
-        <p>— Kartik Sharma, Director<br>PrimeForge Agency<br>WhatsApp: +91 8533925291</p>
-      `
-    })
+    try {
+      await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: data.email,
+        subject: '✅ PrimeForge — Your Project Request is Confirmed',
+        html: `
+          <p>Hello ${data.fullName},</p>
+          <p>Thank you for choosing PrimeForge! This email confirms that we have received your project request and serves as your official record.</p>
+          <h3>📋 Project Details:</h3>
+          <ul>
+            <li><strong>Name:</strong> ${data.fullName}</li>
+            <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
+            <li><strong>Service Requested:</strong> ${data.projectType}</li>
+            <li><strong>Budget:</strong> ${data.budget}</li>
+            <li><strong>Requirements:</strong> ${data.message || "None"}</li>
+            <li><strong>Digital Signature:</strong> ${data.digitalSignature}</li>
+            <li><strong>Submitted On:</strong> ${timestamp}</li>
+          </ul>
+          <p>You agreed to the PrimeForge 5-step process terms. The mockup phase is free, and payment is only processed after your design approval.</p>
+          <p>We will contact you within 24 hours at ${data.phone}.</p>
+          <p>— Kartik Sharma, Director<br>PrimeForge Agency<br>WhatsApp: +91 8533925291</p>
+        `
+      })
 
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'primeforge7@gmail.com',
-      subject: `🔔 New Client Request — ${data.businessName || data.fullName}`,
-      html: `
-        <h3>New project request received!</h3>
-        <ul>
-          <li><strong>Client:</strong> ${data.fullName}</li>
-          <li><strong>Email:</strong> ${data.email}</li>
-          <li><strong>Phone:</strong> ${data.phone}</li>
-          <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
-          <li><strong>Service:</strong> ${data.projectType}</li>
-          <li><strong>Budget:</strong> ${data.budget}</li>
-          <li><strong>Requirements:</strong> ${data.message || "None"}</li>
-          <li><strong>Signature:</strong> ${data.digitalSignature}</li>
-          <li><strong>Submitted:</strong> ${timestamp}</li>
-        </ul>
-      `
-    })
+      await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: 'primeforge7@gmail.com',
+        subject: `🔔 New Client Request — ${data.businessName || data.fullName}`,
+        html: `
+          <h3>New project request received!</h3>
+          <ul>
+            <li><strong>Client:</strong> ${data.fullName}</li>
+            <li><strong>Email:</strong> ${data.email}</li>
+            <li><strong>Phone:</strong> ${data.phone}</li>
+            <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
+            <li><strong>Service:</strong> ${data.projectType}</li>
+            <li><strong>Budget:</strong> ${data.budget}</li>
+            <li><strong>Requirements:</strong> ${data.message || "None"}</li>
+            <li><strong>Signature:</strong> ${data.digitalSignature}</li>
+            <li><strong>Submitted:</strong> ${timestamp}</li>
+          </ul>
+        `
+      })
+    } catch (emailError) {
+      console.error('Resend error (logged but not failing the request):', emailError)
+    }
 
     return { success: true }
   } catch (error) {
