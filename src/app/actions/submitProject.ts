@@ -14,11 +14,24 @@ const supabase = createClient(
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Upstash Rate Limiter (3 requests per hour per IP)
-const ratelimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(3, "1 h"),
-})
+// Safe Upstash Rate Limiter initialization
+const isRedisConfigured = !!(
+  process.env.UPSTASH_REDIS_REST_URL &&
+  process.env.UPSTASH_REDIS_REST_URL.startsWith('http') &&
+  process.env.UPSTASH_REDIS_REST_TOKEN
+);
+
+let ratelimit: Ratelimit | null = null;
+if (isRedisConfigured) {
+  try {
+    ratelimit = new Ratelimit({
+      redis: Redis.fromEnv(),
+      limiter: Ratelimit.slidingWindow(3, "1 h"),
+    });
+  } catch (e) {
+    console.error("Failed to initialize Upstash Ratelimit:", e);
+  }
+}
 
 // Zod Schema mapping user instructions to existing form fields
 const formSchema = z.object({
@@ -36,12 +49,14 @@ const formSchema = z.object({
 export async function submitProjectAction(formData: FormData) {
   try {
     // 1. Rate Limiting
-    const headersList = await headers();
-    const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "127.0.0.1";
-    
-    const { success: rateLimitSuccess } = await ratelimit.limit(ip);
-    if (!rateLimitSuccess) {
-      return { success: false, error: "Too many submissions. Please try again later." };
+    if (ratelimit) {
+      const headersList = await headers();
+      const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "127.0.0.1";
+      
+      const { success: rateLimitSuccess } = await ratelimit.limit(ip);
+      if (!rateLimitSuccess) {
+        return { success: false, error: "Too many submissions. Please try again later." };
+      }
     }
 
     // 2. Extract Data and map to requested Zod schema fields
