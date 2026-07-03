@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Phone, MessageCircle, ArrowUp } from 'lucide-react';
 import { motion, useScroll } from 'framer-motion';
 
-export function FloatingCTAs() {
+export function FloatingCTAs({ children }: { children?: React.ReactNode }) {
   const [showTopBtn, setShowTopBtn] = useState(false);
   const { scrollYProgress } = useScroll();
 
@@ -26,7 +26,7 @@ export function FloatingCTAs() {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.5, duration: 0.4, type: 'spring' }}
-        className="fixed bottom-6 right-6 z-50 flex flex-col gap-4"
+        className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end"
       >
       {/* Scroll to top */}
       {showTopBtn && (
@@ -38,6 +38,9 @@ export function FloatingCTAs() {
           <ArrowUp className="w-5 h-5" />
         </button>
       )}
+
+      {/* Projected Chatbot Button */}
+      {children}
 
       {/* WhatsApp Button */}
       <a 

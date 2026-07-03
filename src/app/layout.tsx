@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingCTAs } from "@/components/ui/FloatingCTAs";
+import { ChatWidget } from "@/components/chatbot/ChatWidget";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { PageTransition } from "@/components/animations/PageTransition";
 
@@ -70,7 +70,7 @@ export default function RootLayout({
           </PageTransition>
         </main>
         <Footer />
-        <FloatingCTAs />
+        <ChatWidget />
         </ThemeProvider>
       </body>
     </html>
