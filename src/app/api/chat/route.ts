@@ -1,15 +1,26 @@
 /**
- * Chatbot API Endpoint (Phase 1)
+ * Chatbot API Endpoint (Phase 2)
  * Purpose: Streams completions from Google Gemini API using SSE fetch stream-parsing.
  * Rate limiting: Checked per-IP via Upstash Redis.
  * Models: Calls gemini-2.5-flash-lite with fallback to gemini-2.5-flash.
+ * Status checks: Dynamically queries client_requests using trackProjectAction.
+ * RAG database: Embeds user queries using text-embedding-004 and retrieves similarity chunks via Supabase match_knowledge_chunks.
  */
 
 import { chatRatelimit } from '@/lib/chat-rate-limit';
 import { knowledge } from '@/components/chatbot/data/knowledge';
+import { trackProjectAction } from '@/app/actions/trackProject';
+import { getEmbedding } from '@/lib/gemini-embeddings';
+import { createClient } from '@supabase/supabase-js';
 import { headers } from 'next/headers';
 
 export const runtime = 'nodejs';
+
+// Initialize Supabase Client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 const systemInstructionText = `
 You are the AI Chat Assistant representing PrimeForge, a premium custom web design and SEO agency.
@@ -61,7 +72,108 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify({ error: "Messages array is required" }), { status: 400 });
   }
 
-  // 3. Map messages array to Gemini contents shape:
+  const lastUserMessage = messages[messages.length - 1]?.content || "";
+
+  // 3. Dynamic Status Check Integration (Task 1)
+  const isStatusQuery = /status|track|progress|update|how\s+far|milestone/i.test(lastUserMessage);
+  let statusContext = "";
+
+  if (isStatusQuery) {
+    // Scan history backwards to extract a client email
+    let clientEmail = "";
+    const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/;
+    
+    for (let i = messages.length - 1; i >= 0; i--) {
+      const match = messages[i].content.match(emailRegex);
+      if (match) {
+        clientEmail = match[0];
+        break;
+      }
+    }
+
+    if (clientEmail) {
+      console.log("Chatbot performing dynamic status lookup for:", clientEmail);
+      const trackingResult = await trackProjectAction(clientEmail);
+      
+      if (trackingResult.success && trackingResult.data) {
+        const data = trackingResult.data;
+        const currentStepName = data.steps?.[data.currentStepIndex]?.name || "Intake";
+        const currentStepDesc = data.steps?.[data.currentStepIndex]?.description || "";
+        const latestLog = data.logs && data.logs.length > 0 ? data.logs[0].message : "Workspace setup.";
+        
+        statusContext = `
+## Client Project Status (Verified Database Record)
+A project was found associated with email "${clientEmail}":
+- Client Name: ${data.request.full_name}
+- Business Name: ${data.request.business_name || "N/A"}
+- Service Category: ${data.request.service_needed}
+- Project Progress: ${data.progressPercent}% Complete
+- Active Step: "${currentStepName}" (${currentStepDesc})
+- Latest Developer Status Log: "${latestLog}"
+- Live Staging link: ${data.stagingUrl || "Not deployed yet"}
+- Figma Mockup link: ${data.mockupUrl || "Not created yet"}
+
+Explain these details conversationally to the client. Highlight the completion percentage and the latest developer log. If a staging/mockup link is listed, provide it.
+`;
+      } else {
+        statusContext = `
+## Client Project Status (Not Found)
+The client requested progress for email "${clientEmail}", but no record exists in our system. Inform them politely that no request was found under "${clientEmail}" and suggest they check the spelling or start a new project intake.
+`;
+      }
+    } else {
+      statusContext = `
+## Client Project Status (Missing Email)
+The client is asking about project tracking, milestones, or progress, but has not provided their email yet. Politely ask them to state the email address associated with their request so we can check their live status.
+`;
+    }
+  }
+
+  // 4. RAG Database Retrieval Integration (Task 2)
+  let ragContext = "";
+
+  // Skip similarity lookup if this is a tracking status request
+  if (!isStatusQuery && lastUserMessage.trim().length > 3) {
+    try {
+      // Generate query embedding using text-embedding-004
+      const queryEmbedding = await getEmbedding(lastUserMessage, true);
+
+      // Query Supabase match RPC function
+      const { data: chunks, error: rpcError } = await supabase.rpc('match_knowledge_chunks', {
+        query_embedding: queryEmbedding,
+        match_count: 4
+      });
+
+      if (rpcError) {
+        console.error("Supabase RPC search failed:", rpcError);
+      } else if (chunks && chunks.length > 0) {
+        // filter for strong cosine similarities (> 0.65 threshold)
+        const relevantChunks = chunks.filter((c: any) => c.similarity > 0.65);
+        if (relevantChunks.length > 0) {
+          const chunkTexts = relevantChunks.map((c: any) => 
+            `[Source: ${c.source}, Section: ${c.section}]\n${c.content}`
+          );
+          
+          ragContext = `
+## Relevant Background Context
+The following background details were retrieved semantically from our vector database. Use them to answer the client's question accurately:
+${chunkTexts.join('\n\n')}
+`;
+        }
+      }
+    } catch (e) {
+      console.error("RAG retrieval pipeline error (this is bypassed safely):", e);
+    }
+  }
+
+  // 5. Combine System Instructions
+  const combinedSystemInstruction = `
+${systemInstructionText}
+${statusContext}
+${ragContext}
+`;
+
+  // 6. Map messages array to Gemini contents shape:
   // Role: user -> user, assistant/model -> model
   const contents = messages.map((m: any) => ({
     role: m.role === "assistant" || m.role === "model" ? "model" : "user",
@@ -71,7 +183,7 @@ export async function POST(req: Request) {
   const payload = {
     contents,
     systemInstruction: {
-      parts: [{ text: systemInstructionText }]
+      parts: [{ text: combinedSystemInstruction }]
     },
     generationConfig: {
       responseMimeType: "text/plain"
@@ -84,7 +196,7 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify({ error: "API Key not configured" }), { status: 500 });
   }
 
-  // 4. Call Gemini stream endpoint with fallback
+  // 7. Call Gemini stream endpoint with fallback
   let response: Response;
   const urlLite = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:streamGenerateContent?alt=sse&key=${apiKey}`;
   const urlFlash = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${apiKey}`;
@@ -126,7 +238,7 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify({ error: "Generative API returned error state" }), { status: response.status });
   }
 
-  // 5. Pipe stream from Gemini SSE to custom output stream
+  // 8. Pipe stream from Gemini SSE to custom output stream
   const stream = new ReadableStream({
     async start(controller) {
       if (!response.body) {
