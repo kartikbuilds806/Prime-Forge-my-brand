@@ -10,6 +10,11 @@ import fs from 'fs';
 import path from 'path';
 import { createClient } from '@supabase/supabase-js';
 
+// Polyfill WebSocket for older Node runtimes to bypass Supabase Realtime client checks
+if (typeof (global as any).WebSocket === 'undefined') {
+  (global as any).WebSocket = class {};
+}
+
 // 1. Manually parse .env.local variables to avoid dependency creep
 try {
   const envPath = path.resolve(process.cwd(), '.env.local');
@@ -112,7 +117,7 @@ const chunks: IngestChunk[] = [
 
 // 4. Generate Embeddings & Upsert to Supabase
 async function getEmbedding(text: string): Promise<number[]> {
-  const model = "models/text-embedding-004";
+  const model = "models/embedding-001";
   const url = `https://generativelanguage.googleapis.com/v1beta/${model}:embedContent?key=${geminiApiKey}`;
 
   const response = await fetch(url, {

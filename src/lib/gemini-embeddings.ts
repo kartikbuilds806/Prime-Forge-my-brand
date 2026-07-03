@@ -10,7 +10,7 @@ export async function getEmbedding(text: string, isQuery = false): Promise<numbe
     throw new Error("Missing GEMINI_API_KEY in environment variables.");
   }
 
-  const model = "models/text-embedding-004";
+  const model = "models/embedding-001";
   const url = `https://generativelanguage.googleapis.com/v1beta/${model}:embedContent?key=${apiKey}`;
 
   const response = await fetch(url, {
