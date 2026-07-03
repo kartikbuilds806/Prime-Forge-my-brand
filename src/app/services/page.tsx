@@ -1,12 +1,20 @@
 import React from 'react';
-import { MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Check, X } from 'lucide-react';
+import { MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Check, X, MessageSquare, PhoneCall, Brain, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { FadeUp, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
+import { FadeUp, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
 
 export const metadata = {
   title: 'Services | PrimeForge — Web Design & SEO Agency',
   description: 'Premium digital solutions engineered to convert visitors into paying clients. Custom websites, landing pages, SEO, AEO, GEO, and AI Chatbots.',
 };
+
+interface AdditionalService {
+  id: string;
+  title: string;
+  price: string;
+  description: string;
+  icon: React.ReactNode;
+}
 
 export default function ServicesPage() {
   const services = [
@@ -48,6 +56,44 @@ export default function ServicesPage() {
     }
   ];
 
+  const additionalServices: AdditionalService[] = [
+    {
+      id: 'whatsapp-chatbot',
+      title: 'WhatsApp Chatbot',
+      price: '$50',
+      description: 'Automate customer communication directly through WhatsApp.',
+      icon: <MessageSquare className="w-6 h-6 text-accent" />,
+    },
+    {
+      id: 'website-chatbot',
+      title: 'Website Chatbot Integration',
+      price: '$50',
+      description: 'Add an intelligent AI chatbot directly to your website.',
+      icon: <Bot className="w-6 h-6 text-accent" />,
+    },
+    {
+      id: 'voice-agent',
+      title: 'Voice Agent',
+      price: '$100',
+      description: 'AI-powered voice assistant for customer support and lead qualification.',
+      icon: <PhoneCall className="w-6 h-6 text-accent" />,
+    },
+    {
+      id: 'ai-automation',
+      title: 'AI Automation',
+      price: '$150',
+      description: 'Automate repetitive business processes and save valuable time.',
+      icon: <Zap className="w-6 h-6 text-accent" />,
+    },
+    {
+      id: 'custom-ai-agent',
+      title: 'Custom Business AI Agent',
+      price: '$200',
+      description: 'A personalized AI system tailored specifically for your business operations and workflows.',
+      icon: <Brain className="w-6 h-6 text-accent" />,
+    },
+  ];
+
   const comparison = [
     { feature: "Code Quality", us: "100% Custom Coded (React/Next.js)", them: "Cheap Templates (Elementor/Wix)" },
     { feature: "Delivery Time", us: "2-5 Days", them: "3-6 Weeks" },
@@ -73,11 +119,11 @@ export default function ServicesPage() {
 
       {/* Services Grid */}
       <section className="py-12 container">
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <StaggerContainer className="flex overflow-x-auto pb-6 gap-6 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-x-visible md:pb-0 max-w-5xl mx-auto w-full">
           {services.map((service, i) => (
             <StaggerItem 
               key={i} 
-              className="glass-card p-8"
+              className="glass-card p-8 w-[85vw] max-w-[350px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
               whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
             >
               <div className="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-6">
@@ -93,6 +139,60 @@ export default function ServicesPage() {
         </StaggerContainer>
       </section>
 
+      {/* Additional Services */}
+      <section className="py-24 bg-surface/20 border-t border-black/5 dark:border-white/5 w-full">
+        <div className="container max-w-5xl mx-auto">
+          <FadeUp>
+            <div className="text-center mb-16">
+              <h2 className="heading-serif text-4xl md:text-5xl mb-4 text-text-heading">
+                Additional Services
+              </h2>
+              <p className="text-text-body text-lg max-w-2xl mx-auto">
+                Enhance your website with powerful AI and automation solutions.
+              </p>
+            </div>
+          </FadeUp>
+
+          <StaggerContainer className="flex overflow-x-auto pb-6 gap-6 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-x-visible md:pb-0 w-full">
+            {additionalServices.map((service) => (
+              <StaggerItem
+                key={service.id}
+                className="glass-card p-6 flex flex-col justify-between w-[85vw] max-w-[350px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
+                whileHover={{
+                  y: -6,
+                  scale: 1.02,
+                  borderColor: 'rgba(37, 99, 235, 0.4)',
+                  boxShadow: '0 10px 20px -10px rgba(37, 99, 235, 0.15)',
+                }}
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 shrink-0">
+                    {service.icon}
+                  </div>
+                  <h4 className="text-text-heading text-lg font-serif font-bold mb-2">{service.title}</h4>
+                  <p className="text-text-body text-sm leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between mt-auto pt-2 border-t border-white/10">
+                  <div className="flex items-baseline gap-0.5">
+                    <span className="text-2xl font-bold text-text-heading">{service.price}</span>
+                    <span className="text-text-body text-xs">/ addon</span>
+                  </div>
+                  <a
+                    href={`/contact?addon=${service.id}`}
+                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1"
+                  >
+                    Inquire
+                  </a>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Comparison Section */}
       <section className="py-24 container max-w-4xl mx-auto">
         <FadeUp>
@@ -105,26 +205,28 @@ export default function ServicesPage() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="bg-surface border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden">
-            <div className="grid grid-cols-3 border-b border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5">
-              <div className="p-6 font-semibold text-text-heading/60">Feature</div>
-              <div className="p-6 font-bold text-accent bg-accent/10 border-x border-accent/20">PrimeForge</div>
-              <div className="p-6 font-semibold text-text-heading/60 text-center">Standard Agencies</div>
-            </div>
-            
-            {comparison.map((item, i) => (
-              <div key={i} className={`grid grid-cols-3 ${i !== comparison.length - 1 ? 'border-b border-black/5 dark:border-white/5' : ''}`}>
-                <div className="p-6 text-text-heading font-medium flex items-center">{item.feature}</div>
-                <div className="p-6 text-text-heading flex items-center gap-3 bg-accent/5 border-x border-accent/10">
-                  <Check className="w-5 h-5 text-accent shrink-0" />
-                  <span className="font-medium">{item.us}</span>
-                </div>
-                <div className="p-6 text-text-body flex items-center gap-3 justify-center text-center">
-                  <X className="w-5 h-5 text-red-500 shrink-0" />
-                  <span>{item.them}</span>
-                </div>
+          <div className="w-full overflow-x-auto pb-4">
+            <div className="min-w-[650px] md:min-w-full bg-surface border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden">
+              <div className="grid grid-cols-3 border-b border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5">
+                <div className="p-6 font-semibold text-text-heading/60">Feature</div>
+                <div className="p-6 font-bold text-accent bg-accent/10 border-x border-accent/20">PrimeForge</div>
+                <div className="p-6 font-semibold text-text-heading/60 text-center">Standard Agencies</div>
               </div>
-            ))}
+              
+              {comparison.map((item, i) => (
+                <div key={i} className={`grid grid-cols-3 ${i !== comparison.length - 1 ? 'border-b border-black/5 dark:border-white/5' : ''}`}>
+                  <div className="p-6 text-text-heading font-medium flex items-center">{item.feature}</div>
+                  <div className="p-6 text-text-heading flex items-center gap-3 bg-accent/5 border-x border-accent/10">
+                    <Check className="w-5 h-5 text-accent shrink-0" />
+                    <span className="font-medium">{item.us}</span>
+                  </div>
+                  <div className="p-6 text-text-body flex items-center gap-3 justify-center text-center">
+                    <X className="w-5 h-5 text-red-500 shrink-0" />
+                    <span>{item.them}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </FadeUp>
 

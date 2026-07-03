@@ -187,7 +187,7 @@ export default function Home() {
             </div>
           </FadeUp>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <StaggerContainer className="flex overflow-x-auto pb-6 gap-6 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-x-visible md:pb-0 max-w-5xl mx-auto w-full">
             {[
               { 
                 icon: <MonitorSmartphone className="w-8 h-8 text-accent" />, 
@@ -228,7 +228,7 @@ export default function Home() {
             ].map((service, i) => (
               <StaggerItem 
                 key={i} 
-                className="glass-card p-8"
+                className="glass-card p-8 w-[85vw] max-w-[350px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
                 whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
               >
                 <div className="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-6">

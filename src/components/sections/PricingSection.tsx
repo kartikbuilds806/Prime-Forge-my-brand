@@ -152,13 +152,12 @@ export function PricingSection() {
         </FadeUp>
       </section>
 
-      {/* PRICING CARDS SECTION */}
       <section className="pb-16 container">
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch max-w-5xl mx-auto">
+        <StaggerContainer className="flex overflow-x-auto pb-6 gap-6 items-stretch snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-x-visible md:pb-0 max-w-5xl mx-auto w-full">
           {plans.map((plan) => (
             <StaggerItem
               key={plan.id}
-              className={`relative rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 ${
+              className={`relative rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 w-[85vw] max-w-[350px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink ${
                 plan.featured
                   ? 'bg-white/[0.04] backdrop-blur-xl border-2 border-accent shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)] md:scale-102 z-10'
                   : 'glass-card'
@@ -251,59 +250,6 @@ export function PricingSection() {
         </FadeUp>
       </section>
 
-      {/* ADDITIONAL SERVICES SECTION */}
-      <section className="py-16 md:py-24 container bg-surface/20 border-t border-black/5 dark:border-white/5 w-full">
-        <div className="max-w-5xl mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <h3 className="heading-serif text-3xl md:text-4xl mb-4 text-text-heading">
-                Additional Services
-              </h3>
-              <p className="text-text-body text-lg max-w-2xl mx-auto">
-                Enhance your website with powerful AI and automation solutions.
-              </p>
-            </div>
-          </FadeUp>
-
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {additionalServices.map((service, i) => (
-              <StaggerItem
-                key={service.id}
-                className="glass-card p-6 flex flex-col justify-between"
-                whileHover={{
-                  y: -6,
-                  scale: 1.02,
-                  borderColor: 'rgba(37, 99, 235, 0.4)',
-                  boxShadow: '0 10px 20px -10px rgba(37, 99, 235, 0.15)',
-                }}
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 shrink-0">
-                    {service.icon}
-                  </div>
-                  <h4 className="text-text-heading text-lg font-bold mb-2">{service.title}</h4>
-                  <p className="text-text-body text-sm leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between mt-auto pt-2 border-t border-black/5 dark:border-white/5">
-                  <div className="flex items-baseline gap-0.5">
-                    <span className="text-2xl font-bold text-text-heading">{service.price}</span>
-                    <span className="text-text-body text-xs">/ addon</span>
-                  </div>
-                  <a
-                    href={`/contact?addon=${service.id}`}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1"
-                  >
-                    Inquire
-                  </a>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
     </div>
   );
 }

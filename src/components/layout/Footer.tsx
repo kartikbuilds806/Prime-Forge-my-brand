@@ -15,15 +15,18 @@ export function Footer() {
         </Link>
         
         <nav className="flex flex-wrap items-center justify-center gap-6 mb-12">
-          {['Services', 'Projects', 'Niches', 'Pricing', 'About', 'Contact', 'Start a Project'].map((link) => (
-            <Link 
-              key={link} 
-              href={`/${link.toLowerCase().replace(/\s+/g, '-')}`}
-              className="text-sm font-medium text-text-body hover:text-text-heading transition-colors"
-            >
-              {link}
-            </Link>
-          ))}
+          {['Services', 'Projects', 'Track Status', 'About', 'Contact', 'Start a Project'].map((link) => {
+            const path = link === 'Track Status' ? '/track' : `/${link.toLowerCase().replace(/\s+/g, '-')}`;
+            return (
+              <Link 
+                key={link} 
+                href={path}
+                className="text-sm font-medium text-text-body hover:text-text-heading transition-colors"
+              >
+                {link}
+              </Link>
+            );
+          })}
         </nav>
 
         <p className="text-sm text-text-body/60">
