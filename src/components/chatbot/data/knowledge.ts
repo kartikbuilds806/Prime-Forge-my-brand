@@ -1,7 +1,7 @@
 /**
- * PrimeForge Static Knowledge Base (Phase 1)
+ * PrimeForge Static Knowledge Base (Phase 2)
  * Purpose: Decoupled business facts for the AI context.
- * Limitation: Placed in-memory. Phase 2 will swap/augment this with vector search (RAG) if the corpus grows.
+ * Pricing Policy: We never quote flat dollar amounts. Every project is custom scoped.
  */
 
 export interface Service {
@@ -12,14 +12,12 @@ export interface Service {
 
 export interface PricingTier {
   name: string;
-  price: string;
   description: string;
   features: string[];
 }
 
 export interface Addon {
   name: string;
-  price: string;
   description: string;
 }
 
@@ -40,6 +38,11 @@ export interface ContactInfo {
   startProjectUrl: string;
 }
 
+export interface PricingPolicy {
+  approach: string;
+  howToGetQuote: string[];
+}
+
 export interface PrimeForgeKnowledge {
   services: Service[];
   pricingTiers: PricingTier[];
@@ -48,6 +51,7 @@ export interface PrimeForgeKnowledge {
   process: string[];
   faq: FAQ[];
   contact: ContactInfo;
+  pricingPolicy: PricingPolicy;
 }
 
 export const knowledge: PrimeForgeKnowledge = {
@@ -86,7 +90,6 @@ export const knowledge: PrimeForgeKnowledge = {
   pricingTiers: [
     {
       name: "Starter Package",
-      price: "$100",
       description: "Essential premium layout for small businesses wanting a solid, fast digital presence.",
       features: [
         "1 Custom-designed page",
@@ -98,7 +101,6 @@ export const knowledge: PrimeForgeKnowledge = {
     },
     {
       name: "Popular Package",
-      price: "$200",
       description: "Comprehensive multi-page custom build ideal for growing local brands and service businesses.",
       features: [
         "Up to 5 Custom pages",
@@ -110,7 +112,6 @@ export const knowledge: PrimeForgeKnowledge = {
     },
     {
       name: "Advanced Package",
-      price: "$400",
       description: "Bespoke full-stack web application with databases, dashboard modules, or specialized logic.",
       features: [
         "Unlimited custom pages",
@@ -124,27 +125,22 @@ export const knowledge: PrimeForgeKnowledge = {
   addons: [
     {
       name: "WhatsApp Chatbot",
-      price: "$50 / addon",
       description: "Automated client communication directly on WhatsApp."
     },
     {
       name: "Website Chatbot Integration",
-      price: "$50 / addon",
       description: "Intelligent AI assistant directly embedded on your website."
     },
     {
       name: "Voice Agent",
-      price: "$100 / addon",
       description: "AI-powered voice assistant for customer support and lead qualification."
     },
     {
       name: "AI Automation",
-      price: "$150 / addon",
       description: "Automate repetitive business workflows and save hours of manual operations."
     },
     {
       name: "Custom Business AI Agent",
-      price: "$200 / addon",
       description: "Personalized AI system tailored specifically for your operational workflows."
     }
   ],
@@ -204,5 +200,14 @@ export const knowledge: PrimeForgeKnowledge = {
     phone: "tel:+918533925291",
     bookCallUrl: "/book-a-call",
     startProjectUrl: "/start-a-project"
+  },
+  pricingPolicy: {
+    approach: "Every project is custom-designed and custom-coded from scratch. We do not publish flat-rate fixed prices because scope, pages, databases, and third-party integrations vary for every business. We provide custom, itemized quotes for each client based on their precise goals.",
+    howToGetQuote: [
+      "Book a strategy call on our website (/book-a-call)",
+      "Start a project questionnaire on our website (/start-a-project)",
+      "Contact us directly via WhatsApp (https://wa.me/918533925291)",
+      "Call our team (+918533925291)"
+    ]
   }
 };
