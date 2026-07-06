@@ -23,7 +23,7 @@ export function QuickPrompts({ onSelect }: QuickPromptsProps) {
         <button
           key={idx}
           onClick={() => onSelect(prompt)}
-          className="text-xs px-3.5 py-2 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-text-body hover:text-text-heading hover:bg-black/10 dark:hover:bg-white/10 transition-all font-medium text-left"
+          className="text-xs px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-white hover:bg-white/10 transition-all font-medium text-left"
         >
           {prompt}
         </button>

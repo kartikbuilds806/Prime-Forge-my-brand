@@ -15,7 +15,7 @@ export default function ProjectsPage() {
       title: "Real Estate",
       desc: "Property listings, lead generation, and location maps.",
       demos: [
-        { name: "AGS Realtors", link: "#" },
+        { name: "A2 Realtor", link: "https://a2-realtor.netlify.app/" },
         { name: "Tandon Realtors", link: "#" },
         { name: "Ruddy PI Estate", link: "#" },
       ]
@@ -25,7 +25,7 @@ export default function ProjectsPage() {
       desc: "Appointment booking, service showcase, trust-building UI.",
       demos: [
         { name: "Elite Dental Care", link: "#" },
-        { name: "The City Clinic", link: "#" },
+        { name: "City Dental Clinic", link: "https://the-city-clinic-dehradun.netlify.app/" },
         { name: "V-Care Clinic", link: "#" },
       ]
     },
@@ -33,22 +33,22 @@ export default function ProjectsPage() {
       title: "Jewellery Shops",
       desc: "Product showcase, premium UI, catalog layout.",
       demos: [
-        { name: "Suvarna Jeweller", link: "#" },
+        { name: "Suvarna Jeweller", link: "https://suvarna-jeweller.vercel.app/" },
       ]
     },
     {
       title: "Pet Clinics",
       desc: "Appointment booking, service details, clean UI.",
       demos: [
-        { name: "Petcuro Surgery", link: "#" },
+        { name: "Petcuro Surgery", link: "https://petcuro-sugery.netlify.app/" },
       ]
     },
     {
       title: "Salons & Makeover",
       desc: "Service pricing, booking system, image gallery.",
       demos: [
-        { name: "Stylish Mahi Unisex", link: "#" },
-        { name: "Cloud 9 Salon", link: "#" },
+        { name: "Stylish Mahi Unisex", link: "https://stylishmahii-unisex-salon.netlify.app/" },
+        { name: "Cloud 9 Salon", link: "https://cloud9salon.netlify.app/about" },
         { name: "Ridhi Makeover", link: "#" },
       ]
     },
@@ -57,15 +57,15 @@ export default function ProjectsPage() {
       desc: "Menu display, table booking, food gallery.",
       demos: [
         { name: "Zaika Cafe", link: "#" },
-        { name: "Crown Restaurant", link: "#" },
-        { name: "Zaika Vercel", link: "#" },
+        { name: "Crown Restaurant", link: "https://crown-restaurant.netlify.app/" },
+        { name: "Zaika Restaurant", link: "https://zaikarestaurant.vercel.app/" },
       ]
     },
     {
       title: "Travellers / Tours",
       desc: "Tour packages, booking forms, destination showcase.",
       demos: [
-        { name: "Smart Choice Travels", link: "#" },
+        { name: "Smart Choice Travels", link: "https://www.thesmartchoicetours.com/" },
       ]
     }
   ];
@@ -136,7 +136,7 @@ export default function ProjectsPage() {
               </div>
 
               <div className="mt-auto">
-                <Button href="#" variant="secondary" className="w-full justify-center text-center">
+                <Button href="https://protein-coach-tracker-g6cx.vercel.app/" variant="secondary" className="w-full justify-center text-center">
                   View Project
                 </Button>
               </div>

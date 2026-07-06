@@ -193,6 +193,14 @@ export const knowledge: PrimeForgeKnowledge = {
     {
       question: "Who owns the website and code after launch?",
       answer: "You own 100% of the custom code and files. There are no vendor lock-ins or monthly fees."
+    },
+    {
+      question: "What is the founder/owner (Kartik Sharma) like, and what is his behaviour/working style?",
+      answer: "Kartik Sharma is direct, hands-on, transparent, and highly committed to client outcomes. He hates unnecessary agency bureaucracy and middleman overhead—clients communicate and work directly with him as the lead developer throughout the process. He works efficiently and is highly accessible via WhatsApp (+918533925291)."
+    },
+    {
+      question: "How do you work with clients and what is your brand personality?",
+      answer: "We are direct, outcome-focused, and plain-spoken. We don't deal in sales talk, middleman delays, or complex jargon. We prove value upfront by designing and coding a free working home page prototype within 48 hours before asking for any financial commitment."
     }
   ],
   contact: {

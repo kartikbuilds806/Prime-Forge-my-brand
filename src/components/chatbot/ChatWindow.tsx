@@ -68,22 +68,22 @@ export function ChatWindow({
       aria-label="PrimeForge AI Chatbot Window"
     >
       {/* Header */}
-      <div className="px-5 py-4 border-b border-black/10 dark:border-white/10 flex items-center justify-between bg-black/10 dark:bg-white/[0.01]">
+      <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between bg-white/[0.03]">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/20">
             <Sparkles className="w-5 h-5 text-accent" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-text-heading leading-none mb-1">PrimeForge AI</h3>
+            <h3 className="text-sm font-bold text-white leading-none mb-1">PrimeForge AI</h3>
             <div className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[10px] font-semibold text-text-body/70">Online & Ready</span>
+              <span className="text-[10px] font-semibold text-white/60">Online & Ready</span>
             </div>
           </div>
         </div>
         <button
           onClick={onClose}
-          className="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-text-body hover:text-text-heading transition-colors"
+          className="p-1.5 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors"
           aria-label="Close Chat Window"
         >
           <X className="w-4 h-4" />
@@ -105,7 +105,7 @@ export function ChatWindow({
             <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 shrink-0 self-end mb-1">
               <Sparkles className="w-4 h-4 text-accent" />
             </div>
-            <div className="flex gap-1 items-center px-4 py-3 bg-black/5 dark:bg-white/[0.03] border border-black/10 dark:border-white/10 rounded-2xl rounded-bl-none">
+            <div className="flex gap-1 items-center px-4 py-3 bg-white/[0.04] border border-white/10 rounded-2xl rounded-bl-none">
               <span className="w-2 h-2 rounded-full bg-accent animate-bounce" style={{ animationDelay: '0ms' }} />
               <span className="w-2 h-2 rounded-full bg-accent animate-bounce" style={{ animationDelay: '150ms' }} />
               <span className="w-2 h-2 rounded-full bg-accent animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -131,7 +131,7 @@ export function ChatWindow({
       </div>
 
       {/* Footer / Inputs */}
-      <div className="px-5 py-4 border-t border-black/10 dark:border-white/10 bg-black/10 dark:bg-white/[0.01]">
+      <div className="px-5 py-4 border-t border-white/10 bg-white/[0.03]">
         {/* Suggestion Chips (only on welcome screen) */}
         {messages.length === 1 && !isLoading && !error && (
           <QuickPrompts onSelect={onQuickSelect} />
@@ -146,7 +146,7 @@ export function ChatWindow({
             onChange={(e) => onInputChange(e.target.value)}
             placeholder="Ask us anything..."
             disabled={isLoading}
-            className="flex-grow px-4 py-2.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/[0.02] text-sm text-text-heading placeholder-text-body/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all disabled:opacity-50"
+            className="flex-grow px-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all disabled:opacity-50"
           />
           <Button
             type="submit"

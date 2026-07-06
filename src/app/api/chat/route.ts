@@ -25,12 +25,12 @@ const supabase = createClient(
 const systemInstructionText = `
 You are the AI Chat Assistant representing PrimeForge, a premium custom web design and SEO agency.
 Answer client questions confidently using ONLY the facts provided in the knowledge base below.
-Do not make up facts, timelines, or features not listed. If asked about something out of scope or custom, instruct them to Book a Call.
+Do not make up facts, timelines, or features not listed. If asked about something out of scope, politely redirect them back to PrimeForge's web design, SEO, and AI automation topics, phrasing the redirection in the user's current language.
 
-CRITICAL PRICING RULE: We do NOT publish or quote flat-rate prices or specific dollar amounts. Never state any pricing figures (e.g. do NOT say $100, $200, $400, etc.) under any circumstances, even if asked directly or repeatedly. If the user asks about cost or pricing, explain our Pricing Policy approach (custom quotes based on client goals) and redirect them to Book a Call (/book-a-call), WhatsApp (https://wa.me/918533925291), or Start a Project (/start-a-project).
+CRITICAL PRICING RULE: We do NOT publish or quote flat-rate prices or specific dollar amounts. Never state any pricing figures (e.g. do NOT say $100, $200, $400, etc.) under any circumstances, even if asked directly or repeatedly. If the user asks about cost or pricing, explain our Pricing Policy approach (custom quotes based on client goals) and redirect them to Book a Call (/book-a-call), WhatsApp (https://wa.me/918533925291), or Start a Project (/start-a-project), ensuring the redirection matches the user's current language register.
 
 Keep your tone direct, outcome-focused, warm, and confident (plain-spoken, not corporate-stiff). Use "we", "our", and "PrimeForge" to refer to the studio.
-When appropriate (e.g. if the user asks about starting, pricing, features, or timeline), politely suggest booking a call or starting a project.
+When appropriate (e.g. if the user asks about starting, pricing, features, or timeline), politely suggest booking a call or starting a project in their language.
 
 KNOWLEDGE BASE:
 ${JSON.stringify(knowledge, null, 2)}
@@ -74,6 +74,27 @@ export async function POST(req: Request) {
 
   const lastUserMessage = messages[messages.length - 1]?.content || "";
 
+  // Dynamic language detection
+  const hinglishKeywords = /\b(kya|aap|hai|hain|ho|ko|se|btao|mujh|mujhe|bhai|mausam|kaisa|kab|tak|toh|na|aur|bhi|krte|karte|kar|kr|ke|ki|tha|thi|hu|hoon|yaar|gaya|gaye|rha|raha|krna|karna|shuru|liye|bata|batao|karta|karte)\b/i;
+  const isHinglish = hinglishKeywords.test(lastUserMessage);
+
+  const languageInstruction = isHinglish 
+    ? `
+CRITICAL LANGUAGE DIRECTIVE:
+- The user is speaking in Hinglish (Hindi-English mix in Roman script).
+- You MUST respond strictly in natural, conversational Hinglish (Roman script, tech-founder style). Do NOT respond in pure English or pure Hindi.
+- Translate any English facts from the KNOWLEDGE BASE or from the Relevant Background Context (retrieved vector/RAG chunks) into natural Hinglish. For example, instead of saying "We offer premium custom web design" in English, say "Hum premium custom web design aur SEO services offer karte hain".
+- Keep technical English words (like "custom website", "web design", "SEO", "landing page", "Google PageSpeed", "WhatsApp", etc.) in English, but write the surrounding grammar in Romanized Hindi.
+- Every single sentence of your response must be in Hinglish. Do not leak English grammar or sentences.
+`
+    : `
+CRITICAL LANGUAGE DIRECTIVE:
+- The user is speaking in English.
+- You MUST respond strictly in 100% pure, premium, professional English.
+- Do NOT use any Hinglish or Hindi words under any circumstances (do NOT use words like "Bhai", "Hum", "hai", "yaar", etc.).
+- Every single sentence of your response must be in English.
+`;
+
   // 3. Dynamic Status Check Integration (Task 1)
   const isStatusQuery = /status|track|progress|update|how\s+far|milestone/i.test(lastUserMessage);
   let statusContext = "";
@@ -113,18 +134,18 @@ A project was found associated with email "${clientEmail}":
 - Live Staging link: ${data.stagingUrl || "Not deployed yet"}
 - Figma Mockup link: ${data.mockupUrl || "Not created yet"}
 
-Explain these details conversationally to the client. Highlight the completion percentage and the latest developer log. If a staging/mockup link is listed, provide it.
+Explain these details conversationally to the client. You MUST write this explanation strictly in the active language of the user's query (e.g., if they asked in English, explain in 100% pure English; if they asked in Hinglish, explain in Hinglish). Highlight the completion percentage and the latest developer log. If a staging/mockup link is listed, provide it.
 `;
       } else {
         statusContext = `
 ## Client Project Status (Not Found)
-The client requested progress for email "${clientEmail}", but no record exists in our system. Inform them politely that no request was found under "${clientEmail}" and suggest they check the spelling or start a new project intake.
+The client requested progress for email "${clientEmail}", but no record exists in our system. Inform them politely that no request was found under "${clientEmail}" and suggest they check the spelling or start a new project intake. You MUST write this response strictly in the active language of the user's query (e.g., in English if they asked in English; in Hinglish if they asked in Hinglish).
 `;
       }
     } else {
       statusContext = `
 ## Client Project Status (Missing Email)
-The client is asking about project tracking, milestones, or progress, but has not provided their email yet. Politely ask them to state the email address associated with their request so we can check their live status.
+The client is asking about project tracking, milestones, or progress, but has not provided their email yet. Politely ask them to state the email address associated with their request so we can check their live status. You MUST write this response strictly in the active language of the user's query.
 `;
     }
   }
@@ -168,6 +189,7 @@ ${chunkTexts.join('\n\n')}
 
   // 5. Combine System Instructions
   const combinedSystemInstruction = `
+${languageInstruction}
 ${systemInstructionText}
 ${statusContext}
 ${ragContext}

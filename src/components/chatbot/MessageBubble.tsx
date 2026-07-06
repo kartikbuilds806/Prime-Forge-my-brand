@@ -33,7 +33,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
           isUser
             ? 'bg-accent text-white rounded-br-none font-medium'
-            : 'bg-black/5 dark:bg-white/[0.03] border border-black/10 dark:border-white/10 text-text-body rounded-bl-none'
+            : 'bg-white/[0.04] border border-white/10 text-white/90 rounded-bl-none'
         }`}
       >
         {isUser ? (
@@ -65,7 +65,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
     if (line.trim().startsWith('* ') || line.trim().startsWith('- ')) {
       const content = line.trim().replace(/^[\*\-]\s+/, '');
       return (
-        <li key={lineIdx} className="ml-4 list-disc text-sm mb-1.5 leading-relaxed text-text-body">
+        <li key={lineIdx} className="ml-4 list-disc text-sm mb-1.5 leading-relaxed text-white/90">
           {parseInlineFormatting(content)}
         </li>
       );
@@ -76,7 +76,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
     if (orderedMatch) {
       const content = orderedMatch[2];
       return (
-        <li key={lineIdx} className="ml-4 list-decimal text-sm mb-1.5 leading-relaxed text-text-body">
+        <li key={lineIdx} className="ml-4 list-decimal text-sm mb-1.5 leading-relaxed text-white/90">
           {parseInlineFormatting(content)}
         </li>
       );
@@ -89,7 +89,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
 
     // 4. Standard Paragraph
     return (
-      <p key={lineIdx} className="text-sm mb-1.5 leading-relaxed text-text-body">
+      <p key={lineIdx} className="text-sm mb-1.5 leading-relaxed text-white/90">
         {parseInlineFormatting(line)}
       </p>
     );
@@ -105,7 +105,7 @@ function parseInlineFormatting(text: string): React.ReactNode {
     // Odd indexes represent text parsed inside double asterisks
     if (idx % 2 === 1) {
       return (
-        <strong key={idx} className="font-bold text-text-heading">
+        <strong key={idx} className="font-bold text-white">
           {part}
         </strong>
       );

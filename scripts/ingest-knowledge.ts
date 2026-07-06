@@ -112,12 +112,17 @@ const chunks: IngestChunk[] = [
     source: "strategy-guide",
     section: "Discovery Session Objectives",
     content: "Our discovery calls cover three crucial items: 1. Deep understanding of the client's business model and target customer. 2. Definition of the website's key conversion goals (e.g., booking calls, capturing leads, click-to-call links). 3. Alignment on core features (automated calendars, WhatsApp bots, database dashboards). We focus on building digital assets that convert traffic into booked revenue."
+  },
+  {
+    source: "about-founder",
+    section: "Kartik Sharma Brand Personality and Behaviour",
+    content: "Kartik Sharma is direct, hands-on, transparent, and highly committed to client outcomes. He hates unnecessary agency bureaucracy and middleman overhead—clients communicate and work directly with him as the lead developer throughout the process. He works efficiently and is highly accessible via WhatsApp (+918533925291). We prove value upfront by designing and coding a free working homepage prototype within 48 hours before asking for any payment."
   }
 ];
 
 // 4. Generate Embeddings & Upsert to Supabase
 async function getEmbedding(text: string): Promise<number[]> {
-  const model = "models/embedding-001";
+  const model = "models/gemini-embedding-001";
   const url = `https://generativelanguage.googleapis.com/v1beta/${model}:embedContent?key=${geminiApiKey}`;
 
   const response = await fetch(url, {
@@ -125,7 +130,8 @@ async function getEmbedding(text: string): Promise<number[]> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       content: { parts: [{ text }] },
-      taskType: "RETRIEVAL_DOCUMENT"
+      taskType: "RETRIEVAL_DOCUMENT",
+      outputDimensionality: 768
     })
   });
 
