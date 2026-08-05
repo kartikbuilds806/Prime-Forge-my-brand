@@ -6,6 +6,12 @@ import { Button } from '@/components/ui/Button';
 import { CheckCircle2, ChevronDown, MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Star } from 'lucide-react';
 import { FadeUp, FadeIn, FadeLeft, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
 import { PricingSection } from '@/components/sections/PricingSection';
+import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider';
+import { HeroCanvas } from '@/components/animations/HeroCanvas';
+import { InteractiveShowcase } from '@/components/sections/InteractiveShowcase';
+import { ProcessSection } from '@/components/sections/ProcessSection';
+import { ServicesShowcase } from '@/components/sections/ServicesShowcase';
+import { GlowCard } from '@/components/ui/GlowCard';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -64,7 +70,10 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-32 flex flex-col items-center justify-center text-center px-4 min-h-[90vh]">
+      <section className="relative pt-32 pb-32 flex flex-col items-center justify-center text-center px-4 min-h-[90vh] overflow-hidden">
+        {/* Interactive Kinetic Particle Grid Canvas */}
+        <HeroCanvas />
+
         {/* Dynamic Background */}
         <div className="absolute inset-0 bg-primary -z-20 pointer-events-none transition-colors duration-500"></div>
         
@@ -75,9 +84,9 @@ export default function Home() {
         {/* Light Mode Glows (Subtle) */}
         <div className="absolute inset-0 block dark:hidden bg-[radial-gradient(circle_at_80%_40%,_rgba(37,99,235,0.15)_0%,_rgba(37,99,235,0.05)_40%,_transparent_70%)] -z-10 pointer-events-none"></div>
         
-        <div className="container max-w-4xl mx-auto flex flex-col items-center justify-center text-center w-full">
+        <div className="container max-w-4xl mx-auto flex flex-col items-center justify-center text-center w-full relative z-10">
           <FadeIn delay={0} className="flex justify-center w-full">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-black/10 dark:border-white/10 mb-8 mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-black/10 dark:border-white/10 mb-8 mx-auto shadow-lg backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
               <span className="text-sm font-medium text-text-heading/80">ACCEPTING NEW PROJECTS</span>
             </div>
@@ -110,34 +119,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Marquee Section */}
-      <section className="py-20 border-y border-black/5 dark:border-white/5 bg-surface/30 overflow-hidden">
-        <FadeUp>
-          <div className="container mb-12 text-center">
-            <h2 className="heading-serif text-3xl md:text-4xl">What Our Customers Say</h2>
-          </div>
-        </FadeUp>
-        
-        <FadeIn delay={0.2}>
-          <div className="relative w-full flex overflow-x-hidden group">
-          <div className="flex w-max animate-marquee space-x-6 px-6 group-hover:[animation-play-state:paused]">
-            {duplicatedTestimonials.map((testimonial, i) => (
-              <div key={i} className="w-[350px] glass-card p-6 flex flex-col justify-between shrink-0">
-                <div>
-                  <div className="flex gap-1 mb-4 text-yellow-500">
-                    {[...Array(testimonial.rating)].map((_, j) => (
-                      <Star key={j} className="w-5 h-5 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-text-heading text-lg italic mb-6">"{testimonial.quote}"</p>
-                </div>
-                <p className="text-text-body font-medium">{testimonial.name}</p>
-              </div>
-            ))}
-          </div>
-          </div>
-        </FadeIn>
-      </section>
+      {/* Interactive Before & After Proof Engine */}
+      <BeforeAfterSlider />
+
+      {/* 3D Browser Interactive Showcase */}
+      <InteractiveShowcase />
 
       {/* Why Choose Us */}
       <section className="py-24 container">
@@ -175,114 +161,11 @@ export default function Home() {
         </StaggerContainer>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 bg-surface/30 border-y border-black/5 dark:border-white/5">
-        <div className="container">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <h2 className="heading-serif text-4xl md:text-5xl mb-4">
-                What We Can <span className="text-accent">Do For You</span>
-              </h2>
-              <p className="text-text-body text-lg">No technical jargon. Just clear solutions that get you measurable results.</p>
-            </div>
-          </FadeUp>
+      {/* Top 1% Capabilities Showcase */}
+      <ServicesShowcase />
 
-          <StaggerContainer className="flex overflow-x-auto pb-6 gap-6 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-x-visible md:pb-0 max-w-5xl mx-auto w-full">
-            {[
-              { 
-                icon: <MonitorSmartphone className="w-8 h-8 text-accent" />, 
-                title: "Business Website Development", 
-                what: "A complete, professionally designed website customized for your brand.",
-                result: "Establishes a powerful online presence that makes you look like the top choice in your local area."
-              },
-              { 
-                icon: <MousePointerClick className="w-8 h-8 text-accent" />, 
-                title: "High-Converting Landing Pages", 
-                what: "A single page highly focused on getting visitors to take one specific action.",
-                result: "Reduces bounce rates and dramatically increases your ad campaign ROI."
-              },
-              { 
-                icon: <CalendarDays className="w-8 h-8 text-accent" />, 
-                title: "Booking System Integration", 
-                what: "Automated calendar scheduling embedded directly on your site.",
-                result: "Saves you hours of manual messaging and secures appointments instantly."
-              },
-              { 
-                icon: <Search className="w-8 h-8 text-accent" />, 
-                title: "SEO / AEO / GEO Optimization", 
-                what: "Technical setup to make sure Google AND AI engines like ChatGPT and Perplexity find and recommend your website.",
-                result: "Brings you free, organic traffic from people already searching for your services."
-              },
-              { 
-                icon: <Bot className="w-8 h-8 text-accent" />, 
-                title: "AI Chatbots & Voice Agents", 
-                what: "Intelligent chatbots and voice assistants trained on your business data.",
-                result: "Answer client queries 24/7 and capture leads even while you sleep."
-              },
-              { 
-                icon: <Wrench className="w-8 h-8 text-accent" />, 
-                title: "Maintenance & Support", 
-                what: "Ongoing updates, security checks, and content edits whenever needed.",
-                result: "Keeps your site running fast and secure, giving you zero technical headaches."
-              }
-            ].map((service, i) => (
-              <StaggerItem 
-                key={i} 
-                className="glass-card p-8 w-[85vw] max-w-[350px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
-                whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(59,130,246,0.5)" }}
-              >
-                <div className="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-6">
-                  {service.icon}
-                </div>
-                <h3 className="text-text-heading text-2xl font-serif mb-4">{service.title}</h3>
-                <div className="space-y-3 text-sm">
-                  <p><strong className="text-text-heading">What it is:</strong> <span className="text-text-body">{service.what}</span></p>
-                  <p><strong className="text-accent">The Result:</strong> <span className="text-text-body">{service.result}</span></p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* How We Work */}
-      <section className="py-24 container max-w-3xl mx-auto">
-        <FadeUp>
-          <div className="text-center mb-16">
-            <h2 className="heading-serif text-4xl md:text-5xl mb-4">
-              How We <span className="text-accent">Work</span>
-            </h2>
-            <p className="text-text-body text-lg">A transparent, risk-free 5-step process from our first chat to your live website.</p>
-          </div>
-        </FadeUp>
-
-        <div className="relative border-l-2 border-black/10 dark:border-white/10 ml-6 md:ml-12 pl-12 space-y-8">
-          {[
-            { step: "1", icon: "📞", title: "Contact / Book Call", desc: "We discuss your goals, target audience, and specific requirements." },
-            { step: "2", icon: "🖥️", title: "Get Free Demo Website", desc: "Within 48 hours, see a live demo of what your site could look like." },
-            { step: "3", icon: "👍", title: "Approve Design", desc: "You review the demo. We refine and tweak it until it perfectly matches your vision." },
-            { step: "4", icon: "💳", title: "Payment", desc: "Once you are 100% satisfied, we process the payment to lock in the final build." },
-            { step: "5", icon: "🚀", title: "Final Delivery", desc: "We launch your website, connect your domain, and you start getting clients." },
-          ].map((item, i) => (
-            <FadeLeft 
-              key={i} 
-              delay={i * 0.1}
-              className="relative"
-            >
-              <div className="absolute -left-[69px] w-10 h-10 bg-[#3B82F6] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-[0_0_20px_rgba(59,130,246,0.6)] z-10">
-                {item.step}
-              </div>
-              <div className="glass-card p-6 flex flex-col md:flex-row gap-6 items-start md:items-center">
-                <div className="text-4xl shrink-0">{item.icon}</div>
-                <div>
-                  <h3 className="text-white text-xl font-medium mb-1">{item.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            </FadeLeft>
-          ))}
-        </div>
-      </section>
+      {/* Top 1% Interactive Process Pipeline */}
+      <ProcessSection />
 
       {/* Pricing Section */}
       <section id="pricing" className="border-t border-black/5 dark:border-white/5">

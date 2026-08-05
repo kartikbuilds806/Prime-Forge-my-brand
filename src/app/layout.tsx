@@ -24,6 +24,8 @@ import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { PageTransition } from "@/components/animations/PageTransition";
 
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { LenisProvider } from "@/components/providers/LenisProvider";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 export default function RootLayout({
   children,
@@ -31,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -62,15 +64,18 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-primary text-text-body pt-[88px] flex flex-col min-h-screen`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-        <ScrollProgress />
-        <Navbar />
-        <main className="flex-grow">
-          <PageTransition>
-            {children}
-          </PageTransition>
-        </main>
-        <Footer />
-        <ChatWidget />
+          <LenisProvider>
+            <CustomCursor />
+            <ScrollProgress />
+            <Navbar />
+            <main className="flex-grow">
+              <PageTransition>
+                {children}
+              </PageTransition>
+            </main>
+            <Footer />
+            <ChatWidget />
+          </LenisProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,9 +1,3 @@
-/**
- * MessageBubble Component (Phase 1)
- * Purpose: Render message blocks, styling user bubbles in accent and assistant bubbles in readable card outlines.
- * Custom Parser: Implements zero-dependency inline markdown helper for bullet lists and bold text.
- */
-
 import React from 'react';
 import { Bot, User } from 'lucide-react';
 
@@ -23,17 +17,17 @@ export function MessageBubble({ message }: MessageBubbleProps) {
     <div className={`flex gap-3 mb-4 ${isUser ? 'justify-end' : 'justify-start'} animate-fade-in`}>
       {/* Bot Icon */}
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 shrink-0 self-end mb-1">
-          <Bot className="w-4 h-4 text-accent" />
+        <div className="w-8 h-8 rounded-full bg-blue-600/10 flex items-center justify-center border border-blue-600/20 shrink-0 self-end mb-1">
+          <Bot className="w-4 h-4 text-blue-600" />
         </div>
       )}
 
-      {/* Bubble Panel */}
+      {/* Bubble Panel: User = Blue, Assistant = Dark Obsidian with crisp white text */}
       <div
-        className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
+        className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
           isUser
-            ? 'bg-accent text-white rounded-br-none font-medium'
-            : 'bg-white/[0.04] border border-white/10 text-white/90 rounded-bl-none'
+            ? 'bg-blue-600 text-white font-medium rounded-br-none'
+            : 'bg-zinc-900 border border-zinc-800 text-white font-medium rounded-bl-none'
         }`}
       >
         {isUser ? (
@@ -47,8 +41,8 @@ export function MessageBubble({ message }: MessageBubbleProps) {
 
       {/* User Icon */}
       {isUser && (
-        <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 self-end mb-1">
-          <User className="w-4 h-4 text-text-heading/85" />
+        <div className="w-8 h-8 rounded-full bg-zinc-800 text-zinc-200 flex items-center justify-center shrink-0 self-end mb-1">
+          <User className="w-4 h-4" />
         </div>
       )}
     </div>
@@ -65,7 +59,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
     if (line.trim().startsWith('* ') || line.trim().startsWith('- ')) {
       const content = line.trim().replace(/^[\*\-]\s+/, '');
       return (
-        <li key={lineIdx} className="ml-4 list-disc text-sm mb-1.5 leading-relaxed text-white/90">
+        <li key={lineIdx} className="ml-4 list-disc text-sm mb-1.5 leading-relaxed text-zinc-100">
           {parseInlineFormatting(content)}
         </li>
       );
@@ -76,7 +70,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
     if (orderedMatch) {
       const content = orderedMatch[2];
       return (
-        <li key={lineIdx} className="ml-4 list-decimal text-sm mb-1.5 leading-relaxed text-white/90">
+        <li key={lineIdx} className="ml-4 list-decimal text-sm mb-1.5 leading-relaxed text-zinc-100">
           {parseInlineFormatting(content)}
         </li>
       );
@@ -89,7 +83,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
 
     // 4. Standard Paragraph
     return (
-      <p key={lineIdx} className="text-sm mb-1.5 leading-relaxed text-white/90">
+      <p key={lineIdx} className="text-sm mb-1.5 leading-relaxed text-zinc-100">
         {parseInlineFormatting(line)}
       </p>
     );
@@ -97,12 +91,10 @@ function parseMarkdown(text: string): React.ReactNode[] {
 }
 
 function parseInlineFormatting(text: string): React.ReactNode {
-  // Split on bold text markers: **text**
   const parts = text.split(/\*\*([^*]+)\*\*/g);
   if (parts.length === 1) return text;
 
   return parts.map((part, idx) => {
-    // Odd indexes represent text parsed inside double asterisks
     if (idx % 2 === 1) {
       return (
         <strong key={idx} className="font-bold text-white">

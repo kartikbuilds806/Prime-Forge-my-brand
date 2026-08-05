@@ -7,12 +7,20 @@ import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
 import { headers } from 'next/headers'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Initialize Supabase Client safely
+const isSupabaseConfigured = !!(
+  process.env.NEXT_PUBLIC_SUPABASE_URL &&
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const supabase = isSupabaseConfigured
+  ? createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+  : null;
+
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Safe Upstash Rate Limiter initialization
 const isRedisConfigured = !!(
@@ -26,7 +34,7 @@ if (isRedisConfigured) {
   try {
     ratelimit = new Ratelimit({
       redis: Redis.fromEnv(),
-      limiter: Ratelimit.slidingWindow(3, "1 h"),
+      limiter: Ratelimit.slidingWindow(5, "1 h"),
     });
   } catch (e) {
     console.error("Failed to initialize Upstash Ratelimit:", e);
@@ -35,15 +43,15 @@ if (isRedisConfigured) {
 
 // Zod Schema mapping user instructions to existing form fields
 const formSchema = z.object({
-  fullName: z.string().min(2).max(100).trim(),
-  email: z.string().email().toLowerCase(),
-  phone: z.string().min(1),
+  fullName: z.string().min(2, "Full name must be at least 2 characters").max(100).trim(),
+  email: z.string().email("Invalid email address").toLowerCase(),
+  phone: z.string().min(5, "Valid phone number is required"),
   businessName: z.string().optional(),
-  projectType: z.string().min(1),
-  budget: z.string().min(1),
+  projectType: z.string().min(1, "Please select a service"),
+  budget: z.string().min(1, "Budget is required"),
   message: z.string().max(2000).trim().optional().or(z.literal('')),
-  digitalSignature: z.string().min(1),
-  agreedToTerms: z.literal("on").transform(() => true),
+  digitalSignature: z.string().min(2, "Digital signature is required"),
+  agreedToTerms: z.literal("on", { message: "You must agree to the terms" }).transform(() => true),
 })
 
 export async function submitProjectAction(formData: FormData) {
@@ -55,19 +63,19 @@ export async function submitProjectAction(formData: FormData) {
       
       const { success: rateLimitSuccess } = await ratelimit.limit(ip);
       if (!rateLimitSuccess) {
-        return { success: false, error: "Too many submissions. Please try again later." };
+        return { success: false, error: "Too many project submissions from your connection. Please try again in an hour or contact us on WhatsApp." };
       }
     }
 
-    // 2. Extract Data and map to requested Zod schema fields
+    // 2. Extract Data and map to Zod schema fields
     const rawData = {
       fullName: formData.get("fullName") || "",
       email: formData.get("email") || "",
       phone: formData.get("phone") || "",
       businessName: formData.get("businessName") || "",
-      projectType: formData.get("serviceNeeded") || "", // Map serviceNeeded to projectType
-      budget: formData.get("budget") || "Not specified", // Fallback if budget input is missing
-      message: formData.get("requirements") || "", // Map requirements to message
+      projectType: formData.get("serviceNeeded") || "",
+      budget: formData.get("budget") || "Not specified",
+      message: formData.get("requirements") || "",
       digitalSignature: formData.get("digitalSignature") || "",
       agreedToTerms: formData.get("agreedToTerms"),
     }
@@ -76,89 +84,131 @@ export async function submitProjectAction(formData: FormData) {
     const validatedFields = formSchema.safeParse(rawData);
     
     if (!validatedFields.success) {
-      const errorMsg = validatedFields.error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`).join(', ');
-      return { success: false, error: `Invalid form data: ${errorMsg}` };
+      const errorMsg = validatedFields.error.issues.map(issue => `${issue.message}`).join('. ');
+      return { success: false, error: errorMsg };
     }
 
-    const data = validatedFields.data; // The sanitized, parsed data
-
-    // 4. Insert to Supabase (using mapped values back to DB columns)
-    const { error: dbError } = await supabase
-      .from('client_requests')
-      .insert([{
-        full_name: data.fullName,
-        email: data.email,
-        phone: data.phone,
-        business_name: data.businessName,
-        requirements: data.message || null,
-        service_needed: data.projectType,
-        digital_signature: data.digitalSignature,
-        agreed_to_terms: data.agreedToTerms,
-        status: 'new',
-        submitted_at: new Date().toISOString()
-      }])
-
-    if (dbError) {
-      console.error('Supabase error:', dbError)
-      throw new Error(`Database error: ${dbError.message}`)
-    }
-
+    const data = validatedFields.data;
     const timestamp = new Date().toLocaleString();
 
-    // 5. Send Emails via Resend (using sanitized data)
-    try {
-      await resend.emails.send({
-        from: 'onboarding@resend.dev',
-        to: data.email,
-        subject: '✅ PrimeForge — Your Project Request is Confirmed',
-        html: `
-          <p>Hello ${data.fullName},</p>
-          <p>Thank you for choosing PrimeForge! This email confirms that we have received your project request and serves as your official record.</p>
-          <h3>📋 Project Details:</h3>
-          <ul>
-            <li><strong>Name:</strong> ${data.fullName}</li>
-            <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
-            <li><strong>Service Requested:</strong> ${data.projectType}</li>
-            <li><strong>Budget:</strong> ${data.budget}</li>
-            <li><strong>Requirements:</strong> ${data.message || "None"}</li>
-            <li><strong>Digital Signature:</strong> ${data.digitalSignature}</li>
-            <li><strong>Submitted On:</strong> ${timestamp}</li>
-          </ul>
-          <p>You agreed to the PrimeForge 5-step process terms. The mockup phase is free, and payment is only processed after your design approval.</p>
-          <p>We will contact you within 24 hours at ${data.phone}.</p>
-          <p>— Kartik Sharma, Director<br>PrimeForge Agency<br>WhatsApp: +91 8533925291</p>
-        `
-      })
+    // 4. Insert to Supabase (if database configured)
+    let dbSuccess = false;
+    if (supabase) {
+      const { error: dbError } = await supabase
+        .from('client_requests')
+        .insert([{
+          full_name: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          business_name: data.businessName,
+          requirements: data.message || null,
+          service_needed: data.projectType,
+          digital_signature: data.digitalSignature,
+          agreed_to_terms: data.agreedToTerms,
+          status: 'new',
+          submitted_at: new Date().toISOString()
+        }]);
 
-      await resend.emails.send({
-        from: 'onboarding@resend.dev',
-        to: 'primeforge7@gmail.com',
-        subject: `🔔 New Client Request — ${data.businessName || data.fullName}`,
-        html: `
-          <h3>New project request received!</h3>
-          <ul>
-            <li><strong>Client:</strong> ${data.fullName}</li>
-            <li><strong>Email:</strong> ${data.email}</li>
-            <li><strong>Phone:</strong> ${data.phone}</li>
-            <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
-            <li><strong>Service:</strong> ${data.projectType}</li>
-            <li><strong>Budget:</strong> ${data.budget}</li>
-            <li><strong>Requirements:</strong> ${data.message || "None"}</li>
-            <li><strong>Signature:</strong> ${data.digitalSignature}</li>
-            <li><strong>Submitted:</strong> ${timestamp}</li>
-          </ul>
-        `
-      })
-    } catch (emailError) {
-      console.error('Resend error (logged but not failing the request):', emailError)
+      if (dbError) {
+        console.error('Supabase Error (Logged Server-Side):', dbError);
+      } else {
+        dbSuccess = true;
+      }
+    } else {
+      console.warn('Supabase credentials not configured in environment variables.');
+    }
+
+    // 5. Automation Webhook Trigger (Make.com / n8n / Zapier)
+    const webhookUrl = process.env.AUTOMATION_WEBHOOK_URL || process.env.MAKE_WEBHOOK_URL || process.env.N8N_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event: 'new_lead',
+            fullName: data.fullName,
+            email: data.email,
+            phone: data.phone,
+            businessName: data.businessName || "N/A",
+            projectType: data.projectType,
+            budget: data.budget,
+            message: data.message || "None",
+            signature: data.digitalSignature,
+            timestamp,
+          }),
+        }).catch(err => console.error('Automation Webhook Error:', err));
+      } catch (webhookErr) {
+        console.error('Webhook execution failed:', webhookErr);
+      }
+    }
+
+    // 6. Send Emails via Resend
+    if (resend) {
+      try {
+        // Confirmation email to Client
+        await resend.emails.send({
+          from: 'PrimeForge Agency <onboarding@resend.dev>',
+          to: data.email,
+          subject: '✅ PrimeForge — Your Project Request is Confirmed',
+          html: `
+            <div style="font-family: Arial, sans-serif; color: #111; line-height: 1.6; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h2 style="color: #2563eb;">Your Project Request is Confirmed</h2>
+              <p>Hello ${data.fullName},</p>
+              <p>Thank you for choosing PrimeForge! We have received your project request and will begin reviewing your requirements immediately.</p>
+              
+              <div style="background: #f4f4f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="margin-top: 0;">📋 Project Overview:</h3>
+                <ul>
+                  <li><strong>Name:</strong> ${data.fullName}</li>
+                  <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
+                  <li><strong>Service Requested:</strong> ${data.projectType}</li>
+                  <li><strong>Budget:</strong> ${data.budget}</li>
+                  <li><strong>Digital Signature:</strong> ${data.digitalSignature}</li>
+                  <li><strong>Submitted:</strong> ${timestamp}</li>
+                </ul>
+              </div>
+
+              <p><strong>Next Step:</strong> Kartik Sharma will reach out within 24 hours to schedule your strategy preview call.</p>
+              <p style="margin-top: 30px; font-size: 14px; color: #666;">
+                — <strong>Kartik Sharma</strong>, Founder & Director<br>
+                PrimeForge Agency | WhatsApp: +91 8533925291
+              </p>
+            </div>
+          `
+        });
+
+        // Notification to Agency Founder
+        await resend.emails.send({
+          from: 'PrimeForge System <onboarding@resend.dev>',
+          to: 'primeforge7@gmail.com',
+          subject: `🔔 NEW LEAD: ${data.businessName || data.fullName} (${data.budget})`,
+          html: `
+            <h3>🔥 New Lead Received on PrimeForge</h3>
+            <ul>
+              <li><strong>Name:</strong> ${data.fullName}</li>
+              <li><strong>Email:</strong> ${data.email}</li>
+              <li><strong>Phone:</strong> ${data.phone}</li>
+              <li><strong>Business:</strong> ${data.businessName || "N/A"}</li>
+              <li><strong>Service:</strong> ${data.projectType}</li>
+              <li><strong>Budget:</strong> ${data.budget}</li>
+              <li><strong>Message:</strong> ${data.message || "None"}</li>
+              <li><strong>Signature:</strong> ${data.digitalSignature}</li>
+            </ul>
+          `
+        });
+      } catch (emailError) {
+        console.error('Resend email error (Logged server-side):', emailError);
+      }
     }
 
     return { success: true }
   } catch (error) {
-    console.error('Full error:', error)
+    console.error('Full server action error:', error)
     return { 
       success: false, 
-      error: error instanceof Error ? error.message : 'Unknown error occurred'
+      error: 'An unexpected issue occurred while processing your request. Please try again or reach us directly on WhatsApp (+91 8533925291).'
     }
   }
 }
+

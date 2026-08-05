@@ -1,6 +1,8 @@
 import React from 'react';
-import { Phone, MessageCircle, Mail, MapPin } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Sparkles, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { GlowCard } from '@/components/ui/GlowCard';
+import { HeroCanvas } from '@/components/animations/HeroCanvas';
 import { FadeUp, FadeLeft, ScaleIn } from '@/components/animations/AnimateOnScroll';
 
 export const metadata = {
@@ -10,90 +12,95 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col container py-24">
-      <FadeUp>
-        <div className="text-center mb-16">
-          <h1 className="heading-serif text-5xl md:text-6xl mb-6">
-            Let's Start a <span className="text-accent italic">Conversation</span>
-          </h1>
-          <p className="text-lg md:text-xl text-text-body max-w-2xl mx-auto">
-            Whether you need a complete website overhaul or a highly optimized landing page, our team is ready to deliver.
-          </p>
+    <div className="flex flex-col container py-24 md:py-32 relative overflow-hidden min-h-screen">
+      <HeroCanvas />
+      
+      <FadeUp className="relative z-10 text-center mb-16">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-4">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>DIRECT CONNECT</span>
         </div>
+        <h1 className="heading-serif text-5xl md:text-7xl mb-6 text-text-heading">
+          Let's Start a <span className="text-accent italic">Conversation</span>
+        </h1>
+        <p className="text-lg md:text-xl text-text-body max-w-2xl mx-auto leading-relaxed">
+          Whether you need a complete website overhaul or a highly optimized landing page, Kartik & the team are ready to deliver.
+        </p>
       </FadeUp>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto relative z-10">
         {/* Direct Contact Options */}
         <FadeLeft>
-          <div className="bg-surface border border-black/10 dark:border-white/10 rounded-[32px] p-8 md:p-12 h-full">
-            <h2 className="text-2xl text-text-heading font-serif mb-8">Direct Contact</h2>
+          <GlowCard className="p-8 md:p-12 h-full">
+            <h2 className="text-2xl text-white font-bold mb-8">Direct Channels</h2>
           
-          <div className="space-y-8">
-            <a href="tel:+918533925291" className="flex items-center gap-6 group">
-              <div className="w-14 h-14 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center text-text-heading group-hover:bg-accent group-hover:border-accent transition-colors">
-                <Phone className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-sm text-text-body mb-1">Call us directly</p>
-                <p className="text-xl text-text-heading font-medium group-hover:text-accent transition-colors">+91 8533925291</p>
-              </div>
-            </a>
+            <div className="space-y-6">
+              <a href="https://wa.me/918533925291" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group">
+                <div className="w-12 h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center shrink-0">
+                  <MessageCircle className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-0.5">Fastest Response</p>
+                  <p className="text-lg text-white font-bold group-hover:text-emerald-400 transition-colors">Chat on WhatsApp (+91 8533925291)</p>
+                </div>
+              </a>
 
-            <a href="https://wa.me/918533925291" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
-              <div className="w-14 h-14 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center text-text-heading group-hover:bg-green-500 group-hover:border-green-500 transition-colors">
-                <MessageCircle className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-sm text-text-body mb-1">Chat on WhatsApp (Fastest)</p>
-                <p className="text-xl text-text-heading font-medium group-hover:text-green-500 transition-colors">+91 8533925291</p>
-              </div>
-            </a>
+              <a href="tel:+918533925291" className="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-accent transition-all group">
+                <div className="w-12 h-12 bg-blue-500/20 border border-blue-500/30 text-blue-400 rounded-xl flex items-center justify-center shrink-0">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-400 font-medium mb-0.5">Call Us Directly</p>
+                  <p className="text-lg text-white font-bold group-hover:text-accent transition-colors">+91 8533925291</p>
+                </div>
+              </a>
 
-            <a href="mailto:primeforge7@gmail.com" className="flex items-center gap-6 group">
-              <div className="w-14 h-14 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center text-text-heading group-hover:bg-blue-500 group-hover:border-blue-500 transition-colors">
-                <Mail className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-sm text-text-body mb-1">Email us</p>
-                <p className="text-xl text-text-heading font-medium group-hover:text-blue-500 transition-colors">primeforge7@gmail.com</p>
-              </div>
-            </a>
+              <a href="mailto:primeforge7@gmail.com" className="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-accent transition-all group">
+                <div className="w-12 h-12 bg-purple-500/20 border border-purple-500/30 text-purple-400 rounded-xl flex items-center justify-center shrink-0">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-400 font-medium mb-0.5">Email Team</p>
+                  <p className="text-lg text-white font-bold group-hover:text-purple-400 transition-colors">primeforge7@gmail.com</p>
+                </div>
+              </a>
 
-            <div className="flex items-center gap-6">
-              <div className="w-14 h-14 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center text-text-heading">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="text-sm text-text-body mb-1">Location</p>
-                <p className="text-xl text-text-heading font-medium">Dehradun, Uttarakhand, IN</p>
+              <div className="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div className="w-12 h-12 bg-zinc-800 text-zinc-300 rounded-xl flex items-center justify-center shrink-0">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-400 font-medium mb-0.5">Agency Studio Location</p>
+                  <p className="text-lg text-white font-bold">Dehradun, Uttarakhand, IN</p>
+                </div>
               </div>
             </div>
-            </div>
-          </div>
+          </GlowCard>
         </FadeLeft>
 
         {/* Booking CTA */}
         <ScaleIn delay={0.2}>
-          <div className="bg-gradient-to-br from-[#0F172A] to-[#1E3A8A]/30 border border-blue-900/50 rounded-[32px] p-8 md:p-12 flex flex-col justify-center relative overflow-hidden h-full">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-[80px]"></div>
-          
-          <div className="relative z-10 text-center">
-            <h2 className="text-3xl text-white font-serif mb-4">Prefer to schedule?</h2>
-            <p className="text-gray-300 mb-8 text-lg">
-              Book a free strategy session at a time that works best for you. We'll discuss your goals and how we can help you achieve them.
+          <GlowCard glowColor="rgba(37, 99, 235, 0.3)" className="p-8 md:p-12 flex flex-col justify-center h-full">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold w-fit mb-6">
+              <Calendar className="w-4 h-4" />
+              <span>Strategy Session</span>
+            </div>
+            
+            <h2 className="text-3xl text-white font-bold mb-4">Prefer to schedule?</h2>
+            <p className="text-zinc-300 mb-8 text-base leading-relaxed">
+              Book a free strategy session at a time that works best for you. We will discuss your goals, timeline, and custom design options.
             </p>
-            <Button href="/book-a-call" variant="primary" className="w-full" icon>
+            <Button href="/book-a-call" variant="primary" className="w-full justify-center" icon>
               Open Booking Calendar
             </Button>
             
-            <div className="mt-8 pt-8 border-t border-white/10">
-              <p className="text-gray-300 text-sm mb-4">Ready to bypass the call and dive right in?</p>
-              <Button href="/start-a-project" variant="secondary" className="w-full !text-white !border-white/20 hover:!bg-white/10 hover:!text-white">
+            <div className="mt-8 pt-8 border-t border-white/10 text-center">
+              <p className="text-zinc-400 text-xs mb-4">Ready to bypass the call and initiate your build?</p>
+              <Button href="/start-a-project" variant="secondary" className="w-full justify-center">
                 Submit Project Request
               </Button>
             </div>
-          </div>
-          </div>
+          </GlowCard>
         </ScaleIn>
       </div>
     </div>

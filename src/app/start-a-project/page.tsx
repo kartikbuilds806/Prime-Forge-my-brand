@@ -131,22 +131,22 @@ export default function StartProjectPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm text-text-heading mb-2">Full Name *</label>
-                  <input required name="fullName" value={formData.fullName} onChange={handleInputChange} type="text" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
+                  <input required name="fullName" value={formData.fullName} onChange={handleInputChange} type="text" className="w-full bg-white/80 dark:bg-black/50 border border-black/15 dark:border-white/15 rounded-xl px-4 py-3 text-zinc-900 dark:text-white focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
                 </div>
                 <div>
                   <label className="block text-sm text-text-heading mb-2">Email Address *</label>
-                  <input required name="email" value={formData.email} onChange={handleInputChange} type="email" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors" placeholder="john@example.com" />
+                  <input required name="email" value={formData.email} onChange={handleInputChange} type="email" className="w-full bg-white/80 dark:bg-black/50 border border-black/15 dark:border-white/15 rounded-xl px-4 py-3 text-zinc-900 dark:text-white focus:outline-none focus:border-accent transition-colors" placeholder="john@example.com" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm text-text-heading mb-2">Phone Number / WhatsApp *</label>
-                  <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors" placeholder="+91 XXXXX XXXXX" />
+                  <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" className="w-full bg-white/80 dark:bg-black/50 border border-black/15 dark:border-white/15 rounded-xl px-4 py-3 text-zinc-900 dark:text-white focus:outline-none focus:border-accent transition-colors" placeholder="+91 XXXXX XXXXX" />
                 </div>
                 <div>
                   <label className="block text-sm text-text-heading mb-2">Business Name</label>
-                  <input name="businessName" value={formData.businessName} onChange={handleInputChange} type="text" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors" placeholder="Your Agency / Shop" />
+                  <input name="businessName" value={formData.businessName} onChange={handleInputChange} type="text" className="w-full bg-white/80 dark:bg-black/50 border border-black/15 dark:border-white/15 rounded-xl px-4 py-3 text-zinc-900 dark:text-white focus:outline-none focus:border-accent transition-colors" placeholder="Your Agency / Shop" />
                 </div>
               </div>
 

@@ -5,12 +5,12 @@ import { motion } from 'framer-motion'
 export function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
     <motion.div
-      className={className}
+      className={`transform-gpu will-change-transform ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       variants={{
-        hidden: { opacity: 0, y: 60 },
+        hidden: { opacity: 0, y: 50 },
         visible: {
           opacity: 1,
           y: 0,
@@ -26,10 +26,10 @@ export function FadeUp({ children, delay = 0, className = "" }: { children: Reac
 export function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
     <motion.div
-      className={className}
+      className={`transform-gpu will-change-transform ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       variants={{
         hidden: { opacity: 0 },
         visible: {
@@ -46,12 +46,12 @@ export function FadeIn({ children, delay = 0, className = "" }: { children: Reac
 export function FadeLeft({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
     <motion.div
-      className={className}
+      className={`transform-gpu will-change-transform ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       variants={{
-        hidden: { opacity: 0, x: -60 },
+        hidden: { opacity: 0, x: -50 },
         visible: {
           opacity: 1,
           x: 0,
@@ -67,12 +67,12 @@ export function FadeLeft({ children, delay = 0, className = "" }: { children: Re
 export function FadeRight({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
     <motion.div
-      className={className}
+      className={`transform-gpu will-change-transform ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       variants={{
-        hidden: { opacity: 0, x: 60 },
+        hidden: { opacity: 0, x: 50 },
         visible: {
           opacity: 1,
           x: 0,
@@ -88,12 +88,12 @@ export function FadeRight({ children, delay = 0, className = "" }: { children: R
 export function ScaleIn({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
     <motion.div
-      className={className}
+      className={`transform-gpu will-change-transform ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       variants={{
-        hidden: { opacity: 0, scale: 0.85 },
+        hidden: { opacity: 0, scale: 0.9 },
         visible: {
           opacity: 1,
           scale: 1,
@@ -109,10 +109,10 @@ export function ScaleIn({ children, delay = 0, className = "" }: { children: Rea
 export function StaggerContainer({ children, className = "" }: { children: React.ReactNode, className?: string }) {
   return (
     <motion.div
-      className={className}
+      className={`transform-gpu ${className}`}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: 0.08 } }
@@ -126,9 +126,9 @@ export function StaggerContainer({ children, className = "" }: { children: React
 export function StaggerItem({ children, className = "", whileHover, transition }: { children: React.ReactNode, className?: string, whileHover?: any, transition?: any }) {
   return (
     <motion.div
-      className={className}
+      className={`transform-gpu will-change-transform ${className}`}
       variants={{
-        hidden: { opacity: 0, y: 40 },
+        hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }
       }}
       whileHover={whileHover}

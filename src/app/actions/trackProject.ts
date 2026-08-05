@@ -2,10 +2,19 @@
 
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Initialize Supabase Client safely
+const isSupabaseConfigured = !!(
+  process.env.NEXT_PUBLIC_SUPABASE_URL &&
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+const supabase = isSupabaseConfigured
+  ? createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+  : null;
+
 
 export interface ProjectRequest {
   id: string | number;
@@ -219,6 +228,11 @@ export async function trackProjectAction(email: string) {
       return { success: true, data: demoProject };
     }
 
+    if (!supabase) {
+      console.warn('Supabase not configured. Returning demo project tracking data.');
+      return { success: true, data: demoProject };
+    }
+
     // Query Supabase
     const { data: requests, error } = await supabase
       .from('client_requests')
@@ -228,7 +242,7 @@ export async function trackProjectAction(email: string) {
 
     if (error) {
       console.error('Supabase track error:', error);
-      throw new Error(`Database error: ${error.message}`);
+      return { success: false, error: "Unable to retrieve tracking details right now. Please try again shortly or contact support." };
     }
 
     if (!requests || requests.length === 0) {
