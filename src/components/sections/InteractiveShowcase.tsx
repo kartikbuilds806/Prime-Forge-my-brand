@@ -62,19 +62,19 @@ export function InteractiveShowcase() {
           </p>
         </div>
 
-        {/* Tab Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+        {/* Tab Buttons (Horizontal Scrollable on Mobile) */}
+        <div className="flex items-center overflow-x-auto no-scrollbar justify-start md:justify-center gap-2.5 mb-8 md:mb-12 w-full px-2">
           {showcaseProjects.map((project, idx) => (
             <button
               key={project.id}
               onClick={() => setActiveTab(idx)}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
+              className={`px-4 py-2.5 sm:px-5 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-2 shrink-0 ${
                 activeTab === idx
                   ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] scale-105 font-bold'
                   : 'bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/15'
               }`}
             >
-              <Monitor className="w-4 h-4" />
+              <Monitor className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>{project.title}</span>
             </button>
           ))}
@@ -88,7 +88,7 @@ export function InteractiveShowcase() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#121216] border border-white/15 rounded-3xl p-6 md:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl text-white"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#121216] border border-white/15 rounded-3xl p-5 sm:p-8 md:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl text-white"
           >
             {/* Left Column: Project Details & Metrics */}
             <div className="lg:col-span-5 space-y-6">
@@ -154,7 +154,7 @@ export function InteractiveShowcase() {
                 </div>
 
                 {/* Mockup Canvas Screen */}
-                <div className={`p-8 md:p-12 min-h-[340px] md:min-h-[400px] flex flex-col justify-between bg-gradient-to-br ${activeProject.previewGradient} relative`}>
+                <div className={`p-5 sm:p-8 md:p-12 min-h-[340px] md:min-h-[400px] flex flex-col justify-between bg-gradient-to-br ${activeProject.previewGradient} relative`}>
                   <div className="flex justify-between items-start">
                     <span className="text-xs font-bold uppercase tracking-widest text-zinc-300 bg-black/60 px-3 py-1 rounded-full border border-white/10">
                       PRIMEFORGE LIVE STAGING

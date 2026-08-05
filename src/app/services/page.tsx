@@ -103,9 +103,15 @@ export default function ServicesPage() {
             </div>
           </FadeUp>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {/* Mobile swipe hint */}
+          <div className="flex md:hidden items-center justify-end gap-1.5 text-xs text-blue-400 font-semibold mb-3 px-1">
+            <span>Swipe left to view add-ons</span>
+            <span>→</span>
+          </div>
+
+          <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-3 lg:grid-cols-5 md:gap-4">
             {additionalServices.map((service) => (
-              <StaggerItem key={service.id} className="h-full">
+              <StaggerItem key={service.id} className="h-full w-[75vw] max-w-[270px] shrink-0 snap-center md:w-auto">
                 <GlowCard className="h-full p-6 flex flex-col justify-between">
                   <div>
                     <div className="p-3 rounded-2xl bg-white/5 border border-white/10 w-fit mb-4">
@@ -138,8 +144,32 @@ export default function ServicesPage() {
           </div>
         </FadeUp>
 
-        <GlowCard className="p-6 md:p-8 overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+        <GlowCard className="p-4 sm:p-6 md:p-8">
+          {/* Mobile Card List (< md) */}
+          <div className="space-y-4 md:hidden">
+            {comparison.map((item, idx) => (
+              <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2.5">
+                <div className="text-xs font-bold uppercase tracking-wider text-zinc-400">{item.feature}</div>
+                <div className="flex items-start gap-2 text-emerald-400 font-semibold text-sm">
+                  <Check className="w-4 h-4 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-zinc-500 block">PrimeForge</span>
+                    <span>{item.us}</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 text-zinc-400 text-xs pt-1 border-t border-white/5">
+                  <X className="w-4 h-4 shrink-0 text-red-400 mt-0.5" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-zinc-500 block">Others</span>
+                    <span>{item.them}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table (>= md) */}
+          <table className="hidden md:table w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-zinc-400">
                 <th className="pb-4">Feature</th>

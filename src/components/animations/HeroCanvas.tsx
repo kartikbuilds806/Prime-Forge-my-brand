@@ -47,9 +47,23 @@ export function HeroCanvas() {
       mouse.y = -1000;
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
     const initParticles = () => {
       particles.length = 0;
-      const spacing = 45;
+      const isMobile = width < 768;
+      const spacing = isMobile ? 65 : 45;
       const cols = Math.floor(width / spacing);
       const rows = Math.floor(height / spacing);
 
@@ -76,6 +90,8 @@ export function HeroCanvas() {
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd);
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -155,6 +171,8 @@ export function HeroCanvas() {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

@@ -34,44 +34,44 @@ export default function ContactPage() {
           <GlowCard className="p-8 md:p-12 h-full">
             <h2 className="text-2xl text-white font-bold mb-8">Direct Channels</h2>
           
-            <div className="space-y-6">
-              <a href="https://wa.me/918533925291" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group">
-                <div className="w-12 h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center shrink-0">
-                  <MessageCircle className="w-6 h-6" />
+            <div className="space-y-4 sm:space-y-6">
+              <a href="https://wa.me/918533925291" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 sm:gap-5 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group overflow-hidden">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center shrink-0">
+                  <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-0.5">Fastest Response</p>
-                  <p className="text-lg text-white font-bold group-hover:text-emerald-400 transition-colors">Chat on WhatsApp (+91 8533925291)</p>
+                  <p className="text-sm sm:text-base md:text-lg text-white font-bold group-hover:text-emerald-400 transition-colors break-words">Chat on WhatsApp (+91 8533925291)</p>
                 </div>
               </a>
 
-              <a href="tel:+918533925291" className="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-accent transition-all group">
-                <div className="w-12 h-12 bg-blue-500/20 border border-blue-500/30 text-blue-400 rounded-xl flex items-center justify-center shrink-0">
-                  <Phone className="w-6 h-6" />
+              <a href="tel:+918533925291" className="flex items-center gap-4 sm:gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-accent transition-all group overflow-hidden">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 border border-blue-500/30 text-blue-400 rounded-xl flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs text-zinc-400 font-medium mb-0.5">Call Us Directly</p>
-                  <p className="text-lg text-white font-bold group-hover:text-accent transition-colors">+91 8533925291</p>
+                  <p className="text-sm sm:text-base md:text-lg text-white font-bold group-hover:text-accent transition-colors">+91 8533925291</p>
                 </div>
               </a>
 
-              <a href="mailto:primeforge7@gmail.com" className="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-accent transition-all group">
-                <div className="w-12 h-12 bg-purple-500/20 border border-purple-500/30 text-purple-400 rounded-xl flex items-center justify-center shrink-0">
-                  <Mail className="w-6 h-6" />
+              <a href="mailto:primeforge7@gmail.com" className="flex items-center gap-4 sm:gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-accent transition-all group overflow-hidden">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 border border-purple-500/30 text-purple-400 rounded-xl flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs text-zinc-400 font-medium mb-0.5">Email Team</p>
-                  <p className="text-lg text-white font-bold group-hover:text-purple-400 transition-colors">primeforge7@gmail.com</p>
+                  <p className="text-sm sm:text-base md:text-lg text-white font-bold group-hover:text-purple-400 transition-colors break-all">primeforge7@gmail.com</p>
                 </div>
               </a>
 
-              <div className="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10">
-                <div className="w-12 h-12 bg-zinc-800 text-zinc-300 rounded-xl flex items-center justify-center shrink-0">
-                  <MapPin className="w-6 h-6" />
+              <div className="flex items-center gap-4 sm:gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-zinc-800 text-zinc-300 rounded-xl flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs text-zinc-400 font-medium mb-0.5">Agency Studio Location</p>
-                  <p className="text-lg text-white font-bold">Dehradun, Uttarakhand, IN</p>
+                  <p className="text-sm sm:text-base md:text-lg text-white font-bold break-words">Dehradun, Uttarakhand, IN</p>
                 </div>
               </div>
             </div>

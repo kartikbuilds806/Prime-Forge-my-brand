@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
@@ -15,6 +15,16 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "PrimeForge — Web Design & SEO Agency",
   description: "Custom web design, SEO, AEO, GEO, AI chatbots and automations for local businesses.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 import { Navbar } from "@/components/layout/Navbar";

@@ -100,27 +100,50 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-full left-0 right-0 bg-primary/95 backdrop-blur-xl border-b border-black/5 dark:border-white/5 h-screen md:hidden flex flex-col pt-8 pb-24 px-6 overflow-y-auto"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'calc(100vh - 72px)' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed top-[72px] left-0 right-0 bottom-0 bg-primary/95 backdrop-blur-2xl border-b border-black/10 dark:border-white/10 md:hidden flex flex-col justify-between pt-6 pb-12 px-6 overflow-y-auto z-40"
           >
-            <nav className="flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  href={link.path}
-                  className={`text-2xl font-serif transition-colors ${pathname === link.path ? 'text-accent' : 'text-text-heading hover:text-text-heading/80'}`}
+            <nav className="flex flex-col gap-2">
+              {navLinks.map((link, idx) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * idx, duration: 0.3 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link 
+                    href={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`text-2xl font-serif py-3 border-b border-black/5 dark:border-white/5 flex items-center justify-between transition-colors min-h-[52px] ${pathname === link.path ? 'text-accent font-bold' : 'text-text-heading hover:text-accent'}`}
+                  >
+                    <span>{link.name}</span>
+                    <span className="text-xs font-sans text-text-body">0{idx + 1}</span>
+                  </Link>
+                </motion.div>
               ))}
             </nav>
             
-            <div className="flex flex-col gap-4 mt-12">
-              <Button href="/book-a-call" variant="secondary" className="w-full justify-center">Book a Call</Button>
-              <Button href="/start-a-project" variant="primary" className="w-full justify-center">Start a Project</Button>
+            <div className="flex flex-col gap-3 mt-8 pt-6 border-t border-black/10 dark:border-white/10">
+              <div className="text-xs font-bold uppercase tracking-wider text-text-heading/60 mb-1">Quick Actions</div>
+              <Button href="/start-a-project" variant="primary" className="w-full justify-center text-center font-bold text-base py-3.5" icon>
+                Start a Project
+              </Button>
+              <div className="grid grid-cols-2 gap-3">
+                <Button href="/book-a-call" variant="secondary" className="w-full justify-center text-center text-sm py-3">
+                  Book a Call
+                </Button>
+                <a 
+                  href="https://wa.me/918533925291" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full py-3 rounded-xl bg-green-500/10 border border-green-500/30 text-green-500 font-semibold text-sm flex items-center justify-center gap-1.5 hover:bg-green-500/20 transition-colors"
+                >
+                  WhatsApp
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

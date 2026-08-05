@@ -58,7 +58,7 @@ export function ChatWindow({
 
   return (
     <div 
-      className="fixed bottom-24 right-4 md:right-6 w-[calc(100vw-2rem)] max-w-[380px] h-[520px] max-h-[75vh] z-[60] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-white/10 rounded-[24px] overflow-hidden flex flex-col justify-between shadow-2xl animate-fade-in text-zinc-900 dark:text-white"
+      className="fixed bottom-16 right-3 left-3 md:left-auto md:right-6 md:bottom-24 w-auto md:w-[380px] h-[78vh] md:h-[520px] max-h-[600px] z-[60] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-white/10 rounded-[24px] overflow-hidden flex flex-col justify-between shadow-2xl animate-fade-in text-zinc-900 dark:text-white"
       role="dialog"
       aria-modal="true"
       aria-label="PrimeForge AI Chatbot Window"

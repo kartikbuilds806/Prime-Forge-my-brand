@@ -28,9 +28,9 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen relative overflow-hidden">
       {/* Hero */}
-      <section className="relative py-24 md:py-32 container overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 container overflow-hidden">
         <HeroCanvas />
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-8 mb-16">
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div className="max-w-2xl">
             <FadeUp>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-4">
@@ -48,14 +48,14 @@ export default function AboutPage() {
             </FadeUp>
 
             {/* Metric Pills */}
-            <FadeUp delay={0.3} className="grid grid-cols-3 gap-4 pt-8">
+            <FadeUp delay={0.3} className="grid grid-cols-3 gap-3 sm:gap-4 pt-8">
               {stats.map((stat, i) => (
-                <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
-                  <div className="flex items-center justify-center gap-1 text-xs text-zinc-400 mb-1">
+                <div key={i} className="p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
+                  <div className="flex items-center justify-center gap-1 text-[10px] sm:text-xs text-zinc-400 mb-1">
                     {stat.icon}
-                    <span>{stat.label}</span>
+                    <span className="truncate">{stat.label}</span>
                   </div>
-                  <div className="text-2xl font-black text-white">{stat.value}</div>
+                  <div className="text-xl sm:text-2xl font-black text-white">{stat.value}</div>
                 </div>
               ))}
             </FadeUp>
@@ -67,24 +67,42 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values & Founder Image */}
-      <section className="pb-24 container max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-          {/* Core Values */}
-          <div className="space-y-4 flex flex-col justify-between">
-            {coreValues.map((value, idx) => (
-              <FadeUp key={idx} delay={idx * 0.1}>
-                <GlowCard className="p-6 md:p-8">
-                  <h3 className="heading-serif text-2xl text-white mb-2">{value.title}.</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{value.desc}</p>
-                </GlowCard>
-              </FadeUp>
-            ))}
+      {/* Founder Spotlight (Middle Section) */}
+      <section className="py-12 md:py-16 container max-w-6xl mx-auto px-4 relative z-10">
+        <FadeUp className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-widest mb-3">
+            LEADERSHIP & VISION
           </div>
+          <h2 className="heading-serif text-3xl md:text-5xl text-white">
+            Driven by <span className="text-accent italic">Engineering Excellence</span>
+          </h2>
+        </FadeUp>
 
-          {/* Large Prominent Founder Image Card */}
-          <ScaleIn className="h-full min-h-[500px] md:min-h-[580px] flex">
-            <div className="w-full h-full min-h-[500px] md:min-h-[580px] relative rounded-3xl overflow-hidden border border-white/15 flex flex-col justify-end p-6 md:p-8 group shadow-[0_20px_50px_rgba(0,0,0,0.9)] bg-zinc-900">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+          {/* Founder Bio Card */}
+          <FadeUp delay={0.1} className="lg:col-span-6 space-y-6">
+            <GlowCard className="p-6 md:p-8">
+              <h3 className="heading-serif text-2xl md:text-3xl text-white mb-4">
+                Personalized Attention for Every Client
+              </h3>
+              <p className="text-zinc-300 text-base leading-relaxed mb-6">
+                "We don't hand your project off to junior developers or outsourcing hubs. I oversee every line of code, UI component, and SEO structure to ensure your site outperforms 99% of competitors."
+              </p>
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <p className="text-white font-bold text-lg">Kartik Sharma</p>
+                  <p className="text-xs text-blue-400 font-medium">Founder & Director, PrimeForge</p>
+                </div>
+                <Button href="/contact" variant="secondary" className="text-xs py-2 px-4">
+                  Get in Touch
+                </Button>
+              </div>
+            </GlowCard>
+          </FadeUp>
+
+          {/* Centered Founder Image Card */}
+          <ScaleIn delay={0.2} className="lg:col-span-6 h-[450px] md:h-[520px]">
+            <div className="w-full h-full relative rounded-3xl overflow-hidden border border-white/15 flex flex-col justify-end p-6 md:p-8 group shadow-[0_20px_50px_rgba(0,0,0,0.9)] bg-zinc-900">
               {/* Full Background Image */}
               <Image 
                 src="/my-image.jpeg" 
@@ -96,19 +114,47 @@ export default function AboutPage() {
               />
               
               {/* Gradient Overlay for Readable Text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none" />
 
               {/* Founder Information Badge */}
-              <div className="relative z-20 p-6 md:p-8 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/15 shadow-2xl">
-                <div className="text-xs font-bold text-accent tracking-widest uppercase mb-1.5 flex items-center gap-2">
+              <div className="relative z-20 p-5 md:p-6 bg-black/70 backdrop-blur-xl rounded-2xl border border-white/15 shadow-2xl">
+                <div className="text-xs font-bold text-accent tracking-widest uppercase mb-1 flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
                   FOUNDER & DIRECTOR
                 </div>
-                <div className="text-3xl md:text-4xl font-black text-white tracking-tight mb-1">Kartik Sharma</div>
-                <p className="text-xs md:text-sm text-zinc-300 font-medium">Lead Full-Stack Architect & Digital Strategist</p>
+                <div className="text-2xl md:text-3xl font-black text-white tracking-tight mb-0.5">Kartik Sharma</div>
+                <p className="text-xs text-zinc-300 font-medium">Lead Full-Stack Architect & Digital Strategist</p>
               </div>
             </div>
           </ScaleIn>
+        </div>
+      </section>
+
+      {/* Core Principles Grid (Bottom Section) */}
+      <section className="py-16 md:py-24 container max-w-6xl mx-auto px-4 relative z-10">
+        <FadeUp className="text-center mb-12">
+          <h2 className="heading-serif text-3xl md:text-5xl text-white mb-4">
+            Our Core <span className="text-accent">Principles</span>
+          </h2>
+          <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto">
+            The standard we uphold across every project we launch.
+          </p>
+        </FadeUp>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {coreValues.map((value, idx) => (
+            <FadeUp key={idx} delay={idx * 0.1}>
+              <GlowCard className="p-6 md:p-8 h-full">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">
+                    0{idx + 1}
+                  </span>
+                  <h3 className="heading-serif text-xl md:text-2xl text-white">{value.title}.</h3>
+                </div>
+                <p className="text-zinc-400 text-sm md:text-base leading-relaxed pl-11">{value.desc}</p>
+              </GlowCard>
+            </FadeUp>
+          ))}
         </div>
       </section>
     </div>

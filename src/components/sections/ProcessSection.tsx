@@ -70,10 +70,16 @@ export function ProcessSection() {
           </FadeUp>
         </div>
 
-        {/* Steps Pipeline Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+        {/* Mobile swipe hint */}
+        <div className="flex md:hidden items-center justify-end gap-1.5 text-xs text-blue-400 font-semibold mb-3 px-1">
+          <span>Swipe left to view steps</span>
+          <span>→</span>
+        </div>
+
+        {/* Steps Pipeline Grid (Horizontal Carousel on Mobile, Grid on Desktop) */}
+        <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-5 md:gap-4 relative">
           {processSteps.map((item, idx) => (
-            <StaggerItem key={item.step} className="h-full">
+            <StaggerItem key={item.step} className="h-full w-[78vw] max-w-[290px] shrink-0 snap-center md:w-auto">
               <GlowCard
                 glowColor={item.glow}
                 className={`h-full p-6 flex flex-col justify-between cursor-pointer transition-all duration-300 ${

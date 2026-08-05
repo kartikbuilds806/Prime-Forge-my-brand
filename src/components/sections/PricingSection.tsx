@@ -99,11 +99,17 @@ export function PricingSection() {
         </FadeUp>
       </div>
 
-      {/* CARDS GRID */}
+      {/* CARDS GRID (Horizontal Carousel on Mobile, Grid on Desktop) */}
       <div className="container max-w-6xl mx-auto px-4">
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        {/* Mobile swipe hint */}
+        <div className="flex md:hidden items-center justify-end gap-1.5 text-xs text-blue-400 font-semibold mb-3 px-1">
+          <span>Swipe left for plans</span>
+          <span>→</span>
+        </div>
+
+        <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-3 md:gap-6 items-stretch">
           {plans.map((plan) => (
-            <StaggerItem key={plan.id} className="h-full">
+            <StaggerItem key={plan.id} className="h-full w-[85vw] max-w-[340px] shrink-0 snap-center md:w-auto">
               <GlowCard
                 glowColor={plan.featured ? 'rgba(37, 99, 235, 0.4)' : 'rgba(255, 255, 255, 0.15)'}
                 className={`h-full p-6 md:p-8 flex flex-col justify-between relative ${

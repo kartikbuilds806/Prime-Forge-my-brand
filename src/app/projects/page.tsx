@@ -93,104 +93,106 @@ export default function ProjectsPage() {
         </FadeUp>
       </section>
 
-      {/* Section 1: Custom Full-Stack Projects */}
-      <section className="py-16 border-t border-black/5 dark:border-white/10 bg-black/5 dark:bg-black/40">
-        <div className="container max-w-6xl mx-auto px-4">
+      {/* Section 1: Custom Full-Stack Projects (Sticky Stacking Cards Animation) */}
+      <section className="py-16 md:py-24 border-t border-black/5 dark:border-white/10 bg-black/5 dark:bg-black/40 relative">
+        <div className="container max-w-4xl mx-auto px-4">
           <FadeUp>
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 md:mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>STACKING OVERLAY SHOWCASE</span>
+              </div>
               <h2 className="heading-serif text-3xl md:text-5xl text-text-heading mb-4">Custom Full-Stack Apps</h2>
               <p className="text-text-body text-base max-w-xl mx-auto">
-                Bespoke applications engineered with Next.js, database backends, and AI integrations.
+                Bespoke applications engineered with Next.js, database backends, and AI integrations. Scroll down to reveal stacked architecture.
               </p>
             </div>
           </FadeUp>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Protein Coach */}
-            <StaggerItem className="h-full">
-              <GlowCard className="h-full p-8 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold text-accent tracking-wider uppercase">
-                      AI-Powered Web App
-                    </span>
-                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      Live Production
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    Protein Coach AI
-                  </h3>
-                  
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                    A full-stack nutrition tracking app where users input meals and get AI-generated protein breakdowns and daily coaching feedback. Built with Next.js, Supabase, and OpenAI API.
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {["Next.js", "Supabase", "OpenAI", "Tailwind v4"].map((tech, idx) => (
-                      <span key={idx} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 font-medium">
-                        {tech}
+          {/* Sticky Stacking Cards Container */}
+          <div className="relative space-y-6 md:space-y-8 pb-12">
+            {[
+              {
+                title: "Protein Coach AI",
+                badge: "AI-POWERED WEB APP",
+                status: "Live Production",
+                desc: "A full-stack nutrition tracking app where users input meals and get AI-generated protein breakdowns and daily coaching feedback. Built with Next.js, Supabase, and OpenAI API.",
+                tech: ["Next.js", "Supabase", "OpenAI", "Tailwind v4"],
+                url: "https://protein-coach-tracker-g6cx.vercel.app/",
+                glow: "rgba(16, 185, 129, 0.4)",
+              },
+              {
+                title: "Sterling Real Estate Platform",
+                badge: "LUXURY REAL ESTATE",
+                status: "Delivered Studio",
+                desc: "Ultra-luxury real estate platform with 60fps property walkthroughs, instant booking scheduler for property viewings, and integrated AEO search optimization.",
+                tech: ["Next.js 16", "Cal.com Embed", "AEO/GEO", "Supabase"],
+                url: "https://a2-realtor.netlify.app/",
+                glow: "rgba(59, 130, 246, 0.4)",
+              },
+              {
+                title: "Nexus AI Engine",
+                badge: "SAAS & AI KNOWLEDGE BASE",
+                status: "Enterprise Live",
+                desc: "Enterprise AI software platform built for automated RAG knowledge bases, high-volume lead capture, and custom subscription billing.",
+                tech: ["React 19", "Supabase Vector", "Upstash Redis", "Resend API"],
+                url: "https://sterling-staging.primeforge.agency",
+                glow: "rgba(168, 85, 247, 0.4)",
+              },
+            ].map((project, idx) => (
+              <div
+                key={idx}
+                className="sticky transition-transform duration-300"
+                style={{
+                  top: `${100 + idx * 24}px`,
+                  zIndex: idx + 10,
+                }}
+              >
+                <GlowCard
+                  glowColor={project.glow}
+                  className="p-6 md:p-10 flex flex-col justify-between bg-zinc-950/95 backdrop-blur-2xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.9)] rounded-3xl"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-bold text-accent tracking-wider uppercase">
+                        {project.badge}
                       </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-auto pt-4">
-                  <Button
-                    onClick={() => setActiveDemo({ name: "Protein Coach AI", url: "https://protein-coach-tracker-g6cx.vercel.app/" })}
-                    variant="primary"
-                    className="w-full justify-center text-center font-bold"
-                  >
-                    Preview App On Screen
-                  </Button>
-                </div>
-              </GlowCard>
-            </StaggerItem>
-
-            {/* Sterling Luxury Real Estate */}
-            <StaggerItem className="h-full">
-              <GlowCard className="h-full p-8 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold text-accent tracking-wider uppercase">
-                      Luxury Real Estate
-                    </span>
-                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 border border-blue-500/30 text-blue-400">
-                      <Zap className="w-3 h-3" /> Delivered Studio
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    Sterling Real Estate Platform
-                  </h3>
-                  
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                    Ultra-luxury real estate platform with 60fps property walkthroughs, instant booking scheduler for property viewings, and integrated AEO search optimization.
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {["Next.js 16", "Cal.com Embed", "AEO/GEO", "Supabase"].map((tech, idx) => (
-                      <span key={idx} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 font-medium">
-                        {tech}
+                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        {project.status}
                       </span>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                    
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+                      {project.desc}
+                    </p>
 
-                <div className="mt-auto pt-4">
-                  <Button
-                    onClick={() => setActiveDemo({ name: "Sterling Real Estate", url: "https://a2-realtor.netlify.app/" })}
-                    variant="primary"
-                    className="w-full justify-center text-center font-bold"
-                  >
-                    Preview Platform On Screen
-                  </Button>
-                </div>
-              </GlowCard>
-            </StaggerItem>
-          </StaggerContainer>
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {project.tech.map((tech, tIdx) => (
+                        <span key={tIdx} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 font-medium">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-auto pt-2">
+                    <Button
+                      onClick={() => setActiveDemo({ name: project.title, url: project.url })}
+                      variant="primary"
+                      className="w-full justify-center text-center font-bold py-3"
+                    >
+                      Preview App On Screen
+                    </Button>
+                  </div>
+                </GlowCard>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -208,9 +210,15 @@ export default function ProjectsPage() {
             </div>
           </FadeUp>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Mobile swipe hint */}
+          <div className="flex md:hidden items-center justify-end gap-1.5 text-xs text-blue-400 font-semibold mb-3 px-1">
+            <span>Swipe left for demos</span>
+            <span>→</span>
+          </div>
+
+          <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6">
             {niches.map((niche, i) => (
-              <StaggerItem key={i} className="h-full">
+              <StaggerItem key={i} className="h-full w-[85vw] max-w-[340px] shrink-0 snap-center md:w-auto">
                 <GlowCard glowColor={niche.glow} className="h-full p-8 flex flex-col justify-between">
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">{niche.title}</h3>
@@ -250,33 +258,35 @@ export default function ProjectsPage() {
 
       {/* INTERACTIVE DEMO PREVIEW MODAL */}
       {activeDemo && (
-        <div className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-2xl flex flex-col items-center justify-center p-4 md:p-8 animate-fade-in">
-          <div className="w-full max-w-5xl h-[85vh] bg-zinc-950 border border-white/20 rounded-2xl overflow-hidden flex flex-col shadow-[0_0_80px_rgba(0,0,0,0.9)]">
+        <div className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-2xl flex flex-col items-center justify-center p-2 sm:p-4 md:p-8 animate-fade-in">
+          <div className="w-full max-w-5xl h-[92vh] sm:h-[85vh] bg-zinc-950 border border-white/20 rounded-2xl overflow-hidden flex flex-col shadow-[0_0_80px_rgba(0,0,0,0.9)]">
             {/* Modal Top Header */}
-            <div className="bg-zinc-900 px-6 py-4 border-b border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Monitor className="w-5 h-5 text-accent" />
-                <div>
-                  <div className="text-sm font-bold text-white">{activeDemo.name}</div>
-                  <div className="text-xs text-zinc-400 truncate max-w-[280px] md:max-w-md">{activeDemo.url}</div>
+            <div className="bg-zinc-900 px-4 py-3 sm:px-6 sm:py-4 border-b border-white/10 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <Monitor className="w-4 h-4 sm:w-5 sm:h-5 text-accent shrink-0" />
+                <div className="min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-white truncate max-w-[160px] sm:max-w-xs">{activeDemo.name}</div>
+                  <div className="text-[10px] sm:text-xs text-zinc-400 truncate max-w-[160px] sm:max-w-md">{activeDemo.url}</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <a
                   href={activeDemo.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 border border-white/10 text-xs text-white hover:bg-white/20 transition-colors font-medium"
+                  className="inline-flex items-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-white/10 border border-white/10 text-[10px] sm:text-xs text-white hover:bg-white/20 transition-colors font-medium shrink-0"
                 >
-                  <span>Open Fullscreen</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Open Fullscreen</span>
+                  <span className="sm:hidden">Open</span>
+                  <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </a>
                 <button
                   onClick={() => setActiveDemo(null)}
-                  className="p-2 rounded-xl bg-white/10 text-white hover:bg-red-500/20 hover:text-red-400 transition-colors"
+                  className="p-1.5 sm:p-2 rounded-xl bg-white/10 text-white hover:bg-red-500/20 hover:text-red-400 transition-colors shrink-0"
+                  aria-label="Close Preview"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>

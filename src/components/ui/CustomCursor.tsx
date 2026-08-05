@@ -44,7 +44,7 @@ export function CustomCursor() {
     <>
       {/* Small Precision Cursor Dot */}
       <div
-        className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full bg-accent transition-transform duration-75 ease-out shadow-[0_0_10px_rgba(37,99,235,0.8)]"
+        className="hidden md:block pointer-events-none fixed top-0 left-0 z-[9999] rounded-full bg-accent transition-transform duration-75 ease-out shadow-[0_0_10px_rgba(37,99,235,0.8)]"
         style={{
           width: isPointer ? '12px' : '8px',
           height: isPointer ? '12px' : '8px',
@@ -54,7 +54,7 @@ export function CustomCursor() {
 
       {/* Outer Radial Glow Ring */}
       <div
-        className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full border border-blue-500/40 bg-blue-500/5 transition-all duration-200 ease-out backdrop-blur-[1px]"
+        className="hidden md:block pointer-events-none fixed top-0 left-0 z-[9998] rounded-full border border-blue-500/40 bg-blue-500/5 transition-all duration-200 ease-out backdrop-blur-[1px]"
         style={{
           width: isPointer ? '48px' : '32px',
           height: isPointer ? '48px' : '32px',
