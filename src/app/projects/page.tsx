@@ -8,6 +8,7 @@ import { HeroCanvas } from '@/components/animations/HeroCanvas';
 import { FadeUp, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
 import { PricingSection } from '@/components/sections/PricingSection';
 import { ProjectDetailsModal, ProjectDetailsData } from '@/components/ui/ProjectDetailsModal';
+import { StackingProjects } from '@/components/sections/StackingProjects';
 
 export default function ProjectsPage() {
   const [activeDemo, setActiveDemo] = useState<{ name: string; url: string } | null>(null);
@@ -112,9 +113,8 @@ export default function ProjectsPage() {
             </div>
           </FadeUp>
 
-          {/* Sticky Stacking Cards Container */}
-          <div className="relative space-y-6 md:space-y-8 pb-12">
-            {[
+          <StackingProjects
+            projects={[
               {
                 title: "Protein Coach AI",
                 badge: "AI-POWERED WEB APP",
@@ -208,81 +208,23 @@ export default function ProjectsPage() {
                   ]
                 }
               },
-            ].map((project, idx) => (
-              <div
-                key={idx}
-                className="sticky transition-transform duration-300"
-                style={{
-                  top: `${100 + idx * 24}px`,
-                  zIndex: idx + 10,
-                }}
-              >
-                <GlowCard
-                  glowColor={project.glow}
-                  className="p-6 md:p-10 flex flex-col justify-between bg-zinc-950/95 backdrop-blur-2xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.9)] rounded-3xl"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-xs font-bold text-accent tracking-wider uppercase">
-                        {project.badge}
-                      </span>
-                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        {project.status}
-                      </span>
-                    </div>
-                    
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                      {project.desc}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {project.tech.map((tech, tIdx) => (
-                        <span key={tIdx} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 font-medium">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-auto pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Button
-                      onClick={() => setActiveDemo({ name: project.title, url: project.url })}
-                      variant="primary"
-                      className="w-full justify-center text-center font-bold py-3"
-                    >
-                      Preview App On Screen
-                    </Button>
-
-                    <button
-                      onClick={() => {
-                        setModalProject({
-                          title: project.title,
-                          category: project.badge,
-                          status: project.status,
-                          description: project.desc,
-                          url: project.url,
-                          tech: project.tech,
-                          metrics: { speed: "0.3s", conversion: "+184%", lighthouse: "99/100" },
-                          caseStudy: project.caseStudy,
-                          architecture: project.architecture
-                        });
-                        setModalInitialTab('casestudy');
-                      }}
-                      className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-semibold text-sm transition-all text-center flex items-center justify-center gap-1.5"
-                    >
-                      <span>Case Study & Arch</span>
-                      <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                    </button>
-                  </div>
-                </GlowCard>
-              </div>
-            ))}
-          </div>
+            ]}
+            onOpenModal={(project) => {
+              setModalProject({
+                title: project.title,
+                category: project.badge,
+                status: project.status,
+                description: project.desc,
+                url: project.url,
+                tech: project.tech,
+                metrics: { speed: "0.3s", conversion: "+184%", lighthouse: "99/100" },
+                caseStudy: project.caseStudy,
+                architecture: project.architecture
+              });
+              setModalInitialTab('casestudy');
+            }}
+            onPreviewApp={(name, url) => setActiveDemo({ name, url })}
+          />
         </div>
       </section>
 

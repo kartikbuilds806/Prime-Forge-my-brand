@@ -11,6 +11,8 @@ import { HeroCanvas } from '@/components/animations/HeroCanvas';
 import { InteractiveShowcase } from '@/components/sections/InteractiveShowcase';
 import { ProcessSection } from '@/components/sections/ProcessSection';
 import { ServicesShowcase } from '@/components/sections/ServicesShowcase';
+import { AIAgentsShowcase } from '@/components/sections/AIAgentsShowcase';
+import { LogoMarquee } from '@/components/sections/LogoMarquee';
 import { GlowCard } from '@/components/ui/GlowCard';
 
 export default function Home() {
@@ -94,19 +96,19 @@ export default function Home() {
 
           <h1 className="heading-serif text-3xl sm:text-5xl md:text-7xl leading-tight mb-6 text-center flex flex-col items-center justify-center gap-1 sm:gap-2 w-full mx-auto tracking-tight">
             <FadeUp delay={0.1} className="w-full text-center flex justify-center">
-              <span>We build websites that</span>
+              <span>Give Your Brand the</span>
             </FadeUp>
             <FadeUp delay={0.2} className="w-full text-center flex justify-center">
-              <span className="text-accent italic">bring you clients,</span>
+              <span className="text-accent italic">Digital Infrastructure</span>
             </FadeUp>
             <FadeUp delay={0.3} className="w-full text-center flex justify-center">
-              <span>not just traffic.</span>
+              <span>It Deserves.</span>
             </FadeUp>
           </h1>
 
           <FadeUp delay={0.4} className="w-full flex justify-center">
             <p className="text-base sm:text-lg md:text-xl text-text-body max-w-2xl mx-auto mb-8 sm:mb-10 text-center leading-relaxed">
-              Helping ambitious businesses dominate their niche with premium, high-converting digital experiences.
+              Zero templates. Zero bloated plugins. Just custom high-speed web apps, AI agents, and modern search optimization.
             </p>
           </FadeUp>
 
@@ -118,6 +120,9 @@ export default function Home() {
           </FadeUp>
         </div>
       </section>
+
+      {/* Infinite Client Logo Marquee */}
+      <LogoMarquee />
 
       {/* Interactive Before & After Proof Engine */}
       <BeforeAfterSlider />
@@ -163,6 +168,9 @@ export default function Home() {
 
       {/* Top 1% Capabilities Showcase */}
       <ServicesShowcase />
+
+      {/* Autonomous AI Agents & Workflows Suite */}
+      <AIAgentsShowcase />
 
       {/* Top 1% Interactive Process Pipeline */}
       <ProcessSection />
