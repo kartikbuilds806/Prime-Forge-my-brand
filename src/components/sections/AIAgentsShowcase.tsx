@@ -110,7 +110,7 @@ export function AIAgentsShowcase() {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden border-t border-black/5 dark:border-white/10 bg-black/5 dark:bg-black/30">
+    <section className="py-24 relative overflow-hidden border-t border-black/5 dark:border-white/10 bg-transparent">
       {/* Background Decorative Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(59,130,246,0.15)_0%,_transparent_70%)] pointer-events-none" />
 

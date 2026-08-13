@@ -96,8 +96,8 @@ export default function ProjectsPage() {
         </FadeUp>
       </section>
 
-      {/* Section 1: Custom Full-Stack Projects (Sticky Stacking Cards Animation) */}
-      <section className="py-16 md:py-24 border-t border-black/5 dark:border-white/10 bg-black/5 dark:bg-black/40 relative">
+      {/* Section 1: Custom Full-Stack Projects */}
+      <section className="py-16 md:py-24 border-t border-black/5 dark:border-white/10 bg-transparent relative">
         <div className="container max-w-4xl mx-auto px-4">
           <FadeUp>
             <div className="text-center mb-12 md:mb-16">

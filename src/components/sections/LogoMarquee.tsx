@@ -24,7 +24,7 @@ export function LogoMarquee() {
   const duplicatedBrands = [...clientBrands, ...clientBrands, ...clientBrands];
 
   return (
-    <section className="py-12 relative overflow-hidden border-y border-black/5 dark:border-white/10 bg-black/5 dark:bg-black/40">
+    <section className="py-12 relative overflow-hidden border-y border-black/5 dark:border-white/10 bg-transparent">
       <div className="container max-w-6xl mx-auto px-4 mb-6 text-center">
         <p className="text-xs font-bold uppercase tracking-widest text-text-body/60">
           Trusted Digital Infrastructure Engineered For Industry Leaders

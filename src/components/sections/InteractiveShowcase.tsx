@@ -128,7 +128,7 @@ export function InteractiveShowcase() {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden bg-surface/30 border-y border-black/5 dark:border-white/10">
+    <section className="py-24 relative overflow-hidden bg-transparent border-y border-black/5 dark:border-white/10">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-14">

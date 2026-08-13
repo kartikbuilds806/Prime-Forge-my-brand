@@ -52,7 +52,7 @@ export function ProcessSection() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="py-24 relative overflow-hidden bg-surface/30 border-t border-black/5 dark:border-white/10">
+    <section className="py-24 relative overflow-hidden bg-transparent border-t border-black/5 dark:border-white/10">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
