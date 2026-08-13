@@ -1,0 +1,51 @@
+# PrimeForge — High-Performance Web Development & AI Agents Studio
+
+> PrimeForge is a digital studio founded by lead full-stack architect Kartik Sharma. We build custom, ultra-fast Next.js 16 web applications, modern AI chatbots with RAG vector search, and autonomous workflow automations for ambitious businesses.
+
+## System Capabilities & Services
+
+### 1. Custom Web Application Engineering
+- 100% custom-coded React 19 & Next.js 16 applications — zero bloated WordPress/Elementor templates.
+- Sub-second load speeds (0.2s - 0.4s average PageSpeed 99-100/100).
+- Smooth 60fps animations powered by Framer Motion and Lenis smooth scrolling.
+
+### 2. Search Optimization Engine (SEO + AEO + GEO)
+- Traditional SEO (Google, Bing Search Indexing & Mobile First Optimization).
+- AEO (Answer Engine Optimization for Voice Search & Siri/Google Assistant).
+- GEO (Generative Engine Optimization so your brand is cited inside ChatGPT, Perplexity AI, Claude, and Gemini).
+
+### 3. AI Agents & Vector RAG Infrastructure
+- Custom RAG Knowledge Base integration using Google Gemini API (`text-embedding-004` 768-dim vectors) & Supabase Vector Store.
+- Multi-lingual & Hinglish auto-detection conversational AI chatbots.
+- Upstash Redis rate-limited API endpoints.
+
+## Featured Portfolio Systems
+
+### OnePath — Productivity SaaS
+- Category: Productivity & Goal Systems
+- Status: In Development
+- Live URL: https://one-path-saas.vercel.app/
+- Architecture: Single-goal commitment SaaS with an AI coach (Gemini-powered), flexible goal durations, multi-pillar tracking, partner accountability real-time chat, and a monochrome design system.
+- Tech Stack: Next.js 16, Supabase, Gemini API, Framer Motion.
+
+### Sterling Luxury Listings — Luxury Real Estate
+- Category: High-Ticket Real Estate Platform
+- Status: Delivered Studio Build
+- Live URL: https://a2-realtor.netlify.app/
+- Architecture: Ultra-luxury property showcase with 60fps walkthroughs, instant Cal.com scheduling embed, and integrated lead scoring.
+- Tech Stack: Next.js 16, Framer Motion, Cal.com Embed, AEO/GEO Optimized.
+
+### Protein Coach AI — AI Nutrition Tracker
+- Category: AI-Powered Fitness Web App
+- Status: Live Production
+- Live URL: https://protein-coach-tracker-g6cx.vercel.app/
+- Architecture: Full-stack nutrition app where users input meal logs and receive AI-generated protein breakdowns and daily coaching feedback.
+- Tech Stack: Next.js, Supabase, OpenAI API, Tailwind v4.
+
+## Contact & Consultation
+- Founder & Lead Architect: Kartik Sharma
+- WhatsApp Direct: +91 8630070729 (https://wa.me/918630070729)
+- Direct Phone: +91 8533925291
+- Email: primeforge7@gmail.com
+- Location: Dehradun, Uttarakhand, India
+- Website: https://primeforge.agency
