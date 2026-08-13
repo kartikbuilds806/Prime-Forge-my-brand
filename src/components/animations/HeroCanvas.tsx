@@ -19,15 +19,39 @@ export function HeroCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
+    let isVisible = true;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
     const particles: Particle[] = [];
     const mouse = { x: -1000, y: -1000, radius: 180 };
+
+    // Pause rendering when canvas is scrolled off-screen or tab is hidden to save mobile battery & GPU cycles
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !animationFrameId) {
+          render();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isVisible = false;
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        isVisible = true;
+        render();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const handleResize = () => {
       if (!canvas) return;
@@ -63,7 +87,7 @@ export function HeroCanvas() {
     const initParticles = () => {
       particles.length = 0;
       const isMobile = width < 768;
-      const spacing = isMobile ? 65 : 45;
+      const spacing = isMobile ? 85 : 45;
       const cols = Math.floor(width / spacing);
       const rows = Math.floor(height / spacing);
 
@@ -94,6 +118,8 @@ export function HeroCanvas() {
     window.addEventListener('touchend', handleTouchEnd);
 
     const render = () => {
+      if (!isVisible) return;
+
       ctx.clearRect(0, 0, width, height);
 
       const isDark = document.documentElement.classList.contains('dark');
@@ -168,6 +194,8 @@ export function HeroCanvas() {
     render();
 
     return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
