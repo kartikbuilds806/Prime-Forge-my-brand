@@ -196,7 +196,7 @@ export const knowledge: PrimeForgeKnowledge = {
     },
     {
       question: "What is the founder/owner (Kartik Sharma) like, and what is his behaviour/working style?",
-      answer: "Kartik Sharma is direct, hands-on, transparent, and highly committed to client outcomes. He hates unnecessary agency bureaucracy and middleman overhead—clients communicate and work directly with him as the lead developer throughout the process. He works efficiently and is highly accessible via WhatsApp (+918533925291)."
+      answer: "Kartik Sharma is direct, hands-on, transparent, and highly committed to client outcomes. He hates unnecessary agency bureaucracy and middleman overhead—clients communicate and work directly with him as the lead developer throughout the process. He works efficiently and is highly accessible via WhatsApp (+918630070729)."
     },
     {
       question: "How do you work with clients and what is your brand personality?",
@@ -204,7 +204,7 @@ export const knowledge: PrimeForgeKnowledge = {
     }
   ],
   contact: {
-    whatsapp: "https://wa.me/918533925291",
+    whatsapp: "https://wa.me/918630070729",
     phone: "tel:+918533925291",
     bookCallUrl: "/book-a-call",
     startProjectUrl: "/start-a-project"
@@ -214,7 +214,7 @@ export const knowledge: PrimeForgeKnowledge = {
     howToGetQuote: [
       "Book a strategy call on our website (/book-a-call)",
       "Start a project questionnaire on our website (/start-a-project)",
-      "Contact us directly via WhatsApp (https://wa.me/918533925291)",
+      "Contact us directly via WhatsApp (https://wa.me/918630070729)",
       "Call our team (+918533925291)"
     ]
   }

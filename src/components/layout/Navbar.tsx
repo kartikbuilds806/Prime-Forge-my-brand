@@ -136,7 +136,7 @@ export function Navbar() {
                   Book a Call
                 </Button>
                 <a 
-                  href="https://wa.me/918533925291" 
+                  href="https://wa.me/918630070729" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="w-full py-3 rounded-xl bg-green-500/10 border border-green-500/30 text-green-500 font-semibold text-sm flex items-center justify-center gap-1.5 hover:bg-green-500/20 transition-colors"

@@ -131,12 +131,12 @@ export default function ProjectsPage() {
                 glow: "rgba(59, 130, 246, 0.4)",
               },
               {
-                title: "Nexus AI Engine",
-                badge: "SAAS & AI KNOWLEDGE BASE",
-                status: "Enterprise Live",
-                desc: "Enterprise AI software platform built for automated RAG knowledge bases, high-volume lead capture, and custom subscription billing.",
-                tech: ["React 19", "Supabase Vector", "Upstash Redis", "Resend API"],
-                url: "https://sterling-staging.primeforge.agency",
+                title: "OnePath",
+                badge: "PRODUCTIVITY & GOAL SYSTEMS",
+                status: "In Development",
+                desc: "A full-stack productivity SaaS built around single-goal commitment — users can only pursue one active goal at a time, forcing focus over the context-switching that \"productive procrastinators\" fall into. Features an AI coach (Gemini-powered), flexible goal durations, multi-pillar tracking, partner accountability via real-time chat, and a fully monochrome, motion-restrained design system.",
+                tech: ["Next.js 16", "Supabase", "Gemini API", "Framer Motion"],
+                url: "https://one-path-saas.vercel.app/",
                 glow: "rgba(168, 85, 247, 0.4)",
               },
             ].map((project, idx) => (

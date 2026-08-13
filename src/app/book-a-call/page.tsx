@@ -48,7 +48,7 @@ export default function BookCallPage() {
               
               <div>
                 <p className="text-sm text-text-body mb-2">Fastest Reply</p>
-                <a href="https://wa.me/918533925291" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-lg text-green-500 hover:text-green-400 transition-colors font-medium">
+                <a href="https://wa.me/918630070729" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-lg text-green-500 hover:text-green-400 transition-colors font-medium">
                   <MessageCircle className="w-5 h-5" />
                   Chat on WhatsApp
                 </a>

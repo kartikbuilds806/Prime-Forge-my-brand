@@ -172,7 +172,7 @@ export async function submitProjectAction(formData: FormData) {
               <p><strong>Next Step:</strong> Kartik Sharma will reach out within 24 hours to schedule your strategy preview call.</p>
               <p style="margin-top: 30px; font-size: 14px; color: #666;">
                 — <strong>Kartik Sharma</strong>, Founder & Director<br>
-                PrimeForge Agency | WhatsApp: +91 8533925291
+                PrimeForge Agency | WhatsApp: +91 8630070729
               </p>
             </div>
           `
@@ -207,7 +207,7 @@ export async function submitProjectAction(formData: FormData) {
     console.error('Full server action error:', error)
     return { 
       success: false, 
-      error: 'An unexpected issue occurred while processing your request. Please try again or reach us directly on WhatsApp (+91 8533925291).'
+      error: 'An unexpected issue occurred while processing your request. Please try again or reach us directly on WhatsApp (+91 8630070729).'
     }
   }
 }

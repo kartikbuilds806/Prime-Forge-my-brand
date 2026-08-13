@@ -44,7 +44,7 @@ export function FloatingCTAs({ children }: { children?: React.ReactNode }) {
 
       {/* WhatsApp Button */}
       <a 
-        href="https://wa.me/918533925291" 
+        href="https://wa.me/918630070729" 
         target="_blank" 
         rel="noopener noreferrer"
         className="w-12 h-12 md:w-14 md:h-14 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 active:scale-90 transition-all shadow-lg hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]"

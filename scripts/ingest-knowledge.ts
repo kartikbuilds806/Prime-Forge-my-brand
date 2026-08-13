@@ -116,7 +116,7 @@ const chunks: IngestChunk[] = [
   {
     source: "about-founder",
     section: "Kartik Sharma Brand Personality and Behaviour",
-    content: "Kartik Sharma is direct, hands-on, transparent, and highly committed to client outcomes. He hates unnecessary agency bureaucracy and middleman overhead—clients communicate and work directly with him as the lead developer throughout the process. He works efficiently and is highly accessible via WhatsApp (+918533925291). We prove value upfront by designing and coding a free working homepage prototype within 48 hours before asking for any payment."
+    content: "Kartik Sharma is direct, hands-on, transparent, and highly committed to client outcomes. He hates unnecessary agency bureaucracy and middleman overhead—clients communicate and work directly with him as the lead developer throughout the process. He works efficiently and is highly accessible via WhatsApp (+918630070729). We prove value upfront by designing and coding a free working homepage prototype within 48 hours before asking for any payment."
   }
 ];
 

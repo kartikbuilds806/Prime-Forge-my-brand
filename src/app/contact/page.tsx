@@ -35,13 +35,13 @@ export default function ContactPage() {
             <h2 className="text-2xl text-white font-bold mb-8">Direct Channels</h2>
           
             <div className="space-y-4 sm:space-y-6">
-              <a href="https://wa.me/918533925291" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 sm:gap-5 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group overflow-hidden">
+              <a href="https://wa.me/918630070729" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 sm:gap-5 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group overflow-hidden">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center shrink-0">
                   <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-0.5">Fastest Response</p>
-                  <p className="text-sm sm:text-base md:text-lg text-white font-bold group-hover:text-emerald-400 transition-colors break-words">Chat on WhatsApp (+91 8533925291)</p>
+                  <p className="text-sm sm:text-base md:text-lg text-white font-bold group-hover:text-emerald-400 transition-colors break-words">Chat on WhatsApp (+91 8630070729)</p>
                 </div>
               </a>
 
