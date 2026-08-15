@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { PhoneCall, Monitor, CheckCircle2, CreditCard, Rocket, Sparkles } from 'lucide-react';
 import { GlowCard } from '@/components/ui/GlowCard';
-import { FadeUp, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
+import { FadeUp, StaggerContainer, StaggerItem, MobileStaggerContainer, MobileStaggerItem, MobileStackContainer, MobileStackCard } from '@/components/animations/AnimateOnScroll';
 
 const processSteps = [
   {
@@ -52,7 +52,7 @@ export function ProcessSection() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="py-24 relative overflow-hidden bg-transparent border-t border-black/5 dark:border-white/10">
+    <section className="py-24 relative overflow-x-clip bg-transparent border-t border-black/5 dark:border-white/10">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -70,16 +70,10 @@ export function ProcessSection() {
           </FadeUp>
         </div>
 
-        {/* Mobile swipe hint */}
-        <div className="flex md:hidden items-center justify-end gap-1.5 text-xs text-blue-400 font-semibold mb-3 px-1">
-          <span>Swipe left to view steps</span>
-          <span>→</span>
-        </div>
-
         {/* Steps Pipeline Grid */}
-        <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-5 md:gap-4 relative">
+        <MobileStackContainer className="space-y-4 md:space-y-0 md:grid md:grid-cols-5 md:gap-4 relative">
           {processSteps.map((item, idx) => (
-            <StaggerItem key={item.step} className="h-full w-[78vw] max-w-[290px] shrink-0 snap-center md:w-auto">
+            <MobileStackCard key={item.step} index={idx} totalCards={5} className="h-full w-full md:w-auto">
               <div onClick={() => setActiveStep(idx)} className="h-full">
                 <GlowCard
                   glowColor={item.glow}
@@ -102,17 +96,10 @@ export function ProcessSection() {
                 </div>
               </GlowCard>
             </div>
-          </StaggerItem>
+          </MobileStackCard>
           ))}
-        </StaggerContainer>
+        </MobileStackContainer>
 
-        {/* Mobile Swipe Indicators */}
-        <div className="flex md:hidden items-center justify-center gap-1.5 mt-4">
-          {processSteps.map((_, idx) => (
-            <div key={idx} className={`h-1.5 rounded-full transition-all ${idx === 0 ? 'w-5 bg-blue-500' : 'w-1.5 bg-text-body/30'}`} />
-          ))}
-          <span className="text-[10px] text-text-body/60 font-medium ml-2">Swipe process →</span>
-        </div>
       </div>
     </section>
   );

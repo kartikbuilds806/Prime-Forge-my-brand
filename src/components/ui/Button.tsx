@@ -33,7 +33,7 @@ export function Button({
     primary: "bg-accent text-white hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]",
     secondary: isWhiteText
       ? "bg-white/10 text-white border border-white/20 hover:bg-white/20"
-      : "bg-white/90 dark:bg-white/10 text-zinc-900 dark:text-white border border-zinc-300 dark:border-white/20 hover:bg-white dark:hover:bg-white/20 shadow-sm backdrop-blur-md font-semibold"
+      : "bg-black/10 dark:bg-white/10 text-text-heading border border-black/15 dark:border-white/20 hover:bg-black/15 dark:hover:bg-white/20 shadow-sm backdrop-blur-md font-semibold"
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${className}`;

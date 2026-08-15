@@ -5,7 +5,7 @@ import { ExternalLink, Sparkles, X, Monitor, ShieldCheck, Zap } from 'lucide-rea
 import { Button } from '@/components/ui/Button';
 import { GlowCard } from '@/components/ui/GlowCard';
 import { HeroCanvas } from '@/components/animations/HeroCanvas';
-import { FadeUp, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
+import { FadeUp, ScaleIn, StaggerContainer, StaggerItem, MobileStaggerContainer, MobileStaggerItem, MobileStackContainer, MobileStackCard } from '@/components/animations/AnimateOnScroll';
 import { PricingSection } from '@/components/sections/PricingSection';
 import { ProjectDetailsModal, ProjectDetailsData } from '@/components/ui/ProjectDetailsModal';
 
@@ -97,7 +97,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Section 1: Custom Full-Stack Projects */}
-      <section className="py-16 md:py-24 border-t border-black/5 dark:border-white/10 bg-transparent relative">
+      <section className="py-16 md:py-24 border-t border-black/5 dark:border-white/10 bg-transparent relative overflow-x-clip">
         <div className="container max-w-4xl mx-auto px-4">
           <FadeUp>
             <div className="text-center mb-12 md:mb-16">
@@ -112,7 +112,7 @@ export default function ProjectsPage() {
             </div>
           </FadeUp>
 
-          <div className="space-y-6 md:space-y-8">
+          <MobileStackContainer className="space-y-6 md:space-y-8">
             {[
               {
                 title: "Protein Coach AI",
@@ -208,72 +208,73 @@ export default function ProjectsPage() {
                 }
               },
             ].map((project, idx) => (
-              <GlowCard
-                key={idx}
-                glowColor={project.glow}
-                className="p-6 md:p-10 flex flex-col justify-between bg-zinc-950/95 backdrop-blur-2xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.9)] rounded-3xl"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold text-accent tracking-wider uppercase">
-                      {project.badge}
-                    </span>
-                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      {project.status}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-zinc-300 text-sm leading-relaxed mb-6">
-                    {project.desc}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tech.map((tech, tIdx) => (
-                      <span key={tIdx} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 font-medium">
-                        {tech}
+              <MobileStackCard key={idx} index={idx} totalCards={3}>
+                <GlowCard
+                  glowColor={project.glow}
+                  className="p-6 md:p-10 flex flex-col justify-between bg-zinc-950/95 backdrop-blur-2xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.9)] rounded-3xl"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-bold text-accent tracking-wider uppercase">
+                        {project.badge}
                       </span>
-                    ))}
+                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        {project.status}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+                      {project.desc}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {project.tech.map((tech, tIdx) => (
+                        <span key={tIdx} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-300 font-medium">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <div className="mt-auto pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <Button
-                    onClick={() => setActiveDemo({ name: project.title, url: project.url })}
-                    variant="primary"
-                    className="w-full justify-center text-center font-bold py-3"
-                  >
-                    Preview App On Screen
-                  </Button>
+                  <div className="mt-auto pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <Button
+                      onClick={() => setActiveDemo({ name: project.title, url: project.url })}
+                      variant="primary"
+                      className="w-full justify-center text-center font-bold py-3"
+                    >
+                      Preview App On Screen
+                    </Button>
 
-                  <button
-                    onClick={() => {
-                      setModalProject({
-                        title: project.title,
-                        category: project.badge,
-                        status: project.status,
-                        description: project.desc,
-                        url: project.url,
-                        tech: project.tech,
-                        metrics: { speed: "0.3s", conversion: "+184%", lighthouse: "99/100" },
-                        caseStudy: project.caseStudy,
-                        architecture: project.architecture
-                      });
-                      setModalInitialTab('casestudy');
-                    }}
-                    className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-semibold text-sm transition-all text-center flex items-center justify-center gap-1.5"
-                  >
-                    <span>Case Study & Arch</span>
-                    <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                  </button>
-                </div>
-              </GlowCard>
+                    <button
+                      onClick={() => {
+                        setModalProject({
+                          title: project.title,
+                          category: project.badge,
+                          status: project.status,
+                          description: project.desc,
+                          url: project.url,
+                          tech: project.tech,
+                          metrics: { speed: "0.3s", conversion: "+184%", lighthouse: "99/100" },
+                          caseStudy: project.caseStudy,
+                          architecture: project.architecture
+                        });
+                        setModalInitialTab('casestudy');
+                      }}
+                      className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-semibold text-sm transition-all text-center flex items-center justify-center gap-1.5"
+                    >
+                      <span>Case Study & Arch</span>
+                      <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                    </button>
+                  </div>
+                </GlowCard>
+              </MobileStackCard>
             ))}
-          </div>
+          </MobileStackContainer>
         </div>
       </section>
 

@@ -5,15 +5,15 @@ import Lenis from 'lenis';
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Check if mobile viewport or touch screen for 60fps native touch responsiveness
-    const isMobile = typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window);
-    
+    // Disable Lenis smooth scroll on mobile screens (< 768px) so native touch scrolling and CSS sticky stacking work perfectly
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    if (isMobile) return;
+
     const lenis = new Lenis({
-      duration: isMobile ? 0.8 : 1.2,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: isMobile ? 1.0 : 1.5,
     });
 
     let animationFrameId: number;

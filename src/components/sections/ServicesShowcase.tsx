@@ -3,7 +3,7 @@
 import React from 'react';
 import { MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Sparkles, ArrowUpRight } from 'lucide-react';
 import { GlowCard } from '@/components/ui/GlowCard';
-import { FadeUp, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
+import { FadeUp, StaggerContainer, StaggerItem, MobileStaggerContainer, MobileStaggerItem } from '@/components/animations/AnimateOnScroll';
 
 const servicesList = [
   {
@@ -97,9 +97,9 @@ export function ServicesShowcase({ showHeader = true }: { showHeader?: boolean }
         </div>
 
         {/* Services Grid (Horizontal Carousel on Mobile, Grid on Desktop) */}
-        <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+        <MobileStaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6">
           {servicesList.map((service) => (
-            <StaggerItem key={service.id} className="h-full w-[85vw] max-w-[330px] shrink-0 snap-center md:w-auto">
+            <MobileStaggerItem key={service.id} className="h-full w-[85vw] max-w-[330px] shrink-0 snap-center md:w-auto">
               <GlowCard
                 glowColor={service.glow}
                 className="h-full p-6 md:p-8 flex flex-col justify-between group cursor-pointer"
@@ -133,9 +133,9 @@ export function ServicesShowcase({ showHeader = true }: { showHeader?: boolean }
                   <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
               </GlowCard>
-            </StaggerItem>
+            </MobileStaggerItem>
           ))}
-        </StaggerContainer>
+        </MobileStaggerContainer>
 
         {/* Mobile Swipe Indicators */}
         <div className="flex md:hidden items-center justify-center gap-1.5 mt-4">
