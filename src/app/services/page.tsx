@@ -41,7 +41,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Main Capabilities Showcase */}
-      <ServicesShowcase />
+      <ServicesShowcase showHeader={false} />
 
       {/* Autonomous AI Agents & Workflows Suite */}
       <AIAgentsShowcase />

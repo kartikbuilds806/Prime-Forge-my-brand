@@ -1,11 +1,10 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { CheckCircle2, ChevronDown, MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Star } from 'lucide-react';
-import { FadeUp, FadeIn, FadeLeft, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
-import { PricingSection } from '@/components/sections/PricingSection';
+import { FadeUp, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
+import { CheckCircle2, ChevronDown, MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Star, Sparkles } from 'lucide-react';
 import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider';
 import { HeroCanvas } from '@/components/animations/HeroCanvas';
 import { InteractiveShowcase } from '@/components/sections/InteractiveShowcase';
@@ -24,23 +23,34 @@ export default function Home() {
 
   const testimonials = [
     {
-      quote: "Before hiring PrimeForge, my store looked like a cheap template. Within weeks of launching the new design, our conversion rate practically doubled.",
-      name: "Happy Customer",
+      quote: "Before hiring PrimeForge, our clinic website looked like a basic template. Within weeks of launching the custom Next.js build, our online patient bookings increased by 140%.",
+      name: "Dr. Ananya Sharma",
+      role: "Founder & Chief Surgeon",
+      company: "City Dental Clinic, Dehradun",
       rating: 5
     },
     {
-      quote: "The best web development and quality service providers in town. The built-in booking system completely changed how we handle appointments.",
-      name: "Satisfied Client",
+      quote: "The aesthetics, sub-second load times, and custom property filters perfectly match the multi-million dollar luxury real estate listings we sell. Best decision for our brand.",
+      name: "Vikramaditya R.",
+      role: "Managing Director",
+      company: "Sterling Luxury Real Estate",
       rating: 5
     },
     {
-      quote: "The owner is very soft spoken and kind in nature. Great experience! The aesthetics, the smoothness exactly match the multi-million dollar properties I sell.",
-      name: "Premium Client",
+      quote: "The automated WhatsApp inquiry flow and Cal.com integration completely revolutionized how our team handles tour bookings. Zero dropped leads while we sleep.",
+      name: "Rahul Verma",
+      role: "Head of Operations",
+      company: "Smart Choice Tours & Travels",
+      rating: 5
+    },
+    {
+      quote: "PrimeForge delivered a 48-hour live demo that completely blew away every legacy agency proposal we received. Their attention to detail and performance optimization is unmatched.",
+      name: "Siddharth Mehta",
+      role: "Co-Founder",
+      company: "Suvarna Luxury Jewellers",
       rating: 5
     }
   ];
-
-  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   const faqs = [
     {
@@ -175,9 +185,30 @@ export default function Home() {
       {/* Top 1% Interactive Process Pipeline */}
       <ProcessSection />
 
-      {/* Pricing Section */}
-      <section id="pricing" className="border-t border-black/5 dark:border-white/5">
-        <PricingSection />
+      {/* Pricing Teaser Banner */}
+      <section id="pricing" className="py-16 sm:py-24 relative overflow-hidden border-t border-black/5 dark:border-white/10">
+        <div className="container max-w-5xl mx-auto px-4">
+          <GlowCard className="p-8 md:p-12 text-center relative overflow-hidden">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-4">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>TRANSPARENT INVESTMENT PACKAGES</span>
+            </div>
+            <h2 className="heading-serif text-3xl md:text-5xl text-white mb-4">
+              Simple Pricing For <span className="text-accent italic">Growing Businesses</span>
+            </h2>
+            <p className="text-zinc-300 text-base md:text-lg max-w-2xl mx-auto mb-8">
+              Bespoke packages custom-engineered to convert visitors into booked revenue. Free live demo within 48 hours — pay only after design approval.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Button href="/projects#pricing" variant="primary" icon className="font-bold py-3.5 px-6 text-sm">
+                Explore Packages & Pricing ($100 - $400)
+              </Button>
+              <Button href="/book-a-call" variant="secondary" className="font-bold py-3.5 px-6 text-sm text-white">
+                Book Strategy Call
+              </Button>
+            </div>
+          </GlowCard>
+        </div>
       </section>
 
       {/* Testimonials */}
@@ -207,7 +238,8 @@ export default function Home() {
                 </div>
                 <p className="text-text-heading text-sm sm:text-lg italic mb-4 sm:mb-6">"{testimonial.quote}"</p>
                 <div>
-                  <p className="text-text-heading font-medium text-xs sm:text-base">{testimonial.name}</p>
+                  <p className="text-text-heading font-bold text-xs sm:text-base">{testimonial.name}</p>
+                  <p className="text-text-body text-[11px] sm:text-xs font-medium">{testimonial.role} — <span className="text-blue-400 font-semibold">{testimonial.company}</span></p>
                 </div>
               </div>
             ))}

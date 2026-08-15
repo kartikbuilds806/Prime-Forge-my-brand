@@ -68,25 +68,27 @@ const servicesList = [
   },
 ];
 
-export function ServicesShowcase() {
+export function ServicesShowcase({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <section className="py-24 relative overflow-hidden bg-transparent border-y border-black/5 dark:border-white/10">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <FadeUp>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-semibold uppercase tracking-widest mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>HIGH-IMPACT CAPABILITIES</span>
-            </div>
-            <h2 className="heading-serif text-4xl md:text-6xl text-text-heading mb-4">
-              What We Can <span className="text-accent italic">Do For You</span>
-            </h2>
-            <p className="text-text-body text-base md:text-lg max-w-2xl mx-auto">
-              Precision digital solutions engineered to eliminate friction, capture high-ticket leads, and grow your revenue.
-            </p>
-          </FadeUp>
-        </div>
+        {showHeader && (
+          <div className="text-center mb-16">
+            <FadeUp>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-semibold uppercase tracking-widest mb-4">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>HIGH-IMPACT CAPABILITIES</span>
+              </div>
+              <h2 className="heading-serif text-4xl md:text-6xl text-text-heading mb-4">
+                What We Can <span className="text-accent italic">Do For You</span>
+              </h2>
+              <p className="text-text-body text-base md:text-lg max-w-2xl mx-auto">
+                Precision digital solutions engineered to eliminate friction, capture high-ticket leads, and grow your revenue.
+              </p>
+            </FadeUp>
+          </div>
+        )}
 
         {/* Mobile swipe hint */}
         <div className="flex md:hidden items-center justify-end gap-1.5 text-xs text-blue-400 font-semibold mb-3 px-1">
