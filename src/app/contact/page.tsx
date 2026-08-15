@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col container py-24 md:py-32 relative overflow-hidden min-h-screen">
+    <div className="flex flex-col container pt-24 pb-16 md:pt-28 md:pb-32 relative overflow-hidden min-h-screen">
       <HeroCanvas />
       
       <FadeUp className="relative z-10 text-center mb-16">
@@ -96,7 +96,7 @@ export default function ContactPage() {
             
             <div className="mt-8 pt-8 border-t border-white/10 text-center">
               <p className="text-zinc-400 text-xs mb-4">Ready to bypass the call and initiate your build?</p>
-              <Button href="/start-a-project" variant="secondary" className="w-full justify-center">
+              <Button href="/start-a-project" variant="secondary" className="w-full justify-center text-white">
                 Submit Project Request
               </Button>
             </div>

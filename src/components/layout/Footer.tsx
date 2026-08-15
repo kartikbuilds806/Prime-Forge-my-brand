@@ -100,7 +100,7 @@ export function Footer() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-medium text-text-body hover:text-white hover:border-accent transition-all group"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-xs font-medium text-text-body hover:text-accent hover:border-accent transition-all group"
                 >
                   <span>{social.icon}</span>
                   <span>{social.name}</span>

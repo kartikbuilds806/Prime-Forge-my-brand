@@ -13,7 +13,7 @@ export default function BookCallPage() {
   }, []);
  
   return (
-    <div className="container py-12 md:py-24">
+    <div className="container pt-24 pb-12 md:pt-28 md:pb-24">
       <div className="text-center mb-16">
         <h1 className="heading-serif text-5xl md:text-6xl mb-6 text-text-heading">Let's build your pipeline.</h1>
         <p className="text-lg md:text-xl text-text-body max-w-2xl mx-auto">

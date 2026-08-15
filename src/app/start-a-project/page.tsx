@@ -97,7 +97,7 @@ export default function StartProjectPage() {
   };
 
   return (
-    <div className="container py-12 md:py-24 max-w-4xl mx-auto">
+    <div className="container pt-24 pb-12 md:pt-28 md:pb-24 max-w-4xl mx-auto">
       {step !== 3 && (
         <FadeUp>
           <div className="text-center mb-16">
@@ -152,7 +152,7 @@ export default function StartProjectPage() {
 
               <div>
                 <label className="block text-sm text-text-heading mb-2">Service Needed *</label>
-                <select name="serviceNeeded" value={formData.serviceNeeded} onChange={handleInputChange} className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors appearance-none">
+                <select name="serviceNeeded" value={formData.serviceNeeded} onChange={handleInputChange} className="w-full bg-white/80 dark:bg-black/50 border border-black/15 dark:border-white/15 rounded-xl px-4 py-3 text-zinc-900 dark:text-white focus:outline-none focus:border-accent transition-colors">
                   <option value="Custom Website Design">Custom Website</option>
                   <option value="High-Converting Landing Page">Landing Page</option>
                   <option value="SEO / AEO / GEO Package">SEO Package</option>
@@ -163,11 +163,11 @@ export default function StartProjectPage() {
 
               <div>
                 <label className="block text-sm text-text-heading mb-2">Requirements</label>
-                <textarea name="requirements" value={formData.requirements} onChange={handleInputChange} rows={4} className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Briefly describe what you need..."></textarea>
+                <textarea name="requirements" value={formData.requirements} onChange={handleInputChange} rows={4} className="w-full bg-white/80 dark:bg-black/50 border border-black/15 dark:border-white/15 rounded-xl px-4 py-3 text-zinc-900 dark:text-white focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Briefly describe what you need..."></textarea>
               </div>
             </div>
 
-            <button type="submit" className="w-full mt-10 py-4 rounded-full font-medium transition-all bg-accent text-text-heading hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] flex items-center justify-center gap-2">
+            <button type="submit" className="w-full mt-10 py-4 rounded-full font-medium transition-all bg-accent text-white hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] flex items-center justify-center gap-2">
               Continue <span className="text-xl leading-none">→</span>
             </button>
           </form>
@@ -177,30 +177,30 @@ export default function StartProjectPage() {
           <form onSubmit={handleSubmit} className="animate-fade-in relative z-10">
             <h3 className="text-2xl text-text-heading font-medium mb-8">Terms & Conditions</h3>
             
-            <div className="bg-black/30 border border-black/5 dark:border-white/5 rounded-xl p-6 mb-8 max-h-[300px] overflow-y-auto text-text-body text-sm leading-relaxed">
+            <div className="bg-black/5 dark:bg-black/30 border border-black/10 dark:border-white/5 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-h-[180px] sm:max-h-[300px] overflow-y-auto text-text-body text-xs sm:text-sm leading-relaxed">
               <p>I hereby request a digital project. I agree to the 5-step process outlined by PrimeForge. The mockup phase is free. Further continuation after mockup approval implies commitment to payment. I understand that PrimeForge will contact me within 24 hours to confirm project details.</p>
             </div>
 
             <div className="space-y-6">
-              <label className="flex items-start gap-3 cursor-pointer group">
-                <div className="relative flex items-center mt-1">
-                  <input required name="agreedToTerms" checked={formData.agreedToTerms} onChange={handleInputChange} type="checkbox" className="peer w-5 h-5 appearance-none border border-white/20 rounded bg-black/50 checked:bg-accent checked:border-accent transition-colors cursor-pointer" />
-                  <CheckCircle2 className="w-4 h-4 text-text-heading absolute left-0.5 top-0.5 opacity-0 peer-checked:opacity-100 pointer-events-none" />
+              <label className="flex items-center gap-3 cursor-pointer group min-h-[44px] py-1">
+                <div className="relative flex items-center justify-center shrink-0">
+                  <input required name="agreedToTerms" checked={formData.agreedToTerms} onChange={handleInputChange} type="checkbox" className="peer w-5 h-5 appearance-none border border-black/20 dark:border-white/20 rounded bg-white/80 dark:bg-black/50 checked:bg-accent checked:border-accent transition-colors cursor-pointer" />
+                  <CheckCircle2 className="w-4 h-4 text-white absolute left-0.5 top-0.5 opacity-0 peer-checked:opacity-100 pointer-events-none" />
                 </div>
-                <span className="text-text-heading group-hover:text-accent transition-colors">I agree to the Terms & Conditions</span>
+                <span className="text-sm text-text-heading group-hover:text-accent transition-colors">I agree to the Terms & Conditions</span>
               </label>
 
               <div>
                 <label className="block text-sm text-text-heading mb-2">Digital Signature (Type your full name) *</label>
-                <input required name="digitalSignature" value={formData.digitalSignature} onChange={handleInputChange} type="text" className="w-full bg-black/50 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-text-heading focus:outline-none focus:border-accent transition-colors font-serif italic" placeholder="Your Name" />
+                <input required name="digitalSignature" value={formData.digitalSignature} onChange={handleInputChange} type="text" className="w-full bg-white/80 dark:bg-black/50 border border-black/15 dark:border-white/15 rounded-xl px-4 py-3 text-zinc-900 dark:text-white focus:outline-none focus:border-accent transition-colors font-serif italic" placeholder="Your Name" />
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 mt-10">
-              <button type="button" onClick={() => setStep(1)} disabled={loading} className="w-full sm:w-auto px-8 py-4 rounded-full font-medium transition-all bg-transparent border border-white/20 text-text-heading hover:bg-black/5 dark:bg-white/5">
+              <button type="button" onClick={() => setStep(1)} disabled={loading} className="w-full sm:w-auto px-8 py-4 rounded-full font-medium transition-all bg-transparent border border-black/20 dark:border-white/20 text-text-heading hover:bg-black/5 dark:hover:bg-white/5">
                 Back
               </button>
-              <button type="submit" disabled={loading} className="w-full sm:flex-1 py-4 rounded-full font-medium transition-all bg-accent text-text-heading hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+              <button type="submit" disabled={loading} className="w-full sm:flex-1 py-4 rounded-full font-medium transition-all bg-accent text-white hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                 {loading ? "Submitting..." : "Sign & Submit Request"}
               </button>
             </div>

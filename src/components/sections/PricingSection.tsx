@@ -163,7 +163,7 @@ export function PricingSection() {
                   <Button
                     href={plan.ctaHref}
                     variant={plan.featured ? 'primary' : 'secondary'}
-                    className="w-full justify-center text-center font-bold py-3 text-xs tracking-wider uppercase"
+                    className={`w-full justify-center text-center font-bold py-3 text-xs tracking-wider uppercase ${!plan.featured ? 'text-white' : ''}`}
                     icon={plan.featured}
                   >
                     {plan.ctaText}
@@ -174,8 +174,16 @@ export function PricingSection() {
           ))}
         </StaggerContainer>
 
+        {/* Mobile Swipe Indicators */}
+        <div className="flex md:hidden items-center justify-center gap-1.5 mt-4">
+          {plans.map((_, idx) => (
+            <div key={idx} className={`h-1.5 rounded-full transition-all ${idx === 1 ? 'w-5 bg-blue-500' : 'w-1.5 bg-text-body/30'}`} />
+          ))}
+          <span className="text-[10px] text-text-body/60 font-medium ml-2">Swipe plans →</span>
+        </div>
+
         {/* Bottom Trust Row */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-400">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-text-body font-medium">
           <div className="flex items-center gap-2">
             <Zap className="w-4 h-4 text-amber-400" /> 48-Hour Live Demo
           </div>

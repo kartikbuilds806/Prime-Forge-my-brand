@@ -134,6 +134,14 @@ export function ServicesShowcase() {
             </StaggerItem>
           ))}
         </StaggerContainer>
+
+        {/* Mobile Swipe Indicators */}
+        <div className="flex md:hidden items-center justify-center gap-1.5 mt-4">
+          {servicesList.map((_, idx) => (
+            <div key={idx} className={`h-1.5 rounded-full transition-all ${idx === 0 ? 'w-5 bg-blue-500' : 'w-1.5 bg-text-body/30'}`} />
+          ))}
+          <span className="text-[10px] text-text-body/60 font-medium ml-2">Swipe cards →</span>
+        </div>
       </div>
     </section>
   );

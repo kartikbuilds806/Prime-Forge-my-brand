@@ -45,16 +45,16 @@ export function LogoMarquee() {
           {duplicatedBrands.map((brand, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-all shrink-0 cursor-default group"
+              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:border-blue-500/50 hover:bg-black/10 dark:hover:bg-white/10 transition-all shrink-0 cursor-default group shadow-sm"
             >
-              <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform">
+              <div className="p-2 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 group-hover:scale-110 transition-transform">
                 {brand.icon}
               </div>
               <div>
-                <div className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+                <div className="text-sm font-bold text-text-heading group-hover:text-blue-500 transition-colors">
                   {brand.name}
                 </div>
-                <div className="text-[10px] text-zinc-400 font-medium">
+                <div className="text-[10px] text-text-body font-medium">
                   {brand.category}
                 </div>
               </div>

@@ -47,7 +47,7 @@ export function BeforeAfterSlider() {
       {/* Interactive Container */}
       <div 
         ref={containerRef}
-        className="relative w-full h-[450px] sm:h-[480px] md:h-[500px] rounded-2xl overflow-hidden select-none cursor-ew-resize border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] touch-none"
+        className="relative w-full h-[420px] sm:h-[480px] md:h-[500px] rounded-2xl overflow-hidden select-none cursor-ew-resize border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] touch-none"
         onMouseDown={() => setIsDragging(true)}
         onMouseUp={() => setIsDragging(false)}
         onMouseLeave={() => setIsDragging(false)}
@@ -60,7 +60,7 @@ export function BeforeAfterSlider() {
         onTouchMove={handleTouchMove}
       >
         {/* AFTER PANEL (Right Side - PrimeForge) */}
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black p-5 sm:p-8 md:p-10 flex flex-col justify-between">
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black p-4 sm:p-8 md:p-10 flex flex-col justify-between">
           <div className="flex justify-between items-start gap-2">
             <span className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-semibold flex items-center gap-1 sm:gap-1.5">
               <CheckCircle className="w-3.5 h-3.5" /> PRIMEFORGE CODE
@@ -71,21 +71,21 @@ export function BeforeAfterSlider() {
             </div>
           </div>
 
-          <div className="space-y-3 sm:space-y-4 my-auto max-w-md ml-auto text-right">
-            <div className="text-3xl sm:text-4xl md:text-6xl font-bold text-white tracking-tight">
+          <div className="space-y-2 sm:space-y-4 my-auto max-w-md ml-auto text-right">
+            <div className="text-2xl sm:text-4xl md:text-6xl font-bold text-white tracking-tight">
               0.4s <span className="text-xs sm:text-lg font-normal text-emerald-400">Load Time</span>
             </div>
             <p className="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed">
               Custom Next.js 16 code, optimized images, zero bloat, instant SSR, and automated lead capture.
             </p>
             <div className="grid grid-cols-2 gap-2 sm:gap-3 text-left pt-1 sm:pt-2">
-              <div className="bg-white/5 border border-white/10 p-2.5 sm:p-3 rounded-xl">
+              <div className="bg-white/5 border border-white/10 p-2 sm:p-3 rounded-xl">
                 <div className="text-[10px] sm:text-xs text-zinc-400">Conversion Rate</div>
-                <div className="text-sm sm:text-lg font-bold text-emerald-400">5.4% (+157%)</div>
+                <div className="text-xs sm:text-lg font-bold text-emerald-400">5.4% (+157%)</div>
               </div>
-              <div className="bg-white/5 border border-white/10 p-2.5 sm:p-3 rounded-xl">
+              <div className="bg-white/5 border border-white/10 p-2 sm:p-3 rounded-xl">
                 <div className="text-[10px] sm:text-xs text-zinc-400">Search Rank</div>
-                <div className="text-sm sm:text-lg font-bold text-blue-400">Top 3 Organic</div>
+                <div className="text-xs sm:text-lg font-bold text-blue-400">Top 3 Organic</div>
               </div>
             </div>
           </div>
@@ -93,10 +93,10 @@ export function BeforeAfterSlider() {
 
         {/* BEFORE PANEL (Left Side - Generic Template) */}
         <div 
-          className="absolute top-0 left-0 bottom-0 overflow-hidden bg-zinc-900 border-r border-white/20 p-5 sm:p-8 md:p-10 flex flex-col justify-between transition-all duration-75"
+          className="absolute top-0 left-0 bottom-0 overflow-hidden bg-zinc-900 border-r border-white/20 p-4 sm:p-8 md:p-10 flex flex-col justify-between transition-all duration-75"
           style={{ width: `${sliderPosition}%` }}
         >
-          <div className="w-[calc(100vw-2.5rem)] max-w-5xl h-full flex flex-col justify-between">
+          <div className="w-[calc(100vw-3rem)] sm:w-[calc(100vw-4rem)] max-w-5xl h-full flex flex-col justify-between">
             <div className="flex justify-between items-start gap-2 pr-6">
               <span className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] sm:text-xs font-semibold flex items-center gap-1 sm:gap-1.5">
                 <AlertTriangle className="w-3.5 h-3.5" /> WORDPRESS TEMPLATE
@@ -107,21 +107,21 @@ export function BeforeAfterSlider() {
               </div>
             </div>
 
-            <div className="space-y-3 sm:space-y-4 my-auto max-w-md text-left">
-              <div className="text-3xl sm:text-4xl md:text-6xl font-bold text-red-400 tracking-tight">
+            <div className="space-y-2 sm:space-y-4 my-auto max-w-md text-left">
+              <div className="text-2xl sm:text-4xl md:text-6xl font-bold text-red-400 tracking-tight">
                 4.2s <span className="text-xs sm:text-lg font-normal text-zinc-400">Slow Load Time</span>
               </div>
               <p className="text-zinc-400 text-xs sm:text-sm md:text-base leading-relaxed">
                 Heavy plugins, slow server response, broken mobile layouts, and lost high-ticket clients.
               </p>
               <div className="grid grid-cols-2 gap-2 sm:gap-3 pt-1 sm:pt-2">
-                <div className="bg-black/40 border border-red-500/20 p-2.5 sm:p-3 rounded-xl">
+                <div className="bg-black/40 border border-red-500/20 p-2 sm:p-3 rounded-xl">
                   <div className="text-[10px] sm:text-xs text-zinc-500">Conversion Rate</div>
-                  <div className="text-sm sm:text-lg font-bold text-red-400">1.8% (Poor)</div>
+                  <div className="text-xs sm:text-lg font-bold text-red-400">1.8% (Poor)</div>
                 </div>
-                <div className="bg-black/40 border border-red-500/20 p-2.5 sm:p-3 rounded-xl">
+                <div className="bg-black/40 border border-red-500/20 p-2 sm:p-3 rounded-xl">
                   <div className="text-[10px] sm:text-xs text-zinc-500">Mobile Layout</div>
-                  <div className="text-sm sm:text-lg font-bold text-amber-400">Stuttery</div>
+                  <div className="text-xs sm:text-lg font-bold text-amber-400">Stuttery</div>
                 </div>
               </div>
             </div>

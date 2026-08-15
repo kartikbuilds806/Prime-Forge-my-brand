@@ -40,12 +40,18 @@ interface ProjectDetailsModalProps {
 
 export function ProjectDetailsModal({ isOpen, onClose, initialTab = 'casestudy', project }: ProjectDetailsModalProps) {
   const [activeTab, setActiveTab] = useState<'preview' | 'casestudy' | 'architecture'>(initialTab);
+  const [isIframeLoading, setIsIframeLoading] = useState(true);
 
   useEffect(() => {
     if (initialTab) {
       setActiveTab(initialTab);
     }
   }, [initialTab, project]);
+
+  // Reset iframe loading when project or tab changes
+  useEffect(() => {
+    setIsIframeLoading(true);
+  }, [activeTab, project]);
 
   // Lock background body scroll when modal is open
   useEffect(() => {
@@ -90,90 +96,106 @@ export function ProjectDetailsModal({ isOpen, onClose, initialTab = 'casestudy',
       <div 
         onClick={onClose}
         data-lenis-prevent
-        className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-6 md:p-8 animate-fade-in"
+        className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-2xl flex items-end sm:items-center justify-center p-0 sm:p-6 md:p-8 animate-fade-in"
       >
         <motion.div 
           onClick={(e) => e.stopPropagation()}
-          initial={{ opacity: 0, scale: 0.95, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 10 }}
-          transition={{ duration: 0.3 }}
-          className="w-full max-w-5xl h-[88vh] max-h-[850px] bg-zinc-950 border border-white/20 rounded-3xl overflow-hidden flex flex-col shadow-[0_0_80px_rgba(0,0,0,0.95)]"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.96 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-5xl h-[92vh] sm:h-[88vh] max-h-[850px] bg-zinc-950 border border-white/20 rounded-t-3xl sm:rounded-3xl overflow-hidden flex flex-col shadow-[0_0_80px_rgba(0,0,0,0.95)]"
         >
+          {/* Mobile Drag Handle Indicator */}
+          <div className="w-12 h-1.5 bg-zinc-700/80 rounded-full mx-auto my-1.5 sm:hidden shrink-0" />
+
           {/* Modal Header */}
-          <div className="bg-zinc-900 px-5 py-4 border-b border-white/10 flex flex-wrap items-center justify-between gap-4 shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold text-lg">
-                {project.title.charAt(0)}
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-lg font-bold text-white leading-tight">{project.title}</h3>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 border border-blue-500/30 text-blue-400 uppercase tracking-wider">
-                    {project.category}
-                  </span>
+          <div className="bg-zinc-900 p-3 sm:px-5 sm:py-4 border-b border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold text-base sm:text-lg shrink-0">
+                  {project.title.charAt(0)}
                 </div>
-                <p className="text-xs text-zinc-400 truncate max-w-sm">{project.url}</p>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <h3 className="text-sm sm:text-lg font-bold text-white leading-tight truncate">{project.title}</h3>
+                    <span className="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-blue-500/10 border border-blue-500/30 text-blue-400 uppercase tracking-wider shrink-0">
+                      {project.category}
+                    </span>
+                  </div>
+                  <p className="text-[10px] sm:text-xs text-zinc-400 truncate max-w-[180px] sm:max-w-sm">{project.url}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0 sm:hidden">
+                <button
+                  onClick={onClose}
+                  className="p-2 rounded-xl bg-white/10 text-zinc-300 hover:bg-red-500/20 hover:text-red-400 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  aria-label="Close Modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
             </div>
 
-            {/* Modal Tab Switcher */}
-            <div className="flex items-center bg-black/60 p-1 rounded-xl border border-white/10">
-              <button
-                onClick={() => setActiveTab('casestudy')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                  activeTab === 'casestudy'
-                    ? 'bg-blue-600 text-white shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Case Study</span>
-              </button>
+            {/* Modal Tab Switcher & Desktop Controls */}
+            <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
+              <div className="flex items-center overflow-x-auto no-scrollbar bg-black/60 p-1 rounded-xl border border-white/10 max-w-full">
+                <button
+                  onClick={() => setActiveTab('casestudy')}
+                  className={`px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold flex items-center gap-1 sm:gap-1.5 shrink-0 transition-all ${
+                    activeTab === 'casestudy'
+                      ? 'bg-blue-600 text-white shadow-md'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>Case Study</span>
+                </button>
 
-              <button
-                onClick={() => setActiveTab('architecture')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                  activeTab === 'architecture'
-                    ? 'bg-blue-600 text-white shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                <Layers className="w-3.5 h-3.5" />
-                <span>Architecture</span>
-              </button>
+                <button
+                  onClick={() => setActiveTab('architecture')}
+                  className={`px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold flex items-center gap-1 sm:gap-1.5 shrink-0 transition-all ${
+                    activeTab === 'architecture'
+                      ? 'bg-blue-600 text-white shadow-md'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>Architecture</span>
+                </button>
 
-              <button
-                onClick={() => setActiveTab('preview')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                  activeTab === 'preview'
-                    ? 'bg-blue-600 text-white shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                <Monitor className="w-3.5 h-3.5" />
-                <span>Live Preview</span>
-              </button>
-            </div>
+                <button
+                  onClick={() => setActiveTab('preview')}
+                  className={`px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold flex items-center gap-1 sm:gap-1.5 shrink-0 transition-all ${
+                    activeTab === 'preview'
+                      ? 'bg-blue-600 text-white shadow-md'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <Monitor className="w-3.5 h-3.5" />
+                  <span>Live Preview</span>
+                </button>
+              </div>
 
-            {/* Action Buttons & Close */}
-            <div className="flex items-center gap-2">
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-white hover:bg-white/20 transition-colors font-medium"
-              >
-                <span>Visit Live App</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-              <button
-                onClick={onClose}
-                className="p-2 rounded-xl bg-white/10 text-zinc-300 hover:bg-red-500/20 hover:text-red-400 transition-colors"
-                aria-label="Close Modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="hidden sm:flex items-center gap-2 shrink-0">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-white hover:bg-white/20 transition-colors font-medium"
+                >
+                  <span>Visit Live App</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <button
+                  onClick={onClose}
+                  className="p-2 rounded-xl bg-white/10 text-zinc-300 hover:bg-red-500/20 hover:text-red-400 transition-colors"
+                  aria-label="Close Modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -327,12 +349,23 @@ export function ProjectDetailsModal({ isOpen, onClose, initialTab = 'casestudy',
               </div>
             )}
 
-            {/* TAB 3: LIVE PREVIEW IFRAME */}
+            {/* TAB 3: LIVE PREVIEW IFRAME WITH SKELETON LOADER */}
             {activeTab === 'preview' && (
               <div className="w-full h-full min-h-[500px] rounded-2xl overflow-hidden border border-white/15 bg-white relative animate-fade-in">
+                {isIframeLoading && (
+                  <div className="absolute inset-0 bg-zinc-950 flex flex-col items-center justify-center gap-4 z-10">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/40 text-blue-400 flex items-center justify-center animate-pulse">
+                      <Zap className="w-6 h-6 animate-bounce" />
+                    </div>
+                    <div className="text-xs font-semibold text-zinc-400 tracking-wide animate-pulse">
+                      Rendering Sub-Second Staging App...
+                    </div>
+                  </div>
+                )}
                 <iframe
                   src={project.url}
                   title={project.title}
+                  onLoad={() => setIsIframeLoading(false)}
                   className="w-full h-full border-none min-h-[500px]"
                 />
               </div>

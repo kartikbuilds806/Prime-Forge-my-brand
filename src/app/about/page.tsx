@@ -28,7 +28,7 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen relative overflow-hidden">
       {/* Hero */}
-      <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 container overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-28 md:pb-20 container overflow-hidden">
         <HeroCanvas />
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div className="max-w-2xl">
@@ -50,12 +50,12 @@ export default function AboutPage() {
             {/* Metric Pills */}
             <FadeUp delay={0.3} className="grid grid-cols-3 gap-3 sm:gap-4 pt-8">
               {stats.map((stat, i) => (
-                <div key={i} className="p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
-                  <div className="flex items-center justify-center gap-1 text-[10px] sm:text-xs text-zinc-400 mb-1">
+                <div key={i} className="p-3 sm:p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-center">
+                  <div className="flex items-center justify-center gap-1 text-[10px] sm:text-xs text-text-body mb-1">
                     {stat.icon}
                     <span className="truncate">{stat.label}</span>
                   </div>
-                  <div className="text-xl sm:text-2xl font-black text-white">{stat.value}</div>
+                  <div className="text-xl sm:text-2xl font-black text-text-heading">{stat.value}</div>
                 </div>
               ))}
             </FadeUp>
@@ -73,7 +73,7 @@ export default function AboutPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-widest mb-3">
             LEADERSHIP & VISION
           </div>
-          <h2 className="heading-serif text-3xl md:text-5xl text-white">
+          <h2 className="heading-serif text-3xl md:text-5xl text-text-heading">
             Driven by <span className="text-accent italic">Engineering Excellence</span>
           </h2>
         </FadeUp>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                   <p className="text-white font-bold text-lg">Kartik Sharma</p>
                   <p className="text-xs text-blue-400 font-medium">Founder & Director, PrimeForge</p>
                 </div>
-                <Button href="/contact" variant="secondary" className="text-xs py-2 px-4">
+                <Button href="/contact" variant="secondary" className="text-xs py-2 px-4 text-white">
                   Get in Touch
                 </Button>
               </div>
@@ -133,10 +133,10 @@ export default function AboutPage() {
       {/* Core Principles Grid (Bottom Section) */}
       <section className="py-16 md:py-24 container max-w-6xl mx-auto px-4 relative z-10">
         <FadeUp className="text-center mb-12">
-          <h2 className="heading-serif text-3xl md:text-5xl text-white mb-4">
+          <h2 className="heading-serif text-3xl md:text-5xl text-text-heading mb-4">
             Our Core <span className="text-accent">Principles</span>
           </h2>
-          <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto">
+          <p className="text-text-body text-base md:text-lg max-w-xl mx-auto">
             The standard we uphold across every project we launch.
           </p>
         </FadeUp>

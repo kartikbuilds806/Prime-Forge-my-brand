@@ -80,7 +80,7 @@ export default function ProjectsPage() {
   return (
     <div className="flex flex-col min-h-screen relative">
       {/* Combined Hero Section */}
-      <section className="relative py-24 md:py-32 container text-center overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-28 md:pb-32 container text-center overflow-hidden">
         <HeroCanvas />
         <FadeUp className="relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-4">

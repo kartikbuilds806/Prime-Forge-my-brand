@@ -72,7 +72,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 flex flex-col items-center justify-center text-center px-4 min-h-[85vh] overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-28 md:pb-32 flex flex-col items-center justify-center text-center px-4 min-h-[85vh] overflow-hidden">
         {/* Interactive Kinetic Particle Grid Canvas */}
         <HeroCanvas />
 
@@ -99,7 +99,7 @@ export default function Home() {
               <span>Give Your Brand the</span>
             </FadeUp>
             <FadeUp delay={0.2} className="w-full text-center flex justify-center">
-              <span className="text-accent italic">Digital Infrastructure</span>
+              <span className="bg-gradient-to-r from-blue-500 via-indigo-400 to-emerald-400 bg-clip-text text-transparent italic">Digital Infrastructure</span>
             </FadeUp>
             <FadeUp delay={0.3} className="w-full text-center flex justify-center">
               <span>It Deserves.</span>

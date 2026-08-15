@@ -34,6 +34,7 @@ export const viewport: Viewport = {
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ChatWidget } from "@/components/chatbot/ChatWidget";
+import { MobileBottomDock } from "@/components/layout/MobileBottomDock";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 import { PageTransition } from "@/components/animations/PageTransition";
 
@@ -132,7 +133,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-primary text-text-body pt-[88px] flex flex-col min-h-screen`}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-primary text-text-body flex flex-col min-h-screen`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LenisProvider>
@@ -146,6 +147,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <ChatWidget />
+            <MobileBottomDock />
           </LenisProvider>
         </ThemeProvider>
       </body>

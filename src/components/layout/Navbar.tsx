@@ -49,7 +49,7 @@ export function Navbar() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'glass border-b border-black/5 dark:border-black/5 dark:border-white/5 py-4' : 'bg-transparent py-6'}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'glass border-b border-black/5 dark:border-white/5 py-3.5 sm:py-4' : 'bg-transparent py-4 sm:py-6'}`}
     >
       <div className="container flex items-center justify-between">
         {/* Logo */}
@@ -57,7 +57,7 @@ export function Navbar() {
           <div className="w-8 h-8 bg-text-heading text-primary rounded flex items-center justify-center font-bold text-xl group-hover:bg-accent group-hover:text-text-heading transition-colors">
             P
           </div>
-          <span className="font-serif text-xl tracking-wide text-text-heading">PrimeForge</span>
+          <span className="font-serif text-lg sm:text-xl tracking-wide text-text-heading">PrimeForge</span>
         </Link>
 
         {/* Desktop Nav Links */}
@@ -81,11 +81,12 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center gap-4 z-50">
+        <div className="md:hidden flex items-center gap-3 sm:gap-4 z-50">
           <ThemeToggle />
           <button 
-            className="text-text-heading p-2"
+            className="text-text-heading p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Navigation Menu"
           >
           {mobileMenuOpen ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -101,10 +102,10 @@ export function Navbar() {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'calc(100vh - 72px)' }}
+            animate={{ opacity: 1, height: 'calc(100vh - 64px)' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-[72px] left-0 right-0 bottom-0 bg-primary/95 backdrop-blur-2xl border-b border-black/10 dark:border-white/10 md:hidden flex flex-col justify-between pt-6 pb-12 px-6 overflow-y-auto z-40"
+            className="fixed top-[64px] sm:top-[72px] left-0 right-0 bottom-0 bg-primary/98 backdrop-blur-2xl border-b border-black/10 dark:border-white/10 md:hidden flex flex-col justify-between pt-4 pb-8 px-6 overflow-y-auto z-40 overscroll-contain"
           >
             <nav className="flex flex-col gap-2">
               {navLinks.map((link, idx) => (

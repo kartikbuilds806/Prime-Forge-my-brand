@@ -27,9 +27,13 @@ export function Button({
 }: ButtonProps) {
   const baseStyles = "inline-flex items-center justify-center px-6 py-3 font-medium transition-all duration-300 rounded-[999px] text-sm";
   
+  const isWhiteText = className.includes('text-white') || className.includes('secondary-dark');
+
   const variants = {
     primary: "bg-accent text-white hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]",
-    secondary: "bg-transparent text-text-heading border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10"
+    secondary: isWhiteText
+      ? "bg-white/10 text-white border border-white/20 hover:bg-white/20"
+      : "bg-white/90 dark:bg-white/10 text-zinc-900 dark:text-white border border-zinc-300 dark:border-white/20 hover:bg-white dark:hover:bg-white/20 shadow-sm backdrop-blur-md font-semibold"
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${className}`;

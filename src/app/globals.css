@@ -20,7 +20,7 @@
     --bg-surface: #f4f4f5;
     --color-accent-base: #2563eb;
     --text-heading: #09090b;
-    --text-body: #52525b;
+    --text-body: #3f3f46;
     --color-glass: rgba(255, 255, 255, 0.7);
   }
 
@@ -31,6 +31,23 @@
     --text-heading: #ffffff;
     --text-body: #a1a1aa;
     --color-glass: rgba(10, 10, 10, 0.7);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading);
+  }
+
+  .text-text-heading {
+    color: var(--text-heading);
+  }
+
+  .text-text-body {
+    color: var(--text-body);
   }
 }
 

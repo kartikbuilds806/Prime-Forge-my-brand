@@ -98,7 +98,7 @@ export default function TrackPage() {
   };
 
   return (
-    <div className="container py-12 md:py-24 min-h-[85vh] flex flex-col justify-center">
+    <div className="container pt-24 pb-12 md:pt-28 md:pb-24 min-h-[85vh] flex flex-col justify-center">
       <AnimatePresence mode="wait">
         {!hasSearched ? (
           /* Search / Entry Screen */
@@ -127,7 +127,7 @@ export default function TrackPage() {
               
               <form onSubmit={handleSearch} className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-text-heading mb-2">
                     Client Email Address
                   </label>
                   <div className="relative">
@@ -138,7 +138,7 @@ export default function TrackPage() {
                       placeholder="e.g. client@company.com"
                       value={emailInput}
                       onChange={(e) => setEmailInput(e.target.value)}
-                      className="w-full bg-black/40 border border-white/10 hover:border-white/20 focus:border-accent focus:ring-1 focus:ring-accent rounded-xl py-3.5 pl-11 pr-4 text-white placeholder-gray-500 focus:outline-none transition-all"
+                      className="w-full bg-white/80 dark:bg-black/40 border border-black/15 dark:border-white/10 hover:border-accent focus:border-accent focus:ring-1 focus:ring-accent rounded-xl py-3.5 pl-11 pr-4 text-zinc-900 dark:text-white placeholder-gray-500 focus:outline-none transition-all"
                     />
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                   </div>
@@ -166,16 +166,16 @@ export default function TrackPage() {
 
               <div className="relative flex items-center justify-center my-6">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-white/5"></div>
+                  <div className="w-full border-t border-black/10 dark:border-white/5"></div>
                 </div>
-                <span className="relative px-3 text-xs uppercase bg-transparent text-gray-500 font-semibold tracking-wider">
+                <span className="relative px-3 text-xs uppercase bg-transparent text-text-body font-semibold tracking-wider">
                   Or Test the Tracker
                 </span>
               </div>
 
               <button
                 onClick={handleDemoClick}
-                className="w-full py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 group"
+                className="w-full py-3.5 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/15 dark:border-white/10 text-text-heading rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 group"
               >
                 <Sparkles className="w-4 h-4 text-yellow-400 group-hover:scale-125 transition-transform" />
                 <span>See Demo Tracker</span>
@@ -288,7 +288,7 @@ export default function TrackPage() {
                     Development Steps
                   </h3>
 
-                  <div className="relative border-l-2 border-white/10 ml-4 md:ml-6 pl-8 md:pl-10 space-y-10">
+                  <div className="relative border-l-2 border-white/10 ml-2 sm:ml-4 md:ml-6 pl-6 sm:pl-8 md:pl-10 space-y-8 sm:space-y-10">
                     {projectData?.steps.map((step, idx) => {
                       const isCompleted = step.status === 'completed';
                       const isCurrent = step.status === 'current';
@@ -296,7 +296,7 @@ export default function TrackPage() {
                       return (
                         <div key={idx} className="relative">
                           {/* Indicator Dot */}
-                          <div className={`absolute -left-[45px] md:-left-[53px] w-8 h-8 rounded-full flex items-center justify-center border z-10 transition-all ${
+                          <div className={`absolute -left-[37px] sm:-left-[45px] md:-left-[53px] w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center border z-10 transition-all ${
                             isCompleted 
                               ? 'bg-green-500 border-green-400 text-white shadow-[0_0_15px_rgba(34,197,94,0.4)]'
                               : isCurrent
