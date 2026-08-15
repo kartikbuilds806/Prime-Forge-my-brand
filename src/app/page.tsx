@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { FadeUp, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
+import { FadeUp, FadeIn, FadeLeft, ScaleIn, StaggerContainer, StaggerItem } from '@/components/animations/AnimateOnScroll';
 import { CheckCircle2, ChevronDown, MonitorSmartphone, MousePointerClick, CalendarDays, Search, Bot, Wrench, Star, Sparkles } from 'lucide-react';
 import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider';
 import { HeroCanvas } from '@/components/animations/HeroCanvas';
